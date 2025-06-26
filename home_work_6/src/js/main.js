@@ -1,5 +1,5 @@
 //==========================================================
-//Student Yaroslav Lutskyi. JS Homework: An Array of objects
+//Student Yaroslav Lutskyi. JS Homework: Closure, Recursion
 // =========================================================
 
 /* I) Multiplier Factory

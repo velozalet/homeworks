@@ -17,7 +17,6 @@ console.log("==========An Array of objects===========");
 // =========================================
 // Task 1: Create a new array of strings in this format: "Alice:85", "Bob:58", etc. Display the result in the console
 // =========================================
-
 //1. for() loop --> manually push to an array
 const studentArr1 = [];
 for( let i=0; i < getArrlength(students); i++ ) {
@@ -75,14 +74,14 @@ students.forEach((student) => {
     if( student.grade >= 60 ) { passedStudents.push(student); }
 }); //console.log(passedStudents);
 
-//4. filter() method
-//4.1
+//3. filter() method
+//3.1
 /* const passedStudents3 = students.filter( //OR: const passedStudents3 = students.filter(student => student.grade >= 60);
         function(student) { return student.grade >= 60; }
     ); //console.log(passedStudents3);
 */  /*OR*/
 
-//4.2
+//3.2
 function checkGrade(student, val) { return student.grade >= val; }
 const passedStudents3 = students.filter( //OR: const passedStudents3 = students.filter(student => checkGrade(student, 60));
     function(student) { return checkGrade(student, 60); }
@@ -115,43 +114,41 @@ const averageGrade2 = ( totalGrade2 / getArrlength(students) ).toFixed(2);
 // "<name> failed" if grade < 60
 // =========================================
 //1. for() loop / forEach() method
-/**/
+/*
     for( let i = 0; i < getArrlength(students); i++ ) {
-        /*
-            if (students[i].grade >= 60) {
-                console.log(`${students[i].name} - passed`);
-            } else {
-                console.log(`${students[i].name} - failed`);
-            }
-        */ /*OR*/
+        if (students[i].grade >= 60) {
+            console.log(`${students[i].name} - passed`);
+        } else {
+            console.log(`${students[i].name} - failed`);
+        }
+        OR:
         //(students[i].grade >= 60) ? console.log(`${students[i].name} - passed`) : console.log(`${students[i].name} - failed`);
     }
-
-/**/
+*/
+/*
     students.forEach((student) => {
-        /*
             if(student.grade >= 60){
                 console.log(`${student.name} - passed`);
             }else{
                 console.log(`${student.name} - failed`);
             }
-        */ /*OR*/
+        OR:
         //(student.grade >= 60) ? console.log(`${student.name} - passed`) : console.log(`${student.name} - failed`);
     });
-
+*/
 
 //2. for...of method
-/**/
+/*
     for( const student of students ){
-        /*
-           if(student.grade >= 60){
-                console.log(`${student.name} - passed`);
-            }else{
-                console.log(`${student.name} - failed`);
-            }
-        */  /*OR*/
+       if(student.grade >= 60){
+            console.log(`${student.name} - passed`);
+        }else{
+            console.log(`${student.name} - failed`);
+        }
+        OR:
         //console.log( student.grade >= 60 ? `${student.name} - passed` : `${student.name} - failed` );
     }
+*/
 
 //3. map() method
 const messages = students.map((item, index, array) => {
@@ -159,10 +156,10 @@ const messages = students.map((item, index, array) => {
 });
 messages.forEach((item, index, array) => { return console.log(item)} ); //OR: messages.forEach(item =>  console.log(item) );
 
+
 // =========================================
 // Task 5: Print each student’s name one by one using a loop. Display the result in the console
 // =========================================
-
 //1. for() loop
 //for( let i = 0; i < getArrlength(students); i++ ) { console.log(students[i].name); }
 
