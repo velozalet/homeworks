@@ -1,0 +1,166 @@
+body {
+  font-family: Ubuntu, Arial, sans-serif;
+  font-size: 1em;
+  color: black;
+}
+
+.outline{ outline: 1px solid black; }
+.display-none{ display: none; }
+//----------------------------------------------------------------------------------------------------------------------
+//VARIABLES:
+$color-white: #ffffff;
+$color-black: #000000;
+$color-green: #008000;
+$color-red: #d01105;
+$color-orange: #ffa500;
+$color-yellow: #ebe405;
+$color-light-gray: #d9d9d9;
+$color-dark-gray: #555;
+//----------------------------------------------------------------------------------------------------------------------
+
+main{
+  > h2{
+    font-size: 2rem;
+    color: $color-green;
+    text-align: center;
+  }
+
+  .wrapper-grid{
+    display:grid;
+    grid-template-columns: 40% 1fr;
+    grid-gap:0 2rem;
+    margin: 0 15px;
+    //justify-items: center;
+
+  section:nth-of-type(1), section:nth-of-type(2){
+    padding:0 15px 15px 15px;
+    background-color: $color-yellow;
+  }
+
+    .new-guest-add-section{
+      max-height: 130px;
+      background-color: $color-yellow;
+      form{
+        input[type="text"]{
+          border: none;
+          padding: 10px 10px;
+          height: 30px;
+          width: 55%;
+          font-size: 1.3rem;
+          float: left;
+          &:hover, &:active{
+           outline: none;
+          }
+          &:focus{
+            outline: 1px solid $color-green;
+          }
+
+          +span{
+            padding: 16px 15px;
+            background: $color-light-gray;
+            color: $color-dark-gray;
+            text-align: center;
+            cursor: pointer;
+            float: left;
+            letter-spacing: 3px;
+            transition: 1s;
+            &:hover, &:focus, &:active {
+              color: $color-white;
+               background: $color-green;
+            }
+          }
+        }
+      }
+
+      &.--show-one-block-only{ grid-column: 1 / 3; }
+    } //.new-guest-add-section
+
+    .list-guest-section{
+      fieldset{
+        margin-top: 0.83rem;
+        background-color: $color-white;
+
+        legend{
+          strong{
+            font-size: 1.5rem;
+            margin-top: .83rem; margin-left: 7px; margin-right: 7px;
+            i.fa{
+              font-size: 36px;
+              color: $color-green;
+            }
+          }
+        }
+      }
+
+      ul.guest-mane-ul-list{
+        list-style-type: none;
+        padding-left: 0;
+
+        li{
+          position: relative;
+          padding: 10px 15px;
+          font-size: 1.3rem;
+          color: $color-dark-gray;
+          button{
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+            top: 5px;
+          }
+          button:nth-of-type(1){
+            margin-right: 32px;
+            font-size: 1rem;
+            transition: .4s;
+            &:hover{
+              background-color: $color-green;
+              color: $color-white;
+              border-color: $color-green;
+            }
+          }
+          button:nth-of-type(2){
+            font-size: 1rem;
+            transition: .3s;
+            &:hover{
+              background-color: $color-red;
+              color: $color-white;
+              border-color: $color-red;
+            }
+          }
+
+          &.confirmed{
+            color: $color-black;
+          }
+          &.confirmed:before{
+            content: "\f046";
+            font-family: 'FontAwesome';
+            font-size:24px;
+            margin-right: 5px;
+            color: green;
+          }
+        }
+      }
+
+      figure{
+        margin-left: 0;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: end;
+
+        .clear-guest-list{
+          button{
+            padding: 5px 7px;
+            cursor: pointer;
+            transition: .3s;
+            &:hover{
+              background-color: $color-orange;
+              color: $color-white;
+              border-color: $color-orange;
+            }
+          }
+        }
+      }
+    } //.list-guest-section
+
+    &.--justify-items-center{ justify-items:center; }
+  } //.wrapper-grid
+} //main

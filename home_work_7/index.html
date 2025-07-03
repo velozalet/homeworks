@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Yaroslav Lutskyi. 'Dynamic Guest List App'">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!--Icons Font-->
+    <link rel="stylesheet" type="text/css" href="src/css/normalize.css">
+    <link rel="stylesheet" href="src/css/style.css">
+
+    <!--<script src="src/js/main.js" defer></script>-->
+    <script src="src/js/useLocalStorage.js" defer></script>  <!-- + Use localStorage option-->
+
+<title>JS:Dynamic Guest List</title>
+</head>
+
+<body>
+<!--Student Yaroslav Lutskyi. A Dynamic Guest List App-->
+    <h1 style="color:#9f0000; text-align:center">JS is power!</h1>
+<hr style="border-top:1px solid red">
+<br>
+<!--//____________________________________________________________________________________________________________________-->
+
+<main id="main">
+    <h2>Dynamic Guest List</h2>
+
+    <div class="container">
+
+       <div class="wrapper-grid --justify-items-center"> <!-- GRID-Container-->
+            <section class="new-guest-add-section --show-one-block-only outline">
+                <h2>Add new Guest to the "Guest's List"</h2>
+                    <form action="" method="POST">
+                        <input type="text" name="guest_mane" id="guest_mane_input" placeholder="Guest's mane">
+                        <span id="guest_mane_btn" >Add Guest</span>
+                    </form>
+
+            </section>
+
+            <section class="list-guest-section display-none outline">
+                <fieldset>
+                    <legend> <strong><i class="fa">&#xf2bc;</i> Guest's List:</strong> </legend>
+                    <ul id="guest_mane_ul_list" class="guest-mane-ul-list"></ul>
+                </fieldset>
+                <figure>
+                    <div class="cnts-guest-list">
+                        <p>Guests: <button id="allCount">0</button></p>
+                        <p>Confirmed Guests: <button id="confirmedCount">0</button></p>
+                    </div>
+                    <div class="clear-guest-list">
+                        <button id="sort_guest_list">Sort A–Z</button>
+                        <button id="clear_guest_list">Clear All</button>
+                    </div>
+                </figure>
+
+             </section>
+        </div> <!-- /GRID-Container-->
+    </div> <!-- /container-->
+</main>
+
+</body>
+</html>
