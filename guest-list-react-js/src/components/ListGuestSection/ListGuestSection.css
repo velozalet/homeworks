@@ -1,0 +1,66 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.listGuestSection-component{
+  padding: 0 165px; 
+}
+.listGuestSection-component .guest-mane-ul-list > li{
+  position: relative;
+  padding: 6px 10px;
+  font-size: 1.3rem;
+  color: #555;
+  text-align: left;
+}
+
+.listGuestSection-component .guest-mane-ul-list .btn-remove:focus, .listGuestSection-component .guest-mane-ul-list .btn-remove:focus-visible{
+  outline: none; border: 1px solid lightgrey;
+}
+.listGuestSection-component .guest-mane-ul-list .btn-remove{
+  padding: 0.1rem 0.5rem;
+  border: 1px solid lightgrey;
+
+  position:absolute; right:0; top:5px;
+
+  transition: all;
+  transition-duration: .5s; 
+}
+.listGuestSection-component .guest-mane-ul-list .btn-confirm{
+  padding: 0.1rem 0.5rem;
+  border: 1px solid lightgrey;
+
+  position: absolute; right:40px; top:5px; 
+
+  transition: all;
+  transition-duration: .5s; 
+}
+.listGuestSection-component .guest-mane-ul-list .btn-remove:hover{
+  border: none;
+  border: 1px solid #e01616;
+  background-color: #e01616;
+  color: white;
+}
+
+.listGuestSection-component .guest-mane-ul-list .btn-confirm:not([disabled]):hover{
+  border: none;
+  border: 1px solid #074701;
+  background-color: #008000;
+  color: white; 
+}
+.listGuestSection-component .guest-mane-ul-list .btn-confirm.confirmed{ display:none; }
+
+.listGuestSection-component .btn-clearAll{
+  padding: 0.8rem 1.2rem;
+  border: 1px solid lightgrey;
+
+  transition: all;
+  transition-duration: .5s; 
+}
+.listGuestSection-component .btn-clearAll:hover{
+    border: 1px solid #e01616;
+    background-color: #e01616;
+    color: white;
+}

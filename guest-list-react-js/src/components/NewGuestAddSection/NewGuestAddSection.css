@@ -1,0 +1,31 @@
+.newGuestAddSection-component form input[name="guest_name"]{
+  border: 1px solid lightgrey;
+  border-radius: 8px;
+  padding: 10px 10px;
+  height: 20px;
+  width: 55%;
+  font-size: 1.3rem;
+  color: black;
+}
+.newGuestAddSection-component form input[name="guest_name"]:focus-visible{
+  border: none; outline: none;
+}
+.newGuestAddSection-component form input[name="guest_name"]:focus{
+  border: 2px solid #008000;
+}
+
+.newGuestAddSection-component form button[type="submit"]:focus, .newGuestAddSection-component form button[type="submit"]:focus-visible{
+  outline: none; border: 1px solid lightgrey;
+}
+.newGuestAddSection-component form button[type="submit"]{
+  padding: 0.8em 1.2em;
+  border: 1px solid lightgrey;
+  transition: all;
+  transition-duration: .8s; 
+}
+.newGuestAddSection-component form button[type="submit"]:hover{
+  border: none;
+  border: 1px solid #008000;
+  background-color: #008000;
+  color: white;
+}
