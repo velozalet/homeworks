@@ -4,22 +4,16 @@ import { useState, useRef, useEffect } from 'react';
 import './ClickSpeedTest.css';
 
 function ClickSpeedTest(){
-    const [testDuration, setTestDuration] = useState(5); //Duration of the test in seconds. Default 5s. It can be changed by User
+    const [testDuration, setTestDuration] = useState(5); //Duration of the test in seconds. 
     const [timeLeft, setTimeLeft] = useState(0); //Timer countdown(depending on `testDuration`)
     const [clickCount, setClickCount] = useState(0); //Mouse click counting(what user sees)
     const [IsGameStarted, setIsGameStarted] = useState(false); //Is game active? Flag(Boolean)
-    const [highScore, setHighScore] = useState(0); //To show the highest score ever achieved. Update it only if the user’s final score is greater than the current high score.
+    const [highScore, setHighScore] = useState(0); //To show the highest score ever achieved.
   
     
     const clickCountRef = useRef(0); //Real-time click counter (no re-render)
     const intervalRef = useRef(null); //To store interval ID
-        /*useRef(0) it's like: Hey React, give me a special container where I can store a value
-          that will survive between renders, but won’t trigger re-renders when I change it.
-        When calling useRef() - React gives you back an object {current: null}
-        */
           
-    //const testDuration = 5;
-  
     function handleStartTest(duration) { 
       let time = duration; //5
     
@@ -43,28 +37,16 @@ function ClickSpeedTest(){
           setIsGameStarted(false);
 
             //Update high score if needed - to show the highest score ever achieved.
-                //update it only if the user’s final score is greater than the current high score.
             if (clickCountRef.current > highScore) {
                 setHighScore(clickCountRef.current);
             }
         }
       }
       intervalRef.current = setInterval(countdownDuration, 1000);
-      /* OR:
-        intervalRef.current = setInterval(function(){
-          time -= 1;
-          setTimeLeft(time);
-      
-          if(time <= 0){
-            clearInterval(intervalRef.current);
-            setIsGameStarted(false);
-          }
-        }, 1000); 
-      */
     }
     
     function handleClickMe(){
-      clickCountRef.current += 1; //update ref with NO re-render(React keeps updated 'clickCountRef.current' value across re-nders)
+      clickCountRef.current += 1; //update ref with NO re-render
       setClickCount(clickCountRef.current); //update UI
     }
 
