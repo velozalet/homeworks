@@ -1,0 +1,45 @@
+.start-test--btn:focus, .start-test--btn:focus-visible,
+.click-me--btn:focus, .click-me--btn:focus-visible,
+.set-test-duration--btn:focus, .set-test-duration--btn:focus-visible{
+    outline: none;
+    border: none;
+}
+.start-test--btn:not([disabled]){
+    background-color: #008000;
+    color:azure;
+    outline: none;
+    border: none;
+}
+.click-me--btn:not([disabled]){
+    background-color: #ff0000;
+    color:azure;
+    outline: none;
+    border: none;
+}
+.set-test-duration--btn:not([disabled]){
+    background-color: #0059ff;
+    color:azure;
+    outline: none;
+    border: none;
+}
+.start-test--btn[disabled],
+.click-me--btn[disabled],
+.set-test-duration--btn[disabled]{
+    cursor: none;
+}
+.start-test--btn:hover,
+.click-me--btn:hover,
+.set-test-duration--btn:hover{
+    border: 1px solid transparent;
+} 
+
+.time-left-info > code,
+.clicks-info > code,
+.final-score > code,
+.final-score{
+    font-size: 1.4rem; 
+}
+
+.high-score{
+    color:red;
+}
