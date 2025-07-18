@@ -1,0 +1,11 @@
+.btn-example{
+    outline: 1px solid black; 
+    display: inline-block; 
+    margin-right: 15px;
+    padding: 5px 5px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.btn-example:hover{
+    outline: 2px solid blue; 
+}
