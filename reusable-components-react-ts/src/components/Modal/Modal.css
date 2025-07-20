@@ -9,6 +9,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.4); /* dark overlay */
+    backdrop-filter: blur(8px);           /* blur background */
+    -webkit-backdrop-filter: blur(8px);   /* Safari support */
 }
 .modal-content {
     background-color: white;

@@ -45,10 +45,10 @@ return (
 
     <main>
         <div style={{padding:'30px'}}>  
-            <Button ref={buttonRef} className="btn-example" onClick={openModal}>This "Button Elem."</Button>
+            <Button ref={buttonRef} className="btn-example" size="sm" onClick={openModal}>This "Button Elem."</Button>
             <Button as="a" href="https://example.com" title="Go there -->" target="_blank" className="btn-example" onClick={openModal}>Button as "LINK Elem."</Button>
-            <Button as="div" className="btn-example" onClick={openModal}>Button as "DIV elem."</Button>
-            <Button as="span" className="btn-example" onClick={openModal}>Button as "SPAN elem."</Button>
+            <Button as="div" className="btn-example" size="lg" onClick={openModal}>Button as "DIV elem."</Button>
+            <Button as="span" className="btn-example" size="lg" onClick={openModal}>Button as "SPAN elem."</Button> 
 
             <Modal isOpen={isModalOpen} onClose={closeModal}>
               <ModalContent />
