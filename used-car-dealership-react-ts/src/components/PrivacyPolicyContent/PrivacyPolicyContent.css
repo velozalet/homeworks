@@ -1,0 +1,13 @@
+/* Override Bootstrap .modal-backdrop */
+.modal.fade.show { 
+    background-color: rgba(0, 0, 0, 0.6) !important; /*darker overlay*/
+    backdrop-filter: blur(8px); /*blur*/
+    -webkit-backdrop-filter: blur(8px); /*Safari support*/
+}
+.modal p::first-letter { 
+    font-size: 25px;
+    color: #ffc107;
+    font-weight: bold;
+    margin-right: 0.1rem;
+}
+.modal .modal-dialog .modal-footer .btn[type="button"]:hover{ background-color: red; }

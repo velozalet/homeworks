@@ -1,0 +1,165 @@
+ /*Hero Section*/
+.home--page .hero {
+    background: #1e1e1e;
+    padding: 3rem;
+    text-align: center;
+}
+.home--page .hero h1 span {
+    color: yellow;
+}
+.home--page .inventory-card {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    text-align: center;
+    border-radius: 9px;
+}
+.home--page .inventory-card img {
+    max-height: 250px;
+    object-fit: cover;
+    width: 100%;
+}
+.home--page .hero{
+    width: 100%;
+    background-position: 50% 50%;
+    position: relative;
+    min-height: 690px;
+    background-repeat: no-repeat;
+    background-size: cover; 
+    z-index: 0;
+}
+.home--page .hero h1,
+.home--page .hero h1.chromatic-aberration-effect{ font-size:4rem; }
+ /*__/Hero Section*/
+
+ /*Inventory Section*/
+ .inventory .row .col:nth-of-type(1) .inventory-card .card-title.chromatic-aberration-effect,
+ .inventory .row .col:nth-of-type(3) .inventory-card .card-title.chromatic-aberration-effect{ font-size: 3.8rem; }
+ .inventory .row .col:nth-of-type(2) .inventory-card .card-title.chromatic-aberration-effect{ font-size: 3.1rem; margin-top:10px; }
+ /*__/Inventory Section*/
+
+
+/*Testimonials Section - Slider*/
+#slider_testimonials { /*Fixed slider height, keep content inside */
+    height: 190px;    /*final height you asked for*/
+    position: relative;
+} 
+/* Make inner and items fill that height */
+#slider_testimonials .carousel-inner,
+#slider_testimonials .carousel-item {
+    height: 100%;
+}
+/* Images scale to fill area (crop if needed) */
+#slider_testimonials .carousel-item img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; /* preserves cover look without stretching */
+    display: block;
+}
+/* Center caption vertically (instead of bottom) so text is visible */
+#slider_testimonials .carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    bottom: auto;              /* avoid bottom positioning */
+    width: 90%;
+    text-align: center;
+    padding: 0.25rem 0.5rem;
+    pointer-events: none;      /* allow clicking arrows/indicators through caption */
+    z-index: 5;
+    /* Optional: light translucent background for contrast */
+    /* background: rgba(0,0,0,0.30); */
+    background-color: #212529;
+    border-radius: 6px;
+}
+/* Tweak caption text sizes so they fit */
+#slider_testimonials .carousel-caption h3.chromatic-aberration-effect {
+    font-size: 1.6rem;
+    margin: 0 0 .25rem;
+    line-height: 1;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+#slider_testimonials .carousel-caption p {
+    font-size: 1rem;
+    margin: 0;
+    color: #fff;
+}
+/* Move indicators a little down (so they don't overlap caption) */
+#slider_testimonials .carousel-indicators {
+    bottom: 8px;
+}
+/* Make sure indicators remain visible above images */
+#slider_testimonials .carousel-indicators button {
+    background: transparent;
+    border: 2px solid rgba(255,255,0,0.45); /* example style */
+}
+
+/* Optional: show caption on all sizes (remove d-none d-sm-block behavior) */
+/* ONLY add this if you want captions on very small screens too */
+#slider_testimonials .carousel-caption {
+    display: block !important;
+}
+/* Make arrows always visible */
+#slider_testimonials .slick-prev,
+#slider_testimonials .slick-next {
+    opacity: 1 !important; /* fully visible */
+    visibility: visible !important;
+    z-index: 10; /* make sure they're above slides */
+}
+#slider_testimonials .slick-prev:before,
+#slider_testimonials .slick-next:before {
+    color: white; /* or your preferred color */
+    font-size: 30px;
+}
+#slider_testimonials .navigation-buttons {
+    opacity: 1;
+    visibility: visible;
+    transition: none; /*disable fade in/out*/
+}
+#slider_testimonials .carousel-control-next, #slider_testimonials .carousel-control-prev{ 
+    width: initial !important;
+}
+
+#slider_testimonials .carousel-indicators{ display:none !important; }
+#slider_testimonials .carousel-inner blockquote .fa{
+    color: #ffc107; font-size:1.5rem;
+}
+/*__/Testimonials Section - Slider*/
+   
+
+
+  
+
+/***********************************************************************
+                               #MEDIA QUERIES:
+***********************************************************************/
+
+@media screen and (max-width: 1199px) {
+    .home--page .hero{ min-height: 615px; }
+    .inventory .row .col:nth-of-type(2) .inventory-card .card-title.chromatic-aberration-effect{ font-size:2.6rem; margin-top:20px; }
+}
+
+@media screen and (max-width: 991px) {
+    .home--page .hero{ min-height: 530px; }
+    .inventory .row .col:nth-of-type(2) .inventory-card .card-title.chromatic-aberration-effect{ font-size: 1.8rem; margin-top:20px; margin-bottom:25px; }
+    .inventory .row .col:nth-of-type(3) .inventory-card .card-title.chromatic-aberration-effect{ font-size: 3.3rem; margin-bottom:20px;}
+}
+
+@media screen and (max-width: 767px) {
+    .home--page .hero{ min-height: 375px; }
+    .home--page .hero h1,
+    .home--page .hero h1.chromatic-aberration-effect{ font-size:3rem; }
+} 
+
+@media screen and (max-width: 575px) {
+    .home--page .hero{ min-height: 225px; background-position:33% 50%; }
+    .home--page .hero h1,
+    .home--page .hero h1.chromatic-aberration-effect{ font-size:1.5rem; }
+
+    .inventory .row .col:nth-of-type(2) .inventory-card .card-title.chromatic-aberration-effect{ font-size: 1.8rem; margin-top:0; margin-bottom:0; }
+
+    #slider_testimonials { height:300px; }
+
+
+} 

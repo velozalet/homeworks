@@ -1,0 +1,192 @@
+#root {}
+/*
+color-black1 --> #212529 (Navmenu)
+color-black2 --> #1e1e1e (more dark)
+color-black3 --> ##121212 (more dark --> body now)
+olor-black4 --> #000 (tataly black --> Footer)
+*/
+
+body {
+    /* background-color: #121212; */
+    color: #fff;
+    /* font-family: 'Barlow Condensed', sans-serif; */
+    font-family: 'Ubuntu', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
+}
+h1,h2,h3,h4,h5 {
+    font-family: 'Bruno Ace', sans-serif;  
+}
+
+/*________________HEADER_________________*/
+.navbar { 
+    transition: all 0.3s ease; /* Smooth shrinking effect */
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.navbar-brand{
+    transition: 0.5s;
+}
+.navbar-brand > img{ 
+    width:105px; height:auto;
+    transition: 0.5s ease;
+}
+/* Shrunk navbar */
+.navbar.scrolled {
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+}
+.navbar.scrolled img {
+    width:85px; height:auto;
+}
+
+.nav-link {
+    /* color: yellow; */
+    color:white;
+    font-weight:lighter;
+    border: 1px solid yellow;
+    border-radius: 7px;
+
+    transition: 0.6s;
+}
+.nav-link:hover {
+    background-color: black;
+    color: yellow;
+    border-color: black;
+}
+.navbar .navbar-toggler:focus{
+    box-shadow: none;
+}
+
+.navbar .navbar-toggler .navbar-toggl-icon{
+    font-size:35px; opacity:.4;
+}
+.navbar .navbar-toggler:hover{
+    outline: 1px solid yellow;
+}
+.navbar .navbar-toggler:hover .navbar-toggl-icon{
+    color: white;  opacity:1;
+}
+
+/**Сhange the icon for <span class="navbar-toggl-icon fa"></span>  and smooth,opacity effect*/
+/*Default:menu closed(collapsed) → show `car` icon */
+button.navbar-toggler.collapsed span.navbar-toggl-icon.fa:before{
+    /* kept your original comment */
+    content: "\f1b9"; /* fa-car Unicode (kept for clarity/fallback) */
+    font-family: "Font Awesome 5 Free", "FontAwesome";
+    font-weight: 900; /* for solid icons */
+}
+/* Menu open → show `close` icon*/
+button.navbar-toggler span.navbar-toggl-icon.fa:before{ 
+    /* kept your original comment */
+    content: "\f00d"; /* fa-close (times) Unicode (kept for clarity/fallback) */
+    font-family: "Font Awesome 5 Free", "FontAwesome";
+    font-weight: 400;
+}
+
+/* container for the icon pseudo-elements *//* ---Added:layered pseudo-elements + transitions (0.5s) ---*/
+button.navbar-toggler span.navbar-toggl-icon.fa {
+  position: relative;
+  display: inline-block;
+  width: 1.25em;   /* adjust size if needed */
+  height: 1em;
+  line-height: 1;
+  vertical-align: middle;
+}
+/* both glyph layers (before = car, after = close) */
+button.navbar-toggler span.navbar-toggl-icon.fa::before,
+button.navbar-toggler span.navbar-toggl-icon.fa::after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  text-align: center;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.85);
+  /* ensure correct font is used for glyphs */
+  font-family: "Font Awesome 5 Free", "FontAwesome";
+  speak: none;
+}
+/* set the glyphs and weights (defined once here) */
+button.navbar-toggler span.navbar-toggl-icon.fa::before {
+  content: "\f1b9";    /* fa-car */
+  font-weight: 900;    /* solid car */
+  z-index: 2;
+}
+button.navbar-toggler span.navbar-toggl-icon.fa::after {
+  content: "\f00d";    /* fa-times / close */
+  font-weight: 400;    /* thinner close */
+  z-index: 1;
+}
+/* show car when collapsed (closed menu) */
+button.navbar-toggler.collapsed span.navbar-toggl-icon.fa::before { opacity:1; transform:scale(1); }
+button.navbar-toggler.collapsed span.navbar-toggl-icon.fa::after { opacity:0; transform:scale(0.85); }
+/* show close when NOT collapsed (open menu) */
+button.navbar-toggler:not(.collapsed) span.navbar-toggl-icon.fa::before { opacity:0; transform:scale(0.85); }
+button.navbar-toggler:not(.collapsed) span.navbar-toggl-icon.fa::after { opacity:1; transform:scale(1); }
+/**___/Сhange the icon for <span class="navbar-toggl-icon fa"></span>  and smooth,opacity effect*/
+
+
+.btn-yellow{ 
+    font-family: 'Bruno Ace', sans-serif; 
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+    transition: 0.6s; 
+}
+.btn.btn-yellow:hover{
+    background-color: black;
+    color: yellow;
+}
+
+/*________________FOOTER_________________*/
+footer {
+    background: #000;
+    padding: 2rem 0;
+    color: #ccc;
+}
+footer a {
+    color: yellow;
+    text-decoration: none;
+}
+footer hr{
+    border-color:#ffffff;
+} 
+footer .footer-logo img{
+    width:125px; height:auto; 
+}
+footer .bottom-footer {
+    font-size: 1.1rem;
+    font-family: 'Barlow Condensed', sans-serif;
+}
+footer .footer-social a > i.fa{   
+    font-size: 36px;
+    color: #ffc107;
+    transition: 0.3s;
+}
+footer .footer-social a:hover > i.fa{
+    color:white; 
+}
+
+footer li > a:hover{
+    font-style: italic; color: #ffc107 !important;
+}
+
+/***********************************************************************
+                               #MEDIA QUERIES:
+***********************************************************************/
+
+@media screen and (max-width: 1199px) {}
+
+@media screen and (max-width: 991px) {}
+
+@media screen and (max-width: 767px) {
+    .navbar-brand > img, .navbar.scrolled img{ width:85px; height:auto; }
+    .navbar.scrolled { padding-top: 0.6rem; padding-bottom: 0.6rem; }
+        
+}
+
+@media screen and (max-width: 575px) {} 
