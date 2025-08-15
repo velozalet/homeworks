@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 //import type { ReactNode } from "react";
-import type { User } from "firebase/auth";
+//import type { User } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase"; //firebase.ts config
-import { Navigate } from "react-router-dom";
+//import { Navigate } from "react-router-dom";
 
-import { Outlet } from "react-router-dom";
+//import { Outlet } from "react-router-dom";
 import AdminPanel from "../pages/__AdminPanel/AdminPanel";
 
 

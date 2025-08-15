@@ -26,19 +26,19 @@ const Button: React<ButtonProps> = ({
     switch (as){ 
         case 'a':
         return(
-            <a href={disabled ? undefined : href} className={`btn ${className}`}  onClick={onClick}>{children || text}</a>
+            <a href={disabled ? undefined : href} className={`${className}`}  onClick={onClick}>{children || text}</a>
         );
         case 'button':
         return(
-            <button type="button" disabled={disabled}  className={`btn ${className}`} onClick={onClick}>{children || text}</button>
+            <button type="button" disabled={disabled}  className={`${className}`} onClick={onClick}>{children || text}</button>
         );
         case 'div':
         return (
-            <div className={`btn ${className}`} onClick={!disabled ? onClick : undefined}>{children || text}</div>
+            <div className={`${className}`} onClick={!disabled ? onClick : undefined}>{children || text}</div>
         );
         case 'span':
         return (
-            <span className={`btn ${className}`} onClick={!disabled ? onClick : undefined}>{children || text}</span>
+            <span className={`${className}`} onClick={!disabled ? onClick : undefined}>{children || text}</span>
         );
         default: return null;
     } //End switch

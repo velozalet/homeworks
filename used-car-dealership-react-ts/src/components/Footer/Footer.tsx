@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
 
+//Components:
+import ScrollUpButton from "../ScrollUpButton/ScrollUpButton";
+
 //Images:
 import footerlogo from '../../assets/footer_logo.png';
 import siteLogo from '../../assets/site_logo.png';
@@ -40,9 +43,10 @@ const Footer = () => (
           </div>
         </div>
         <hr />  
-        <p className="bottom-footer text-center">
+        <p className="bottom-footer text-center"> 
           <img src={footerlogo} alt="footer logo" /> &copy; 2025 &nbsp; Yaroslav L <span className="d-lg-inline d-md-inline d-sm-inline d-none">-- All rights reserved : )</span>
-          </p>
+        </p>
+        <ScrollUpButton />
       </div>   
     </footer> 
  );

@@ -34,6 +34,7 @@ import EditCar from './pages/__AdminPanel/subpages/EditCar';
 import DeleteCar from './pages/__AdminPanel/subpages/DeleteCar';
 
 //Components:
+import CarDetails from './components/CarDetails/CarDetails';
 
 //Styles:
 import './App.css';
@@ -89,6 +90,7 @@ const App = ():JSX.Element => {
                 <Route path="/" element={<Home />} />
                 <Route path="/new-cars" element={<NewCars />} />
                 <Route path="/used-cars" element={<UsedCars />} />
+                <Route path="/used-cars/:carId" element={<CarDetails />} />
                 <Route path="/about" element={<AboutUs />} />
                 <Route path="/contact" element={<ContactUs />} />
                 {/*Fallback for invalid URLs*/}

@@ -1,0 +1,18 @@
+.scroll-top-btn{
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    color: #212529;
+    font-size: 3.1rem;
+    opacity: .8;
+    cursor: pointer;
+    z-index: 10;
+
+    transition: opacity;
+    transition-duration: 1.3s;
+}
+
+.scroll-top-btn:hover {
+    color: #ffc107;
+    opacity: 1;
+}

@@ -1,0 +1,72 @@
+/* .usedcar--page .cars-section .row > div, .sidebar{ outline: 1px solid black; }  */
+
+
+.usedcar--page .cars-section .card--car > img.card-img-top{
+    max-height: 265px;
+    object-fit: cover;
+}
+.usedcar--page .cars-section .card--car .card-title--price .view-car--btn{
+    position: absolute;
+    right: 15px; 
+}
+.usedcar--page .cars-section .card--car .card-body .view-car--btn{
+    color: black;
+    transition: 0.6s;
+}
+.usedcar--page .cars-section .card--car .card-body .view-car--btn:hover{
+    background-color: black;
+    color: yellow;
+    border-color: yellow;
+}
+
+.usedcar--page .cars-section .card--car .card-body .params span.txt{ font-size: .8rem; }
+.usedcar--page .cars-section .card--car .card-body .params > span.icon-wrapper{ font-size: 1rem; } 
+.usedcar--page .cars-section .card--car .card-body .params._odo > span.icon-wrapper{ font-size: 1.1rem; }  
+.usedcar--page .cars-section .card--car .card-body .params > .icon-wrapper{cursor: pointer; }
+.usedcar--page .cars-section .card--car .add-to-favorite{
+    color:white;
+    border:none; background-color:transparent;
+    font-size:1.8rem;  
+    position:absolute; right:10px; top:10px; 
+}
+.usedcar--page .cars-section .card--car .add-to-favorite:hover{ color:red; }
+.usedcar--page .cars-section .card--car .add-to-favorite.fa-heart{ color:red; }
+/*color scheme ==> light*/
+.usedcar--page.color-scheme--light .card--car .card-title{ color: #000; }
+.usedcar--page.color-scheme--light .card--car .card-title.card-title--price{ color:#0d6efd; }
+.usedcar--page.color-scheme--light .card--car .hr--decor{ color: #000; }
+/*__/color scheme ==> light*/ 
+
+/*color scheme ==> dark*/
+.usedcar--page.color-scheme--dark .card--car .card-body{ background-color: #212529; }
+.usedcar--page.color-scheme--dark .card--car .card-title{ color: #ffffff; }
+.usedcar--page.color-scheme--dark .card--car .card-title.card-title--price{ color:#ffc107; }
+.usedcar--page.color-scheme--dark .card--car .hr--decor{ color: white; }
+.usedcar--page.color-scheme--dark .card--car .params > .icon-wrapper{ background-color: white !important; }
+/*__/color scheme ==> dark*/ 
+
+
+.usedcar--page .sidebar .filters-section .accordion .accordion-item,
+.usedcar--page .sidebar .filters-section .accordion .accordion-item .accordion-header{
+    font-family: 'Barlow Condensed', sans-serif; 
+}
+.usedcar--page .sidebar .filters-section .accordion .accordion-item .accordion-header > .accordion-button{
+    background-color: white;
+    padding: 10px 15px;
+    font-size: 1.7rem; 
+    color: gray;
+}
+.usedcar--page .sidebar .filters-section .accordion .accordion-item .accordion-header > .accordion-button:focus,
+.usedcar--page .sidebar .filters-section .accordion .accordion-item .accordion-header > .accordion-button:active,
+.usedcar--page .sidebar .filters-section .accordion .accordion-item .accordion-collapse .form-select:focus,
+.usedcar--page .sidebar .filters-section .accordion .accordion-item .accordion-collapse .form-select:active{
+    box-shadow: none;
+}
+
+.usedcar--page .sidebar .filters-section .accordion .accordion-item .accordion-collapse .form-select{ font-size: 1.1rem; }
+.usedcar--page .sidebar .filters-section .accordion .accordion-item .accordion-collapse .form-select:focus{
+    border-color: #ffc107;
+}
+.usedcar--page .sidebar .filters-section .accordion .accordion-item .accordion-header > .accordion-button:not(.collapsed){
+    color: #ffc107; 
+}

@@ -20,13 +20,13 @@ const Header = ()=> {
 
 
     return(
-    <nav  ref={navbarRef} className="navbar navbar-expand-md navbar-dark bg-dark sticky-top py-0"> {/*navbar-dark bg-dark*/}
+    <nav ref={navbarRef} className="navbar navbar-expand-md navbar-dark bg-dark sticky-top py-0"> {/*navbar-dark bg-dark*/}
     <div className="container-lg">
         <Link className="navbar-brand" to="/">
-        <img src={siteLogo} alt="Brand" />
+            <img src={siteLogo} alt="Brand" />
         </Link>
         <button className="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span className="navbar-toggl-icon fa"></span> {/*navbar-toggler-icon*/}
+            <span className="navbar-toggl-icon fa"></span> {/*navbar-toggler-icon*/}
         </button>
 
         <div className="collapse navbar-collapse" id="navbarNav">

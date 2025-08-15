@@ -18,6 +18,9 @@
     object-fit: cover;
     width: 100%;
 }
+.home--page .inventory-card .card-body .chromatic-aberration-effect{
+    /*color:black !important;*/  /*#0c0d16*/
+}
 .home--page .hero{
     width: 100%;
     background-position: 50% 50%;
@@ -32,10 +35,122 @@
  /*__/Hero Section*/
 
  /*Inventory Section*/
+ /* .inventory { min-height: 585px; } */
  .inventory .row .col:nth-of-type(1) .inventory-card .card-title.chromatic-aberration-effect,
  .inventory .row .col:nth-of-type(3) .inventory-card .card-title.chromatic-aberration-effect{ font-size: 3.8rem; }
  .inventory .row .col:nth-of-type(2) .inventory-card .card-title.chromatic-aberration-effect{ font-size: 3.1rem; margin-top:10px; }
+
+ .inventory .inventory-card .card-back h5,  .inventory .inventory-card .card-back h4{ color:#ffc107; } 
+ .inventory .inventory-card .card-back p > strong{ color:yellow; } 
+
+/* ===============================
+   Flip Card Effect for .flipp
+   =============================== */
+/* ---------- Flip (stable for many cards) ---------- */
+.flipp {
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+    cursor: pointer;
+  }
+  
+  /* the card container - does not rotate now, just holds faces */
+  .flipp .card {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    transition: none; /* we animate faces, not parent */
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    /* ensure consistent minimum height (tune to your design) */
+    min-height: 260px;  /* ← adjust if needed */
+  }
+  
+  /* FRONT (stays in flow so .card has height) */
+  .flipp .card-front {
+    position: relative;
+    z-index: 2;
+    transform-origin: center center;
+    transform: rotateY(0deg);
+    transition: transform 0.75s cubic-bezier(.2,.9,.3,1);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+  
+  /* Keep front inner elements from showing backface */
+  .flipp .card-front img,
+  .flipp .card-front .card-body,
+  .flipp .card-front * {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  /* BACK (absolute overlay, initially rotated away) */
+  .flipp .card-back {
+    position: absolute;
+    inset: 0;   /* top:0; right:0; bottom:0; left:0 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    text-align: center;
+    background: rgba(0,0,0,0.88);
+    color: #fff;
+    transform-origin: center center;
+    transform: rotateY(-180deg);   /* hidden initially */
+    transition: transform 0.75s cubic-bezier(.2,.9,.3,1);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    z-index: 1;
+  }
+  
+  /* Show back and hide front by rotating faces in opposite directions */
+  .flipp:hover .card-front,
+  .flipp:focus-within .card-front {
+    transform: rotateY(180deg);
+    z-index: 1;
+  }
+  .flipp:hover .card-back,
+  .flipp:focus-within .card-back {
+    transform: rotateY(0deg);
+    z-index: 2;
+  }
+  
+  /* Image sizing - make front image predictable */
+  .flipp .card-front .card-img-top {
+    display: block;
+    width: 100%;
+    height: inherit;
+    object-fit: cover;
+  }
+  
+  /* card body spacing */
+  .flipp .card-front .card-body {
+    padding: 0.75rem 1rem;
+  }
+  
+  /* Small visual polish */
+  .flipp .card-back h5 { margin: 0 0 .5rem; font-size: 1.1rem; }
+  .flipp .card-back p  { margin: 0; font-size: .95rem; line-height: 1.35; }
+  
+  /* Optional: make flip on click for mobile (JS toggles .flipped) */
+  .flipp.flipped .card-front { transform: rotateY(180deg); z-index:1; }
+  .flipp.flipped .card-back  { transform: rotateY(0deg); z-index:2; }
+/* ===============================
+   Flip Card Effect for .flipp ==> END
+   =============================== */
+
  /*__/Inventory Section*/
+
+
+
+
+  
+  
+  
+
+
 
 
 /*Testimonials Section - Slider*/
@@ -128,16 +243,14 @@
 /*__/Testimonials Section - Slider*/
    
 
-
   
 
 /***********************************************************************
                                #MEDIA QUERIES:
 ***********************************************************************/
-
 @media screen and (max-width: 1199px) {
     .home--page .hero{ min-height: 615px; }
-    .inventory .row .col:nth-of-type(2) .inventory-card .card-title.chromatic-aberration-effect{ font-size:2.6rem; margin-top:20px; }
+    .inventory .row .col:nth-of-type(2) .inventory-card .card-title.chromatic-aberration-effect{ font-size:2.5rem; margin-top:20px; }
 }
 
 @media screen and (max-width: 991px) {
@@ -160,6 +273,4 @@
     .inventory .row .col:nth-of-type(2) .inventory-card .card-title.chromatic-aberration-effect{ font-size: 1.8rem; margin-top:0; margin-bottom:0; }
 
     #slider_testimonials { height:300px; }
-
-
 } 
