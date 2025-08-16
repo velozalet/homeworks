@@ -1,35 +1,36 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import type {Car} from '../../types/car';
 
 //Components:
-import Button from '../../components/Button/Button';
+import Button from '../../components/Button/Button'; 
 
 
-interface Car {
-    id: string;
-    make:  'GMC'|'Chevrolet'|'Buick'|string;
-    model: string;
-    year: number;
-    bodyStyle: 'Hatch'|'SUV'|'Sedan'|string;
-    color: string;
-    mileage: number;
-    transmission: 'Auto'|'Manual'|string;
-    fuelType: 'Gas'|'Diesel'|string;
-    price: number; 
-    image: string;
-}
+// interface Car {
+//     id: string;
+//     make:  'gmc'|'chevrolet'|'buick'|string;
+//     model: string;
+//     year: number;
+//     bodyStyle: 'hatch'|'suv'|'sedan'|string;
+//     color: string;
+//     mileage: number;
+//     transmission: 'auto'|'manual'|string;
+//     fuelType: 'gas'|'diesel'|string;
+//     price: number; 
+//     images: string[]; //array of image URLs for multiple images
+// }
 
-const CarCard = ({ car }: {car: Car}) => {
+const CarCard = ({ car }: {car:Car}) => {
   return (
     <div className="col-sm-10 col-md-6 mb-4 mx-auto mx-md-0">
         <div className="card card--car">
-            <img src={car.image} className="card-img-top img-fluid" alt={`${car.make} ${car.model}`} />
+            <img src={car.images[0]} className="card-img-top img-fluid" alt={`${car.make} ${car.model}`} />
             <div className="card-body"> {/*bg-dark*/} 
-                <h5 className="card-title">{car.year} {car.make} {car.model}</h5> {/*text-white|text-black|text-warning*/}
+                <h5 className="card-title">{car.make} {car.model}</h5> {/*text-white|text-black|text-warning*/}
                 <h5 className="card-title card-title--price">
                     <p className="car-price text-primary fs-special fs-5 fw-bold"> {/*text-white|text-primary|text-black|text-warning|text-danger*/}
-                        <i className="fa fa-dollar pe-1"></i>${car.price.toLocaleString()}
-                        <Link to={`/used-cars/${1}`} className="btn btn-warning view-car--btn">View Car</Link>
+                        <i className="fa fa-dollar pe-1"></i>{car.price.toLocaleString()}
+                        <Link to={`/used-cars/${car.id}`} className="btn btn-warning view-car--btn">View Car</Link>
                     </p>
                 </h5>
                 <hr className="mt-4 hr--decor" /> {/*text-white*/} 
@@ -40,12 +41,12 @@ const CarCard = ({ car }: {car: Car}) => {
                         > <i className="fa fa-calendar-check-o"></i><span className="txt ps-1">{car.year}</span>
                         </span> 
                     </div>
-                    <div className="params _fuel">
+                    <div className="params _fuel"> 
                         <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
                             data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="fuel type"
-                        ><i className="fa fa-tint"></i> <span className="txt ps-1">{car.fuelType}</span> 
+                        ><i className="fa fa-tint"></i> <span className="txt ps-1">{car.fuelType}</span>
                         </span>
-                    </div>
+                    </div> 
                     <div className="params _transmission"> 
                         <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
                             data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="transmission type"

@@ -1,5 +1,11 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
+import type { RootState } from "../../store/store"; 
+import { selectMake } from "../../store/carsSlice";
+import { fetchCars } from "../../services/carService";
+import { setCars } from "../../store/carsSlice";
 
 //Components:
 import Button from '../../components/Button/Button';
@@ -10,8 +16,10 @@ import CarList from "../../components/CarList/CarList";
 import './UsedCars.css';
 
 function UsedCars(){
-    const [cars, setCars] = useState<any[]>([]);
-    const [selectedMake, setSelectedMake] = useState("");
+    const dispatch = useDispatch();
+
+    const selectedMake = useSelector((state: RootState) => state.cars.selectedMake);
+    const filteredCars = useSelector((state: RootState) => state.cars.filteredCars);
 
     useEffect(() => {
         //Bootstrap is loaded from CDN, so use window.bootstrap --> for Bootstrap `Tooltip`
@@ -19,15 +27,27 @@ function UsedCars(){
         //@ts-ignore because TS doesn't know bootstrap is on window
         tooltipTriggerList.forEach((tooltipTriggerEl) =>{ new window.bootstrap.Tooltip(tooltipTriggerEl); });
 
-        // TODO: Fetch from Firestore
-        setCars([
-            { id: 1, make: "GMC", model: "Terrain" },
-            { id: 2, make: "Chevrolet", model: "Malibu" },
-            { id: 3, make: "Buick", model: "Enclave" }
-          ]);
+            //TODO: Fetch from Firestore
+            /*setCars([
+                { id: 1, make: "GMC", model: "Terrain" },
+                { id: 2, make: "Chevrolet", model: "Malibu" },
+                { id: 3, make: "Buick", model: "Enclave" }
+            ]);*/
     }, []);
 
-      
+    useEffect(() => { 
+        async function loadCars() {
+          try {
+            const cars = await fetchCars();
+            dispatch(setCars(cars));
+          } catch (error) {
+            console.error("Error loading cars:", error);
+          }
+        }
+        loadCars();
+    }, [dispatch]);
+
+
     return(
     <div className="usedcar--page color-scheme--light"> {/*color-scheme--dark | color-scheme--light*/}
         <div className="contactus--page">
@@ -45,6 +65,7 @@ function UsedCars(){
                     <section className="filters-section">
                         <p className="text-black">
                             <i className="fa fa-filter"></i>FILTERS.....
+                            <Button as="button" className="btn btn-warning mt-3 px-4 py-2" text="Apply Filters"></Button> 
                         </p>
                         <div className="accordion" id="filters-car--accordion">
                             <div className="accordion-item">
@@ -55,12 +76,10 @@ function UsedCars(){
                                 </h2>
                                 <div id="panelsStayOpen-1" className="accordion-collapse collapse show">
                                     <div className="accordion-body">
-                                        <select className="form-select" aria-label="Make">
-                                            <option value="anymake" selected>Any Make</option>
-                                            <option value="gmc">GMC</option>
-                                            <option value="chevrolet">Chevrolet</option>
-                                            <option value="buick">Buick</option> 
-                                        </select>
+                                        <FilterMake
+                                            selectedMake={selectedMake || ""}
+                                            onChange={(value) => dispatch(selectMake(value || null))}
+                                        />
                                         <select className="form-select mt-2" aria-label="Model">
                                             <option value="anymodel">Any Model</option>
                                             <option value="gmc">Buick Encore GX</option>
@@ -198,7 +217,9 @@ function UsedCars(){
                                     </div>
                                 </div>
                             </div>
-                        </div> {/*.accordion*/}
+                        </div> {/*.accordion*/} 
+
+                        <Button as="button" className="btn btn-warning mt-3 px-4 py-2" text="Apply Filters"></Button> 
                     </section>
                     {/*__/Filters Widgets*/}
                 </aside>
@@ -206,419 +227,12 @@ function UsedCars(){
 
                 {/*Car's list*/}
                 <aside className="cars col-lg-9">
-                    <section className="cars-sorting bg-body-tertiary border rounded p-3 mb-4 text-black">
+                    <section className="cars-sorting border rounded p-3 mb-4">
                         <i className="fa fa-sort"></i>Sort by: <i className="fa fa-sort-alpha-asc"> </i> <i className="fa fa-sort-alpha-desc"></i> 
                     </section>
 
                     <section className="cars-section">
-                        <div className="row cars-grid justify-content-center">
-
-                            <div className="col-sm-10 col-md-6 mb-4 mx-auto mx-md-0">
-                                <div className="card card--car">
-                                    <img src="https://www.themecrest.top/templates/carmart/demo/images/cars/bmw-x5/01.jpg" className="card-img-top img-fluid" alt="A Car" />
-                                    <div className="card-body"> {/*bg-dark*/} 
-                                        <h5 className="card-title">Chevrolet Traverse</h5> {/*text-white|text-black|text-warning*/}
-                                        <h5 className="card-title card-title--price">
-                                            <p className="car-price text-primary fs-special fs-5 fw-bold"> {/*text-white|text-primary|text-black|text-warning|text-danger*/}
-                                                <i className="fa fa-dollar pe-1"></i>9,250
-                                                <Link to={`/used-cars/${1}`} className="btn btn-warning view-car--btn">View Car</Link>
-                                            </p>
-                                        </h5>
-                                        <hr className="mt-4 hr--decor" /> {/*text-white*/} 
-                                        <div className="card-text pt-2 row row-cols-3 g-2"> 
-                                            <div className="params _year">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm" 
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="year of car production"
-                                                > <i className="fa fa-calendar-check-o"></i><span className="txt ps-1">2016</span>
-                                                </span> 
-                                            </div>
-                                            <div className="params _fuel">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="fuel type"
-                                                ><i className="fa fa-tint"></i> <span className="txt ps-1">Gas</span> 
-                                                </span>
-                                            </div>
-                                            <div className="params _transmission"> 
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="transmission type"
-                                                ><i className="fa fa-gears"></i> <span className="txt ps-1">Manual</span>
-                                                </span>
-                                            </div>
-                                            <div className="params _odo">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-1 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="car mileage(km)"
-                                                ><i className="">km</i>&nbsp;<span className="txt ps-1">96,6k <span></span> </span>
-                                                </span>
-                                            </div>
-                                            <div className="params _color">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="car color"
-                                                ><i className="fa fa-eye"></i> <span className="txt ps-1">Red</span>
-                                                </span>
-                                            </div>
-                                            <div className="params _bodystyle">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="body style"
-                                                ><i className="fa fa-car"></i> <span className="txt ps-1">Sedan</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                    {/*<button className="add-to-favorite fa fa-heart-o"></button> on click --> to change class to `fa-heart`*/}
-                                    <Button className="add-to-favorite fa fa-heart-o" text=""></Button>  
-                                </div>
-                            </div>
-
-                            <div className="col-sm-10 col-md-6 mb-4 mx-auto mx-md-0">
-                                <div className="card card--car">
-                                    <img src="https://www.themecrest.top/templates/carmart/demo/images/cars/bmw-x5/01.jpg" className="card-img-top img-fluid" alt="A Car" />
-                                    <div className="card-body"> {/*bg-dark*/} 
-                                        <h5 className="card-title">GMC Sierra 1500</h5> {/*text-white|text-black|text-warning*/}
-                                        <h5 className="card-title card-title--price">
-                                            <p className="car-price text-primary fs-special fs-5 fw-bold"> {/*text-white|text-primary|text-black|text-warning|text-danger*/}
-                                                <i className="fa fa-dollar pe-1"></i>16,759 
-                                                {/* <Link to="/used-cars" className="btn btn-warning view-car--btn">View Car</Link> */}
-                                                <Link to={`/used-cars/${2}`} className="btn btn-warning view-car--btn">View Car</Link>
-                                            </p>
-                                        </h5>
-                                        <hr className="mt-4 hr--decor" /> {/*text-white*/} 
-                                        <div className="card-text pt-2 row row-cols-3 g-2"> 
-                                            <div className="params _year">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm" 
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="year of car production"
-                                                > <i className="fa fa-calendar-check-o"></i><span className="txt ps-1">2019</span>
-                                                </span> 
-                                            </div>
-                                            <div className="params _fuel">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="fuel type"
-                                                ><i className="fa fa-tint"></i> <span className="txt ps-1">Disel</span> 
-                                                </span>
-                                            </div>
-                                            <div className="params _transmission"> 
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="transmission type"
-                                                ><i className="fa fa-gears"></i> <span className="txt ps-1">Manual</span>
-                                                </span>
-                                            </div>
-                                            <div className="params _odo">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-1 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="car mileage(km)"
-                                                ><i className="">km</i>&nbsp;<span className="txt ps-1">90,2k <span></span> </span>
-                                                </span>
-                                            </div>
-                                            <div className="params _color">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="car color"
-                                                ><i className="fa fa-eye"></i> <span className="txt ps-1">White</span>
-                                                </span>
-                                            </div>
-                                            <div className="params _bodystyle">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="body style"
-                                                ><i className="fa fa-car"></i> <span className="txt ps-1">SUV</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                    {/*<button className="add-to-favorite fa fa-heart-o"></button> on click --> to change class to `fa-heart`*/}
-                                    <Button className="add-to-favorite fa fa-heart-o" text=""></Button>  
-                                </div>
-                            </div>
-
-                            <div className="col-sm-10 col-md-6 mb-4 mx-auto mx-md-0">
-                                <div className="card card--car">
-                                    <img src="https://www.themecrest.top/templates/carmart/demo/images/cars/bmw-x5/01.jpg" className="card-img-top img-fluid" alt="A Car" />
-                                    <div className="card-body"> {/*bg-dark*/} 
-                                        <h5 className="card-title">Chevrolet Equinox</h5> {/*text-white|text-black|text-warning*/}
-                                        <h5 className="card-title card-title--price">
-                                            <p className="car-price text-primary fs-special fs-5 fw-bold"> {/*text-white|text-primary|text-black|text-warning|text-danger*/}
-                                                <i className="fa fa-dollar pe-1"></i>20,800
-                                                {/* <Link to="/used-cars" className="btn btn-warning view-car--btn">View Car</Link> */}
-                                                <Link to={`/used-cars/${3}`} className="btn btn-warning view-car--btn">View Car</Link>
-                                            </p>
-                                        </h5>
-                                        <hr className="mt-4 hr--decor" /> {/*text-white*/} 
-                                        <div className="card-text pt-2 row row-cols-3 g-2"> 
-                                            <div className="params _year">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm" 
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="year of car production"
-                                                > <i className="fa fa-calendar-check-o"></i><span className="txt ps-1">2019</span>
-                                                </span> 
-                                            </div>
-                                            <div className="params _fuel">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="fuel type"
-                                                ><i className="fa fa-tint"></i> <span className="txt ps-1">Gas</span> 
-                                                </span>
-                                            </div>
-                                            <div className="params _transmission"> 
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="transmission type"
-                                                ><i className="fa fa-gears"></i> <span className="txt ps-1">Auto</span>
-                                                </span>
-                                            </div>
-                                            <div className="params _odo">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-1 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="car mileage(km)"
-                                                ><i className="">km</i>&nbsp;<span className="txt ps-1">43,6k <span></span> </span>
-                                                </span>
-                                            </div>
-                                            <div className="params _color">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="car color"
-                                                ><i className="fa fa-eye"></i> <span className="txt ps-1">Black</span>
-                                                </span>
-                                            </div>
-                                            <div className="params _bodystyle">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="body style"
-                                                ><i className="fa fa-car"></i> <span className="txt ps-1">Hatch</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                    {/*<button className="add-to-favorite fa fa-heart-o"></button> on click --> to change class to `fa-heart`*/}
-                                    <Button className="add-to-favorite fa fa-heart-o" text=""></Button>  
-                                </div>
-                            </div>
-
-                            <div className="col-sm-10 col-md-6 mb-4 mx-auto mx-md-0">
-                                <div className="card card--car">
-                                    <img src="https://www.themecrest.top/templates/carmart/demo/images/cars/bmw-x5/01.jpg" className="card-img-top img-fluid" alt="A Car" />
-                                    <div className="card-body"> {/*bg-dark*/} 
-                                        <h5 className="card-title">Buick Encore GX</h5> {/*text-white|text-black|text-warning*/}
-                                        <h5 className="card-title card-title--price">
-                                            <p className="car-price text-primary fs-special fs-5 fw-bold"> {/*text-white|text-primary|text-black|text-warning|text-danger*/}
-                                                <i className="fa fa-dollar pe-1"></i>39,600
-                                                {/* <Link to="/used-cars" className="btn btn-warning view-car--btn">View Car</Link> */}
-                                                <Link to={`/used-cars/${4}`} className="btn btn-warning view-car--btn">View Car</Link>
-                                            </p>
-                                        </h5>
-                                        <hr className="mt-4 hr--decor" /> {/*text-white*/} 
-                                        <div className="card-text pt-2 row row-cols-3 g-2"> 
-                                            <div className="params _year">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm" 
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="year of car production"
-                                                > <i className="fa fa-calendar-check-o"></i><span className="txt ps-1">2025</span>
-                                                </span> 
-                                            </div>
-                                            <div className="params _fuel">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="fuel type"
-                                                ><i className="fa fa-tint"></i> <span className="txt ps-1">Gas</span> 
-                                                </span>
-                                            </div>
-                                            <div className="params _transmission"> 
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="transmission type"
-                                                ><i className="fa fa-gears"></i> <span className="txt ps-1">Auto</span>
-                                                </span>
-                                            </div>
-                                            <div className="params _odo">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-1 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="car mileage(km)"
-                                                ><i className="">km</i>&nbsp;<span className="txt ps-1">32,3k <span></span> </span>
-                                                </span>
-                                            </div>
-                                            <div className="params _color">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="car color"
-                                                ><i className="fa fa-eye"></i> <span className="txt ps-1">Black</span>
-                                                </span>
-                                            </div>
-                                            <div className="params _bodystyle">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="body style"
-                                                ><i className="fa fa-car"></i> <span className="txt ps-1">Hatch</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                    {/*<button className="add-to-favorite fa fa-heart-o"></button> on click --> to change class to `fa-heart`*/}
-                                    <Button className="add-to-favorite fa fa-heart-o" text=""></Button>  
-                                </div>
-                            </div>
-
-                            <div className="col-sm-10 col-md-6 mb-4 mx-auto mx-md-0">
-                                <div className="card card--car">
-                                    <img src="https://www.themecrest.top/templates/carmart/demo/images/cars/bmw-x5/01.jpg" className="card-img-top img-fluid" alt="A Car" />
-                                    <div className="card-body"> {/*bg-dark*/} 
-                                        <h5 className="card-title">GMC Terrain</h5> {/*text-white|text-black|text-warning*/}
-                                        <h5 className="card-title card-title--price">
-                                            <p className="car-price text-primary fs-special fs-5 fw-bold"> {/*text-white|text-primary|text-black|text-warning|text-danger*/}
-                                                <i className="fa fa-dollar pe-1"></i>23,999
-                                                {/* <Link to="/used-cars" className="btn btn-warning view-car--btn">View Car</Link> */}
-                                                <Link to={`/used-cars/${5}`} className="btn btn-warning view-car--btn">View Car</Link>
-                                            </p>
-                                        </h5>
-                                        <hr className="mt-4 hr--decor" /> {/*text-white*/} 
-                                        <div className="card-text pt-2 row row-cols-3 g-2"> 
-                                            <div className="params _year">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm" 
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="year of car production"
-                                                > <i className="fa fa-calendar-check-o"></i><span className="txt ps-1">2021</span>
-                                                </span> 
-                                            </div>
-                                            <div className="params _fuel">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="fuel type"
-                                                ><i className="fa fa-tint"></i> <span className="txt ps-1">Gas</span> 
-                                                </span>
-                                            </div>
-                                            <div className="params _transmission"> 
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="transmission type"
-                                                ><i className="fa fa-gears"></i> <span className="txt ps-1">Auto</span>
-                                                </span>
-                                            </div>
-                                            <div className="params _odo">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-1 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="car mileage(km)"
-                                                ><i className="">km</i>&nbsp;<span className="txt ps-1">76,6k <span></span> </span>
-                                                </span>
-                                            </div>
-                                            <div className="params _color">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="car color"
-                                                ><i className="fa fa-eye"></i> <span className="txt ps-1">Red</span>
-                                                </span>
-                                            </div>
-                                            <div className="params _bodystyle">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="body style"
-                                                ><i className="fa fa-car"></i> <span className="txt ps-1">SUV</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                    {/*<button className="add-to-favorite fa fa-heart-o"></button> on click --> to change class to `fa-heart`*/}
-                                    <Button className="add-to-favorite fa fa-heart-o" text=""></Button>  
-                                </div>
-                            </div>
-
-                            <div className="col-sm-10 col-md-6 mb-4 mx-auto mx-md-0">
-                                <div className="card card--car">
-                                    <img src="https://www.themecrest.top/templates/carmart/demo/images/cars/bmw-x5/01.jpg" className="card-img-top img-fluid" alt="A Car" />
-                                    <div className="card-body"> {/*bg-dark*/} 
-                                        <h5 className="card-title">Buick Encore GX</h5> {/*text-white|text-black|text-warning*/}
-                                        <h5 className="card-title card-title--price">
-                                            <p className="car-price text-primary fs-special fs-5 fw-bold"> {/*text-white|text-primary|text-black|text-warning|text-danger*/}
-                                                <i className="fa fa-dollar pe-1"></i>24,900
-                                                {/* <Link to="/used-cars" className="btn btn-warning view-car--btn">View Car</Link> */}
-                                                <Link to={`/used-cars/${6}`} className="btn btn-warning view-car--btn">View Car</Link>
-                                            </p>
-                                        </h5>
-                                        <hr className="mt-4 hr--decor" /> {/*text-white*/} 
-                                        <div className="card-text pt-2 row row-cols-3 g-2"> 
-                                            <div className="params _year">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm" 
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="year of car production"
-                                                > <i className="fa fa-calendar-check-o"></i><span className="txt ps-1">2021</span>
-                                                </span> 
-                                            </div>
-                                            <div className="params _fuel">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="fuel type"
-                                                ><i className="fa fa-tint"></i> <span className="txt ps-1">Gas</span> 
-                                                </span>
-                                            </div>
-                                            <div className="params _transmission"> 
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="transmission type"
-                                                ><i className="fa fa-gears"></i> <span className="txt ps-1">Auto</span>
-                                                </span>
-                                            </div>
-                                            <div className="params _odo">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-1 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="car mileage(km)"
-                                                ><i className="">km</i>&nbsp;<span className="txt ps-1">51,8k <span></span> </span>
-                                                </span>
-                                            </div>
-                                            <div className="params _color">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="car color"
-                                                ><i className="fa fa-eye"></i> <span className="txt ps-1">Black</span>
-                                                </span>
-                                            </div>
-                                            <div className="params _bodystyle">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="body style"
-                                                ><i className="fa fa-car"></i> <span className="txt ps-1">Hatch</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                    {/*<button className="add-to-favorite fa fa-heart-o"></button> on click --> to change class to `fa-heart`*/}
-                                    <Button className="add-to-favorite fa fa-heart-o" text=""></Button>  
-                                </div>
-                            </div>
-
-                            <div className="col-sm-10 col-md-6 mb-4 mx-auto mx-md-0">
-                                <div className="card card--car">
-                                    <img src="https://www.themecrest.top/templates/carmart/demo/images/cars/bmw-x5/01.jpg" className="card-img-top img-fluid" alt="A Car" />
-                                    <div className="card-body"> {/*bg-dark*/} 
-                                        <h5 className="card-title">Chevrolet Malibu</h5> {/*text-white|text-black|text-warning*/}
-                                        <h5 className="card-title card-title--price">
-                                            <p className="car-price text-primary fs-special fs-5 fw-bold"> {/*text-white|text-primary|text-black|text-warning|text-danger*/}
-                                                <i className="fa fa-dollar pe-1"></i>16,300
-                                                {/* <Link to="/used-cars" className="btn btn-warning view-car--btn">View Car</Link> */}
-                                                <Link to={`/used-cars/${7}`} className="btn btn-warning view-car--btn">View Car</Link>
-                                            </p>
-                                        </h5>
-                                        <hr className="mt-4 hr--decor" /> {/*text-white*/} 
-                                        <div className="card-text pt-2 row row-cols-3 g-2"> 
-                                            <div className="params _year">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm" 
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="year of car production"
-                                                > <i className="fa fa-calendar-check-o"></i><span className="txt ps-1">2017</span>
-                                                </span> 
-                                            </div>
-                                            <div className="params _fuel">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="fuel type"
-                                                ><i className="fa fa-tint"></i> <span className="txt ps-1">Gas</span> 
-                                                </span>
-                                            </div>
-                                            <div className="params _transmission"> 
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="transmission type"
-                                                ><i className="fa fa-gears"></i> <span className="txt ps-1">Manual</span>
-                                                </span>
-                                            </div>
-                                            <div className="params _odo">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-1 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="car mileage(km)"
-                                                ><i className="">km</i>&nbsp;<span className="txt ps-1">80,1k <span></span> </span>
-                                                </span>
-                                            </div>
-                                            <div className="params _color">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="car color"
-                                                ><i className="fa fa-eye"></i> <span className="txt ps-1">White</span>
-                                                </span>
-                                            </div>
-                                            <div className="params _bodystyle">
-                                                <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="body style"
-                                                ><i className="fa fa-car"></i> <span className="txt ps-1">Sedan</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                    {/*<button className="add-to-favorite fa fa-heart-o"></button> on click --> to change class to `fa-heart`*/}
-                                    <Button className="add-to-favorite fa fa-heart-o" text=""></Button>  
-                                </div>
-                            </div>
-  
-                        </div> {/*row*/} 
+                        <CarList /> {/*<CarList cars={filteredCars} /> */}
                     </section> {/*.cars-section*/}
                 </aside>
                 {/*__/Car's list*/}
@@ -626,8 +240,6 @@ function UsedCars(){
         </div> {/*.container*/}
         
     </div> 
-
-
     ); 
 }
 export default UsedCars;

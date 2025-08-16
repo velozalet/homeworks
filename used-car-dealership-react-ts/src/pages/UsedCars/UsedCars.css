@@ -1,6 +1,6 @@
 /* .usedcar--page .cars-section .row > div, .sidebar{ outline: 1px solid black; }  */
 
-
+.usedcar--page .cars-section .card--car .card-body{ text-transform: capitalize; }
 .usedcar--page .cars-section .card--car > img.card-img-top{
     max-height: 265px;
     object-fit: cover;
@@ -35,6 +35,9 @@
 .usedcar--page.color-scheme--light .card--car .card-title{ color: #000; }
 .usedcar--page.color-scheme--light .card--car .card-title.card-title--price{ color:#0d6efd; }
 .usedcar--page.color-scheme--light .card--car .hr--decor{ color: #000; }
+
+.usedcar--page.color-scheme--light .cars-sorting{ background-color: #f8f9fa; color:#000; }
+.usedcar--page.color-scheme--light .no-cars-found { color:#000; }
 /*__/color scheme ==> light*/ 
 
 /*color scheme ==> dark*/
@@ -43,6 +46,12 @@
 .usedcar--page.color-scheme--dark .card--car .card-title.card-title--price{ color:#ffc107; }
 .usedcar--page.color-scheme--dark .card--car .hr--decor{ color: white; }
 .usedcar--page.color-scheme--dark .card--car .params > .icon-wrapper{ background-color: white !important; }
+
+.usedcar--page.color-scheme--dark .sidebar .filters-section .accordion .accordion-item,
+.usedcar--page.color-scheme--dark .sidebar .filters-section .accordion .accordion-item .accordion-header > .accordion-button{ background-color: #212529; }
+
+.usedcar--page.color-scheme--dark .cars-sorting{ background-color: #212529; color:white; }
+.usedcar--page.color-scheme--dark .no-cars-found { color:white; }
 /*__/color scheme ==> dark*/ 
 
 
@@ -56,6 +65,10 @@
     font-size: 1.7rem; 
     color: gray;
 }
+.usedcar--page .sidebar .filters-section .accordion .accordion-item .accordion-header > .accordion-button:active,
+.usedcar--page .sidebar .filters-section .accordion .accordion-item .accordion-header > .accordion-button:focus,
+.usedcar--page .sidebar .filters-section .accordion .accordion-item .accordion-header > .accordion-button:focus-visible{ border-bottom: 0;  }
+
 .usedcar--page .sidebar .filters-section .accordion .accordion-item .accordion-header > .accordion-button:focus,
 .usedcar--page .sidebar .filters-section .accordion .accordion-item .accordion-header > .accordion-button:active,
 .usedcar--page .sidebar .filters-section .accordion .accordion-item .accordion-collapse .form-select:focus,

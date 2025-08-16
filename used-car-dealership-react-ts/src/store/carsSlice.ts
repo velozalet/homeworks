@@ -1,20 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
+import type {PayloadAction} from '@reduxjs/toolkit';
+
+import type {Car} from '../types/car'; 
 
 
-interface Car {
-  id: string;
-  make:  'GMC'|'Chevrolet'|'Buick'|string;
-  model: string;
-  year: number;
-  bodyStyle: 'Hatch'|'SUV'|'Sedan'|string;
-  color: string;
-  mileage: number;
-  transmission: 'Auto'|'Manual'|string;
-  fuelType: 'Gas'|'Diesel'|string;
-  price: number; 
-  image: string;
-}
+// interface Car {
+//   id: string;
+//   make:  'GMC'|'Chevrolet'|'Buick'|string;
+//   model: string;
+//   year: number;
+//   bodyStyle: 'Hatch'|'SUV'|'Sedan'|string;
+//   color: string;
+//   mileage: number;
+//   transmission: 'Auto'|'Manual'|string;
+//   fuelType: 'Gas'|'Diesel'|string;
+//   price: number; 
+//   images: string[]; //array of image URLs for multiple images
+// }
 
 interface CarsState {
   allCars: Car[];
@@ -24,7 +26,7 @@ interface CarsState {
 }
 
 const initialState: CarsState = {
-  allCars: [],       // will be fetched or imported
+  allCars: [],       //will be fetched or imported
   filteredCars: [],
   selectedMake: null,
   selectedModel: null

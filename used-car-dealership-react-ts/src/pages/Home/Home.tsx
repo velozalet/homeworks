@@ -1,5 +1,6 @@
 //Components:
-import Button from '../../components/Button/Button';
+import { Link } from 'react-router-dom';
+//import Button from '../../components/Button/Button';
 //import ModalWindow from '../../components/ModalWindow/ModalWindow';
 import SliderCarousel from '../../components/SliderCarousel/SliderCarousel'; 
 import SliderCarouselMainContent from '../../components/SliderCarouselMainContent/SliderCarouselMainContent';
@@ -29,7 +30,8 @@ function Home(){
                 <div className="a"> 
                     <h1 className="chromatic-aberration-effect">USED CAR DEALERSHIP <span>SERVICE</span></h1>
                     <p className="lead">Find your next car now!</p>
-                    <Button as="a" className="btn-yellow mt-3 px-4 py-2" href="/used-cars" text="View Details"></Button>
+                    {/* <Button as="a" className="btn-yellow mt-3 px-4 py-2" href="/used-cars" text="View Details"></Button> */}
+                    <Link to="/used-cars" className="btn btn-yellow mt-3 px-4 py-2">View Details</Link>
                 </div>
             </div> {/*.container*/}
         </section>
@@ -47,33 +49,71 @@ function Home(){
             <div className="container-lg">
                 <h2 className="text-center mb-lg-3 mb-md-1 mb-sm-0 mb-0">Our Inventory</h2>
                 <div className="row g-4 justify-content-center align-items-stretch">
-                    <div className="col-lg-4 col-md-4 col-sm-6 col order-lg-1 order-md-1 order-sm-1 order-1">
+
+                    <div className="flipp col-lg-4 col-md-4 col-sm-6 col px-lg-3 px-md-2 px-sm-4 px-4 order-lg-1 order-md-1 order-sm-1 order-1">
                         <div className="card inventory-card h-100">
-                            <img src={GMClogo} className="card-img-top img-fluid" alt="GMC logo"/>
-                            <div className="card-body">
-                                <h5 className="card-title text-white chromatic-aberration-effect">GMC</h5>
-                                <Button as="a" className="btn btn-yellow mt-3 px-4 py-2" href="/new-cars" text="View Details"></Button>
+                            {/*Front of Card*/}
+                            <div className="card-front">
+                                <img src={GMClogo} className="card-img-top img-fluid" alt="GMC logo"/>
+                                <div className="card-body">
+                                    <h5 className="card-title text-white chromatic-aberration-effect">GMC</h5>
+                                    {/* <Button as="a" className="btn btn-yellow mt-3 px-4 py-2" href="/new-cars" text="View Details"></Button> */}
+                                    <Link to="/new-cars" className="btn btn-yellow mt-3 px-4 py-2">View Details</Link>
+                                </div>
+                            </div>
+                            {/*Back of Card*/}
+                            <div className="card-back">
+                                <h4>GMC</h4>
+                                <p><strong>GMC</strong> trucks combine power and reliability to tackle tough jobs. GMC trucks combine power and reliability to tackle tough jobs</p>
+                                {/* <Button as="a" className="btn btn-yellow mt-3 px-4 py-2" href="/new-cars" text="View Details"></Button> */}
+                                <Link to="/new-cars" className="btn btn-yellow mt-3 px-4 py-2">View Details</Link>
+
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-4 col-md-4 col-sm-6 col order-lg-2 order-md-2 order-sm-3 order-3">
+
+                    <div className="flipp col-lg-4 col-md-4 col-sm-6 col px-lg-3 px-md-2 px-sm-4 px-4 order-lg-2 order-md-2 order-sm-3 order-3">
                         <div className="card inventory-card h-100">
-                            <img src={Chevylogo} className="card-img-top img-fluid" alt="Chevrolet Logo"/>
-                            <div className="card-body">
-                                <h5 className="card-title text-white chromatic-aberration-effect">Chevrolet</h5>
-                                <Button as="a" className="btn btn-yellow mt-3 px-4 py-2" href="/new-cars" text="View Details"></Button>
+                            {/*Front of Card*/}
+                            <div className="card-front">
+                                <img src={Chevylogo} className="card-img-top img-fluid" alt="Chevrolet Logo"/>
+                                <div className="card-body">
+                                    <h5 className="card-title text-white chromatic-aberration-effect">Chevrolet</h5>
+                                    {/* <Button as="a" className="btn btn-yellow mt-3 px-4 py-2" href="/new-cars" text="View Details"></Button> */}
+                                    <Link to="/new-cars" className="btn btn-yellow mt-3 px-4 py-2">View Details</Link> 
+                                </div>
+                            </div>
+                            {/*Back of Card*/}
+                            <div className="card-back">
+                                <h4>Chevrolet</h4>
+                                <p><strong>Chevrolet</strong> offers a range of cars and SUVs that balance style with performance. Chevrolet offers a range of cars and SUVs that balance style.</p>
+                                {/* <Button as="a" className="btn btn-yellow mt-3 px-4 py-2" href="/new-cars" text="View Details"></Button> */}
+                                <Link to="/new-cars" className="btn btn-yellow mt-3 px-4 py-2">View Details</Link>
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-4 col-md-4 col-sm-6 col order-lg-3 order-md-3 order-sm-2 order-2">
+
+                    <div className="flipp col-lg-4 col-md-4 col-sm-6 col px-lg-3 px-md-2 px-sm-4 px-4 order-lg-3 order-md-3 order-sm-2 order-2">
                         <div className="card inventory-card h-100">
-                            <img src={Buicklogo} className="card-img-top img-fluid" alt="Buick Logo"/>
-                            <div className="card-body">
-                                <h5 className="card-title text-white chromatic-aberration-effect">Buick</h5>
-                                <Button as="a" className="btn btn-yellow mt-3 px-4 py-2" href="/new-cars" text="View Details"></Button>
+                            {/*Front of Card*/}
+                            <div className="card-front">
+                                <img src={Buicklogo} className="card-img-top img-fluid" alt="Buick Logo"/>
+                                <div className="card-body">
+                                    <h5 className="card-title text-white chromatic-aberration-effect">Buick</h5>
+                                    {/* <Button as="a" className="btn btn-yellow mt-3 px-4 py-2" href="" text="Learn More"></Button> */}
+                                    <Link to="/new-cars" className="btn btn-yellow mt-3 px-4 py-2">View Details</Link>
+                                </div>
+                            </div>
+                            {/*Back of Card*/}
+                            <div className="card-back"> 
+                                <h4>Buick</h4>
+                                <p><strong>Buick</strong> delivers a comfortable driving experience with advanced technology. Buick delivers a comfortable driving experience with advanced tech</p>
+                                {/* <Button as="a" className="btn btn-yellow mt-3 px-4 py-2" href="/new-cars" text="View Details"></Button> */}
+                                <Link to="/new-cars" className="btn btn-yellow mt-3 px-4 py-2">View Details</Link>
                             </div>
                         </div>
                     </div>
+                     
                 </div> {/*.row*/} 
             </div> {/*.container*/} 
         </section>
@@ -91,7 +131,6 @@ function Home(){
             </div> {/*.container*/} 
         </section>
         {/*__/Testimonials Section - Slider*/}
-
 
        {/*Footer --> Footer Component*/} 
     </div>

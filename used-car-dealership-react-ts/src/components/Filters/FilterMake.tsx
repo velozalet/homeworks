@@ -11,19 +11,12 @@ type Props = {
 function FilterMake({ selectedMake, onChange }: Props) {
 
     return(
-      <div>
-        <label htmlFor="make">Make:</label>
-        <select
-          id="make"
-          value={selectedMake}
-          onChange={(e) => onChange(e.target.value)}
-        >
-          <option value="">All</option>
-          <option value="GMC">GMC</option>
-          <option value="Chevrolet">Chevrolet</option>
-          <option value="Buick">Buick</option>
-        </select>
-      </div>
+    <select id="make" className="form-select" value={selectedMake} onChange={(e) => onChange(e.target.value)}>
+        <option value="">Any Make</option>
+        <option value="gmc">GMC</option>
+        <option value="chevrolet">Chevrolet</option>
+        <option value="buick">Buick</option>
+    </select>
     );
 }
 export default FilterMake;

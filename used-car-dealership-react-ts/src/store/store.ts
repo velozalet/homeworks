@@ -6,7 +6,6 @@ export const store = configureStore({
     cars: carsReducer,
   },
 }); 
-
-// ✅ Export RootState and AppDispatch types
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch; 
+//Define types for `useSelector` and `useDispatch`
+export type RootState = ReturnType<typeof store.getState>; //`store.getState` - fn that returns the entire`Redux state`. We've type with structure our `Redux State`
+export type AppDispatch = typeof store.dispatch; //`store.dispatch`- fn(dispatch fn) to send actions

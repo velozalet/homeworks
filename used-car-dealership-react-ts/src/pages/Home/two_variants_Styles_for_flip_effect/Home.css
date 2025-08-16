@@ -1,0 +1,175 @@
+/* ===============================
+   VAR-1 ==>  Flip Card Effect for `.flipp` element
+   =============================== */
+   /*(!) Full 3D effect - complete reversal(flip effect) of the entire card and not just the background as in VAR-2.
+   Issue: We dont see `Back Side` of card - only `Front Side` of card as in mirror inverted image.
+   */
+
+.flipp {
+    perspective: 1000px;
+    cursor: pointer;
+  }
+  
+  /* the rotating element */
+  .flipp .card {
+    position: relative;               /* contains absolute back */
+    width: 100%;
+    transition: transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    overflow: hidden;                 /* hide overflow during rotate */
+    /* optional: ensure min height so all cards look consistent */
+    /* min-height: 260px; */
+  }
+  
+  /* FRONT stays in normal flow so .card has height */
+  .flipp .card-front {
+    position: relative;               /* stays in flow */
+    z-index: 2;
+    transform: rotateY(0deg);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  /* make sure image fills the front nicely */
+  .flipp .card-front .card-img-top {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;                /* crop if needed */
+  }
+  
+  /* BACK overlays front and is rotated 180deg */
+  .flipp .card-back {
+    position: absolute;
+    inset: 0;                         /* top:0; right:0; bottom:0; left:0; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.82);
+    color: #fff;
+    transform: rotateY(180deg);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  /* Hover / focus flip */
+  .flipp:hover .card,
+  .flipp:focus-within .card {
+    transform: rotateY(180deg);
+  }
+  
+  /* small polish */
+  .flipp .card-back h5 { margin: 0 0 .5rem; }
+  .flipp .card-back p { margin: 0; font-size: .95rem; line-height: 1.3; text-align:center; }
+  
+  /* If you want equal heights across the row keep this (optional)
+  .row.align-items-stretch .flipp { display: flex; }
+  .row.align-items-stretch .flipp .card { flex: 1 1 auto; }
+  */
+  ================================================================================
+  
+  /* ===============================
+   VAR-2 ==> Flip Card Effect for `.flipp` element
+   =============================== */
+   /*(!) It is a different flip effect.
+    Not the whole card rotates(flip) as in VAR-1 , but the background remains on the card 
+    and rotates inside the background to show `Back Side` of card */
+       
+.flipp {
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+    cursor: pointer;
+  }
+  
+  /* the card container - does not rotate now, just holds faces */
+  .flipp .card {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    transition: none;                /* we animate faces, not parent */
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    /* ensure consistent minimum height (tune to your design) */
+    min-height: 260px;               /* ← adjust if needed */
+  }
+  
+  /* FRONT (stays in flow so .card has height) */
+  .flipp .card-front {
+    position: relative;
+    z-index: 2;
+    transform-origin: center center;
+    transform: rotateY(0deg);
+    transition: transform 0.75s cubic-bezier(.2,.9,.3,1);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+  
+  /* Keep front inner elements from showing backface */
+  .flipp .card-front img,
+  .flipp .card-front .card-body,
+  .flipp .card-front * {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  /* BACK (absolute overlay, initially rotated away) */
+  .flipp .card-back {
+    position: absolute;
+    inset: 0;                         /* top:0; right:0; bottom:0; left:0 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    text-align: center;
+    background: rgba(0,0,0,0.88);
+    color: #fff;
+    transform-origin: center center;
+    transform: rotateY(-180deg);      /* hidden initially */
+    transition: transform 0.75s cubic-bezier(.2,.9,.3,1);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    z-index: 1;
+  }
+  
+  /* Show back and hide front by rotating faces in opposite directions */
+  .flipp:hover .card-front,
+  .flipp:focus-within .card-front {
+    transform: rotateY(180deg);
+    z-index: 1;
+  }
+  .flipp:hover .card-back,
+  .flipp:focus-within .card-back {
+    transform: rotateY(0deg);
+    z-index: 2;
+  }
+  
+  /* Image sizing - make front image predictable */
+  .flipp .card-front .card-img-top {
+    display: block;
+    width: 100%;
+    height: 180px;               /* adjust to your images */
+    object-fit: cover;
+  }
+  
+  /* card body spacing */
+  .flipp .card-front .card-body {
+    padding: 0.75rem 1rem;
+  }
+  
+  /* Small visual polish */
+  .flipp .card-back h5 { margin: 0 0 .5rem; font-size: 1.1rem; }
+  .flipp .card-back p  { margin: 0; font-size: .95rem; line-height: 1.35; }
+  
+  /* Optional: make flip on click for mobile (JS toggles .flipped) */
+  .flipp.flipped .card-front { transform: rotateY(180deg); z-index:1; }
+  .flipp.flipped .card-back  { transform: rotateY(0deg); z-index:2; }
+/* ===============================
+   Flip Card Effect for .flipp ==> END
+   =============================== */
+  
+  
