@@ -21,7 +21,7 @@ const CarList = () => {
     );
 };
 export default CarList;
-/*
+/* If you prefer to pass cars manually (good for reusability, like showing “featured cars” in another place), then change CarList.tsx to accept a prop:
     type Props = {
     cars: Car[];
     };

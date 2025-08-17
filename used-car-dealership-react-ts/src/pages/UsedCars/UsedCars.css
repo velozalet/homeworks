@@ -1,6 +1,7 @@
 /* .usedcar--page .cars-section .row > div, .sidebar{ outline: 1px solid black; }  */
 
-.usedcar--page .cars-section .card--car .card-body{ text-transform: capitalize; }
+.usedcar--page .cars-section .card--car .card-body,
+.usedcar--page .sidebar .filters-section .accordion .accordion-item .accordion-collapse .form-select{ text-transform: capitalize; }
 .usedcar--page .cars-section .card--car > img.card-img-top{
     max-height: 265px;
     object-fit: cover;

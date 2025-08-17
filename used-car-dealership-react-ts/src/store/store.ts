@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import carsReducer from './carsSlice';
+import carsSliceReducer from './carsSlice'; 
 
+ //=> Export
 export const store = configureStore({
   reducer: {
-    cars: carsReducer,
+    cars: carsSliceReducer, //using reducer`cars` from `carsSlice`(`carsSlice.ts`) -> It manages State under`state.cars`
   },
 }); 
 //Define types for `useSelector` and `useDispatch`

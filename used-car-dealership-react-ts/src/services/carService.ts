@@ -5,7 +5,7 @@ import type { Car } from "../types/car";
 
 // Function to fetch all cars from Firestore
 export async function fetchCars(): Promise<Car[]> {
-  const carsCol = collection(db, "cars"); // "cars" is your Firestore collection name
+  const carsCol = collection(db, "cars"); //`cars` is your FiresStore collection name
   const carsSnapshot = await getDocs(carsCol);
 
   //Convert docs to array of Car objects
@@ -13,6 +13,5 @@ export async function fetchCars(): Promise<Car[]> {
     id: doc.id, // Firestore doc ID
     ...doc.data()
   })) as Car[];
-
   return carsList;
 }

@@ -2,28 +2,30 @@ import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import type { RootState } from "../../store/store"; 
-import { selectMake } from "../../store/carsSlice";
+import type {  RootState, AppDispatch } from "../../store/store"; 
+import { setCars, selectMake } from "../../store/carsSlice";
 import { fetchCars } from "../../services/carService";
-import { setCars } from "../../store/carsSlice";
 
 //Components:
 import Button from '../../components/Button/Button';
 import FilterMake from "../../components/Filters/FilterMake";
+import FilterModel from "../../components/Filters/FilterModel";
 import CarList from "../../components/CarList/CarList";
 
 //Styles:
 import './UsedCars.css';
 
 function UsedCars(){
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>(); //Redux'actions. Now we can use`dispatch(...)` to call fns: setCars(),selectMake(),selectModel(), etc..
+    const selectedMake = useSelector( //gives the current `selectedMake`data of`cars` from`Redux State`; `cars` is the name of our slice in`carSlice.ts`
+        (state: RootState) => { return state.cars.selectedMake; } 
+    );
+    const filteredCars = useSelector( //gives the current `filteredCars`data of`cars` from`Redux State`; `cars` is the name of our slice in`carSlice.ts`
+        (state: RootState) => { return state.cars.filteredCars; } 
+    );
 
-    const selectedMake = useSelector((state: RootState) => state.cars.selectedMake);
-    const filteredCars = useSelector((state: RootState) => state.cars.filteredCars);
-
-    useEffect(() => {
-        //Bootstrap is loaded from CDN, so use window.bootstrap --> for Bootstrap `Tooltip`
-        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    useEffect(() => { //Bootstrap is loaded from CDN, so use window.bootstrap --> for Bootstrap `Tooltip`
+         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
         //@ts-ignore because TS doesn't know bootstrap is on window
         tooltipTriggerList.forEach((tooltipTriggerEl) =>{ new window.bootstrap.Tooltip(tooltipTriggerEl); });
 
@@ -33,7 +35,7 @@ function UsedCars(){
                 { id: 2, make: "Chevrolet", model: "Malibu" },
                 { id: 3, make: "Buick", model: "Enclave" }
             ]);*/
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => { 
         async function loadCars() {
@@ -80,12 +82,13 @@ function UsedCars(){
                                             selectedMake={selectedMake || ""}
                                             onChange={(value) => dispatch(selectMake(value || null))}
                                         />
-                                        <select className="form-select mt-2" aria-label="Model">
+                                        {/* <select className="form-select mt-2" aria-label="Model">
                                             <option value="anymodel">Any Model</option>
                                             <option value="gmc">Buick Encore GX</option>
                                             <option value="chevrolet">Chevrolet Traverse</option>
                                             <option value="buick">GMC Sierra 1500</option>
-                                        </select>
+                                        </select> */}
+                                        <FilterModel />
                                     </div>
                                 </div>
                             </div>

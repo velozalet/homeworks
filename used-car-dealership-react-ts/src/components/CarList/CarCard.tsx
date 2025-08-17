@@ -5,21 +5,21 @@ import type {Car} from '../../types/car';
 //Components:
 import Button from '../../components/Button/Button'; 
 
-
-// interface Car {
-//     id: string;
-//     make:  'gmc'|'chevrolet'|'buick'|string;
-//     model: string;
-//     year: number;
-//     bodyStyle: 'hatch'|'suv'|'sedan'|string;
-//     color: string;
-//     mileage: number;
-//     transmission: 'auto'|'manual'|string;
-//     fuelType: 'gas'|'diesel'|string;
-//     price: number; 
-//     images: string[]; //array of image URLs for multiple images
-// }
-
+/* (!) We moved this to separate file --> `src/types/car.ts`
+interface Car {
+  id: string;
+  make:  'GMC'|'Chevrolet'|'Buick'|string;
+  model: string;
+  year: number;
+  bodyStyle: 'Hatch'|'SUV'|'Sedan'|string;
+  color: string;
+  mileage: number;
+  transmission: 'Auto'|'Manual'|string;
+  fuelType: 'Gas'|'Diesel'|string;
+  price: number; 
+  images: string[]; //array of image URLs for multiple images
+}
+*/
 const CarCard = ({ car }: {car:Car}) => {
   return (
     <div className="col-sm-10 col-md-6 mb-4 mx-auto mx-md-0">
