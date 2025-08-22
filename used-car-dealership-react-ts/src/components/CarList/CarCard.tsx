@@ -22,9 +22,11 @@ interface Car {
 */
 const CarCard = ({ car }: {car:Car}) => {
   return (
-    <div className="col-sm-10 col-md-6 mb-4 mx-auto mx-md-0">
+    <div id={car.id} className="col-sm-10 col-md-6 mb-4 mx-auto mx-md-0">
         <div className="card card--car">
-            <img src={car.images[0]} className="card-img-top img-fluid" alt={`${car.make} ${car.model}`} />
+            <Link to={`/used-cars/${car.id}`} className="">
+                <img src={car.images[0]} className="card-img-top img-fluid" alt={`${car.make} ${car.model}`} />
+            </Link>
             <div className="card-body"> {/*bg-dark*/} 
                 <h5 className="card-title">{car.make} {car.model}</h5> {/*text-white|text-black|text-warning*/}
                 <h5 className="card-title card-title--price">
@@ -68,7 +70,7 @@ const CarCard = ({ car }: {car:Car}) => {
                     <div className="params _bodystyle">
                         <span className="icon-wrapper d-inline-flex align-items-center p-2 me-1 bg-body-secondary rounded-1 text-body-secondary bg-opacity-75 w-100 fs-sm"
                             data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="body style"
-                        ><i className="fa fa-car"></i> <span className="txt ps-1">{car.bodyStyle}</span>
+                        ><i className="fa fa-car"></i> <span className="txt ps-1">{(car.bodyStyle === "suv") ? car.bodyStyle.toUpperCase() : car.bodyStyle}</span>
                         </span>
                     </div>
                 </div>

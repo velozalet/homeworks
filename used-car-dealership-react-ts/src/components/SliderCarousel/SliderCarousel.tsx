@@ -1,5 +1,5 @@
 import React from 'react'; 
-import {useEffect} from 'react';
+import {useEffect,useRef} from 'react';
 import type {ReactNode} from 'react';
 
 //Styles:
@@ -9,6 +9,7 @@ import './SliderCarousel.css';
 type SliderCarouselProps = {
   id?: string; //ID of slider
   interval?: number; //autoplay delay in ms
+  autoloop?: boolean; //autoloop: true/false
   effect_name?: "simply-carousel"|"flash-fade"|"smooth-fade"; //effect type depends on the set of classes
   children: ReactNode; //Content component
 };
@@ -25,10 +26,22 @@ type SliderCarouselProps = {
     data-bs-touch="true" --> enable swipe on touch
 */
 
-const SliderCarousel = ( {id, interval=5000, effect_name="simply-carousel", children}: SliderCarouselProps )=> {
-  useEffect(() => {
-    //Carousel will auto-init via Bootstrap data attributes
-  }, []);
+const SliderCarousel = ( {id, interval=5000, autoloop=true, effect_name="simply-carousel", children}: SliderCarouselProps )=> {
+    const carouselRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        if (carouselRef.current){
+            //@ts-ignore
+            const carousel = new window.bootstrap.Carousel(carouselRef.current, { 
+                interval: interval,
+                ride: "carousel", // <-- this enables autoplay
+                wrap: autoloop,
+                pause: false,
+                touch: true,
+                keyboard: false,
+            });
+            carousel.cycle(); //Force autoplay immediately
+        }
+    }, [children,interval,autoloop]);
 
     //Choose className based on `effect name`
     let carouselClass = '';
@@ -40,12 +53,13 @@ const SliderCarousel = ( {id, interval=5000, effect_name="simply-carousel", chil
   return (
     <div
       id={id}
+      ref={carouselRef}
       className={carouselClass}
       data-bs-ride="carousel" 
       data-bs-interval={interval}
       data-bs-pause="false"
       data-bs-keyboard="false" 
-      data-bs-wrap="true"
+      data-bs-wrap={autoloop}
       data-bs-touch="true">
 
         {children}

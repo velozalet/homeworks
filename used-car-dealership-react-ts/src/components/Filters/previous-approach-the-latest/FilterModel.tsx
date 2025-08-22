@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import type { RootState, AppDispatch } from "../../store/store";
 import { selectModel } from "../../store/carsSlice";
+import type { RootState, AppDispatch } from "../../store/store";
 import { carMakesAndModels } from "../../constants/carMakesAndModels"; //Array of Objs with car's Makes & Models
 
 
@@ -18,7 +18,7 @@ function FilterModel(){ //function FilterModel({ selectedModel, onChange }: Prop
     //OR one line: --> const models = (selectedMake) ? carMakesAndModels[selectedMake] || [] : [];
     
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        if( e.target.value === "" ){ dispatch(selectModel(null)); 
+        if( e.target.value === "anymodel" ){ dispatch(selectModel(null)); 
         }else{ dispatch(selectModel(e.target.value)); }
     };
 
@@ -26,12 +26,12 @@ function FilterModel(){ //function FilterModel({ selectedModel, onChange }: Prop
     <select 
         id="model" 
         className="form-select mt-2" 
-        value={selectedModel ?? ""}
+        value={selectedModel || ""}
         onChange={handleChange} 
         disabled={!selectedMake} //disable until `Make` is selected
     >
         <option value="">any model</option>
-        {models.map( (model, index, array) => ( <option key={model} value={model}>{model}</option> ) )}
+        {models.map( (model) => ( <option key={model} value={model}>{model}</option> ) )}
     </select>
     );
 }

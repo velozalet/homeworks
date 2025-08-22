@@ -16,19 +16,3 @@ components/
 `CarList.tsx` - smart component that connects to Redux
 Filters update Redux → Redux updates filteredCars → `CarList.tsx`  re-renders
 */
-
-import FilterMake from "./FilterMake";
-import FilterModel from "./FilterModel";
-//import FilterYear from "./FilterYear";
-
-function FilterSidebar() {
-    return(
-    <>
-        <FilterMake />
-        <FilterModel />
-        {/*<FilterYear />    👈 new */}
-        {/* Later add FilterYear, FilterColor, etc. */}
-    </>
-    );
-}
-export default FilterSidebar;

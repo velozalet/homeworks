@@ -29,7 +29,7 @@ function Home(){
             <div className="container">
                 <div className="a"> 
                     <h1 className="chromatic-aberration-effect">USED CAR DEALERSHIP <span>SERVICE</span></h1>
-                    <p className="lead">Find your next car now!</p>
+                    <p className="lead">Only Recent Year Cars!</p>
                     {/* <Button as="a" className="btn-yellow mt-3 px-4 py-2" href="/used-cars" text="View Details"></Button> */}
                     <Link to="/used-cars" className="btn btn-yellow mt-3 px-4 py-2">View Details</Link>
                 </div>
@@ -39,7 +39,7 @@ function Home(){
 
         <hr style={{color:'black',margin:'7px',opacity:.35}} />  
         {/*Main SliderCarousel*/}
-        <SliderCarousel id={"slider_carousel"} interval={4000} effect_name="flash-fade">
+        <SliderCarousel id={"slider_carousel"} interval={4000} autoloop={true} effect_name="flash-fade">
             <SliderCarouselMainContent />
         </SliderCarousel>
         {/*__/Main SliderCarousel*/}
@@ -124,7 +124,7 @@ function Home(){
             <div className="container-lg">
                 <h2 className="text-center text-warning mb-0">What Our Clients Say</h2>
                 <div className="row g-4">
-                    <SliderCarousel id={"slider_testimonials"} interval={6000} effect_name="simply-carousel">
+                    <SliderCarousel id={"slider_testimonials"} interval={6000}  autoloop={true} effect_name="simply-carousel">
                         <SliderCarouselTestimonialsContent />
                     </SliderCarousel> 
                 </div> {/*.row*/} 

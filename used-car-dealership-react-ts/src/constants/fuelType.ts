@@ -1,0 +1,1 @@
+export const fuelType: string[] = ["gas", "diesel"];

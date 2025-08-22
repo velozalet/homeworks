@@ -1,0 +1,1 @@
+export const bodyStyles: string[] = ["sedan", "suv", "hatch"];

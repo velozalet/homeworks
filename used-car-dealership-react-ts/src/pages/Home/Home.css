@@ -140,19 +140,10 @@
 /* ===============================
    Flip Card Effect for .flipp ==> END
    =============================== */
-
  /*__/Inventory Section*/
 
 
-
-
-  
-  
-  
-
-
-
-
+ 
 /*Testimonials Section - Slider*/
 #slider_testimonials { /*Fixed slider height, keep content inside */
     height: 190px;    /*final height you asked for*/
@@ -242,8 +233,6 @@
 }
 /*__/Testimonials Section - Slider*/
    
-
-  
 
 /***********************************************************************
                                #MEDIA QUERIES:
