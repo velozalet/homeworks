@@ -20,6 +20,12 @@ h1,h2,h3,h4,h5 {
     font-family: 'Bruno Ace', sans-serif;  
 }
 
+nav.breadcrumbs{ display:flex; justify-content: flex-end; }
+nav.breadcrumbs .breadcrumb{ position: relative; z-index: 2; }
+nav.breadcrumbs .breadcrumb a.breadcrumb-item{}
+nav.breadcrumbs .breadcrumb a.breadcrumb-item:hover{ text-decoration:none; color:#ffc107; }
+nav.breadcrumbs .breadcrumb .breadcrumb-item.active{}
+
 /*________________HEADER_________________*/
 .navbar { 
     transition: all 0.3s ease; /* Smooth shrinking effect */
@@ -150,6 +156,8 @@ footer {
     background: #000;
     padding: 2rem 0;
     color: #ccc;
+    z-index: 10;
+    position: relative;
 }
 footer a {
     color: yellow;
@@ -205,6 +213,8 @@ footer li > a:hover{
 @media screen and (max-width: 767px) {
     .navbar-brand > img, .navbar.scrolled img{ width:85px; height:auto; }
     .navbar.scrolled { padding-top: 0.6rem; padding-bottom: 0.6rem; }
+    nav.breadcrumbs{ justify-content: center; }
+    nav.breadcrumbs .breadcrumb .breadcrumb-item{ font-size:1rem; }
         
 }
 

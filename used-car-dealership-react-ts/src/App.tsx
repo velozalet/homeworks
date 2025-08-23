@@ -22,6 +22,7 @@ import AboutUs from './pages/AboutUs/AboutUs';
 import ContactUs from './pages/ContactUs/ContactUs';
 import NewCars from './pages/NewCars/NewCars';
 import UsedCars from './pages/UsedCars/UsedCars';
+import CarFavorite from "./pages/CarFavorite/CarFavorite";
 import PageNotFound from './pages/PageNotFound/PageNotFound';
 
 //_________________`Admin Panel`:
@@ -93,6 +94,7 @@ const App = ():JSX.Element => {
                 <Route path="/used-cars/:carId" element={<CarDetails />} />
                 <Route path="/about" element={<AboutUs />} />
                 <Route path="/contact" element={<ContactUs />} />
+                <Route path="/used-cars/favorite" element={<CarFavorite />} />
                 {/*Fallback for invalid URLs*/}
                 <Route path="*" element={<PageNotFound />} />
             </Route>

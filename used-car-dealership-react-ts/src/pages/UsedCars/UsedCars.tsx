@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import React, { useState, useEffect } from "react";
+import React, { useState,useEffect,useRef } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import type {  RootState, AppDispatch } from "../../store/store"; 
@@ -23,7 +23,11 @@ import './UsedCars.css';
 
 function UsedCars(){
     const dispatch = useDispatch<AppDispatch>(); //Redux'actions. Now we can use`dispatch(...)` to call fns: setCars(),selectMake(),selectModel(), etc..
-    const filteredCars = useSelector((state: RootState) => state.cars.filteredCars);
+    const allCars = useSelector((state: RootState) => state.cars.allCars); //Get all Cars array from `Redux Store`
+    const filteredCars = useSelector((state: RootState) => state.cars.filteredCars); //Get filtered Cars from `Redux Store`
+    const favorites = useSelector((state: RootState) => state.favorites.favorites); //Get `favorites` array from `Redux Store`
+
+    const pageColorSchemeRef = useRef<HTMLDivElement>(null); //`Ref`to <div className="usedcar--page"> --> color-scheme--dark|color-scheme--ligh
 
     useEffect(() => { //1) Load cars from Firebase DB
         async function loadCars() {
@@ -49,29 +53,46 @@ function UsedCars(){
         };
     }, [filteredCars]); // <-- re-run every time filteredCars changes
 
+    //Reset all Fiilters State:
     const handleResetFilters = () =>{ dispatch(resetFilters()); };
-
+    //Toggle (change) Color Scheme of Page:
+    const toggleColorScheme = () =>{
+        if( pageColorSchemeRef.current ){
+            pageColorSchemeRef.current.classList.toggle("color-scheme--light");
+            pageColorSchemeRef.current.classList.toggle("color-scheme--dark");
+        }
+    };
 
     return(
-    <div className="usedcar--page color-scheme--dark"> {/*color-scheme--dark | color-scheme--light*/}
-        <div className="usedcar--page-titles">
-            <h1 className="text-center text-black mt-4">Welcome to the `Used Cars` Page</h1>
-            <p className="text-black text-center">Only<strong> Recent Year Cars</strong></p>
+    <div ref={pageColorSchemeRef} className="usedcar--page color-scheme--light pt-lg-4 pt-md-4 pt-sm-4 pt-3"> {/*color-scheme--dark | color-scheme--light*/} 
+        <div className="container-lg py-lg-4 py-md-4 py-sm-2">
+            <div className="usedcar--page-titles"> 
+                <h1 className="text-center">Welcome to our <strong>Used Cars</strong> Storage</h1> 
+                <p className="text-center">Only <strong>Recent</strong> Model Cars</p>
+            </div>
+            <hr /> 
+            <div className="total-cars--info text-center">Total Cars:
+                <strong className="ps-2">{allCars.length}</strong>
+                <Button as="button" 
+                    className="btn color-scheme" 
+                    text=""
+                    onClick={toggleColorScheme}
+                ><i className="fa fa-adjust" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Change Color Scheme"></i></Button>  
+            </div> 
         </div>
-        <hr />
 
-
-        <div className="container-lg py-5 mb-md-4">
+        <div className="container-lg py-lg-4 py-md-4 py-sm-2 py-2">
             <div className="row">
                 {/*Sidebar*/}
                 <aside className="col-lg-3 sidebar">
                     {/*Filters Widgets*/}
                     <section className="filters-section">
-                        <div className="text-black filters-section-caption">
+                        <div className="filters-section-caption">
                             <i className="fa fa-filter"></i>FILTERS
                         </div>
                         <div className="text-center reset-btn-container">
-                             <Button as="button" className="btn btn-warning mt-2 mb-2 px-2" onClick={handleResetFilters} text="Reset Filters"></Button> 
+                                <Button as="button" className="btn-reset-all-filters btn btn-warning mt-2 mb-2 px-2" onClick={handleResetFilters} text="Reset Filters"></Button>
+                                <Button as="button" className=" btn btn-warning mt-2 mb-2 px-2 ms-2" text={filteredCars.length}></Button> 
                         </div>
                         <div className="accordion" id="filters-car--accordion">
                             <div className="accordion-item filter-make-and-modal">
@@ -139,30 +160,41 @@ function UsedCars(){
                             <div className="accordion-item filter-price"> 
                                 <h2 className="accordion-header"> 
                                 <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-8" aria-expanded="false" aria-controls="panelsStayOpen-8">
-                                   Price ($)
+                                    Price ($)
                                 </button>
                                 </h2>
                                 <div id="panelsStayOpen-8" className="accordion-collapse collapse show">
                                     <div className="accordion-body">
-                                         <FilterPrice />
+                                            <FilterPrice />
                                     </div>
                                 </div>
                             </div>
                         </div> {/*.accordion*/}
                         <div className="text-center reset-btn-container">
-                             <Button as="button" className="btn btn-warning mt-2 px-2" onClick={handleResetFilters} text="Reset Filters"></Button> 
+                                <Button as="button" className="btn-reset-all-filters btn btn-warning mt-2 px-2" onClick={handleResetFilters} text="Reset Filters"></Button> 
+                                <Button as="button" className=" btn btn-warning mt-2 px-2 ms-2" text={filteredCars.length}></Button> 
                         </div>
                     </section>
                     {/*__/Filters Widgets*/}
                 </aside>
-                 {/*__/Sidebar*/}
+                    {/*__/Sidebar*/}
 
                 {/*Car's list*/}
                 <aside className="cars col-lg-9">
-                    <section className="cars-sorting border rounded p-3 mb-4">
-                        <i className="fa fa-sort"></i>Sort by: <i className="fa fa-sort-alpha-asc"> </i> <i className="fa fa-sort-alpha-desc"></i> 
+                    <section className="cars-sorting border rounded p-3 mb-4"> 
+                        <i className="fa fa-sort"></i>Sort by:
+                        <Button as="button" className="sort price-sort me-2" text=""><i className="fa fa-sort-alpha-asc"></i></Button> 
+                        <Button as="button" className="sort year-sort" text=""><i className="fa fa-sort-alpha-desc"></i></Button> 
+                        <div 
+                            className="favorites-btn-container add-to-favorite"
+                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Favorite Cars"
+                        > 
+                        { favorites.length > 0 && ( 
+                            <Link to="/used-cars/favorite" className="favorites-btn add-to-favorite fa fa-heart"></Link>
+                        ) } 
+                        { favorites.length > 0 && (<sub>{favorites.length}</sub>) }  
+                        </div>
                     </section>
-
                     <section className="cars-section">
                         <CarList /> {/*<CarList cars={filteredCars} /> */}
                     </section> {/*.cars-section*/}
@@ -170,8 +202,8 @@ function UsedCars(){
                 {/*__/Car's list*/}
             </div> {/*.row*/}
         </div> {/*.container*/}
-        
-    </div> 
+            
+    </div> //.usedcar--page
     ); 
 }
 export default UsedCars;

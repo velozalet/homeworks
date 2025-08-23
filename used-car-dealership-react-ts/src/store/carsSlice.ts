@@ -45,7 +45,7 @@ function applyFilters(state: CarsState) {
             if( max !== undefined && car.mileage > max ) { return false; }
         }
 
-        if( state.selectedPrice ) { //👈 NEW
+        if( state.selectedPrice ) {
             const {min,max} = state.selectedPrice;
             if( car.price < min ) { return false; }
             if (max !== undefined && car.price > max) { return false; }

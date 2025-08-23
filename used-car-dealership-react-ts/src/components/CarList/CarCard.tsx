@@ -1,4 +1,7 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../../store/store";
+import { toggleFavorite } from "../../store/favoritesSlice";
 import {Link} from 'react-router-dom';
 import type {Car} from '../../types/car';
 
@@ -21,8 +24,21 @@ interface Car {
 }
 */
 const CarCard = ({ car }: {car:Car}) => {
+    const dispatch = useDispatch();
+    const favorites = useSelector((state: RootState) => state.favorites.favorites);
+
+    const isFavorite = favorites.includes(car.id);
+
+    useEffect(() => { //Init Bootstrap tooltips
+        //@ts-ignore
+        const tooltipTriggerList = [...document.querySelectorAll('[data-bs-toggle="tooltip"]')].map(el => new window.bootstrap.Tooltip(el));
+        return () => {
+            tooltipTriggerList.forEach((tooltip: any) => tooltip.dispose());
+        };
+    }, []); 
+
   return (
-    <div id={car.id} className="col-sm-10 col-md-6 mb-4 mx-auto mx-md-0">
+  <div id={car.id} className="col-sm-10 col-md-6 mb-4 mx-auto mx-md-0">
         <div className="card card--car">
             <Link to={`/used-cars/${car.id}`} className="">
                 <img src={car.images[0]} className="card-img-top img-fluid" alt={`${car.make} ${car.model}`} />
@@ -75,10 +91,15 @@ const CarCard = ({ car }: {car:Car}) => {
                     </div>
                 </div>
             </div>
-            {/*<button className="add-to-favorite fa fa-heart-o"></button> on click --> to change class to `fa-heart`*/}
-            <Button className="add-to-favorite fa fa-heart-o" text=""></Button>  
+            {/*<Button className="add-to-favorite fa fa-heart-o" text=""></Button>*/}
+            <Button 
+                className={`add-to-favorite fa ${isFavorite ? "fa-heart" : "fa-heart-o"}`}
+                text=""
+                data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add to Favorites"
+                onClick={() => dispatch(toggleFavorite(car.id))}
+            ></Button>
         </div>
-  </div>
+  </div> 
   );
 };
 export default CarCard;
