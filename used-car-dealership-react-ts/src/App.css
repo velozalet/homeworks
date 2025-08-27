@@ -27,6 +27,7 @@ nav.breadcrumbs .breadcrumb a.breadcrumb-item:hover{ text-decoration:none; color
 nav.breadcrumbs .breadcrumb .breadcrumb-item.active{}
 
 /*________________HEADER_________________*/
+nav.navbar { border-bottom:1px solid gray; }
 .navbar { 
     transition: all 0.3s ease; /* Smooth shrinking effect */
     padding-top: 1rem;

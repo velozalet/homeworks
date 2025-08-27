@@ -1,0 +1,138 @@
+.wrapper-placeholder .form-control:focus,
+.wrapper-placeholder .form-control:active,
+.wrapper-placeholder .form-control:focus-visible{ border:none; box-shadow:none; outline:1px solid #ffc107; }
+
+.wrapper-placeholder .booking-form .form-check { display:inline-block; }
+.wrapper-placeholder .booking-form .form-label--flow{
+    pointer-events: none;
+    position: absolute;
+    margin: 0;
+    top: -25px;
+    left: 10px;
+    font-size: 0.78rem;
+    color: #212529;
+    font-weight: bold;
+}
+.wrapper-placeholder .booking-form .form-check .form-label--email,
+.wrapper-placeholder .booking-form .form-check .form-label--phone{
+    position: relative;
+    top: -5px;
+}
+.wrapper-placeholder .booking-form .form-check .form-label--email > i.fa{
+    font-size: 2.4rem;
+}
+.wrapper-placeholder .booking-form .form-check .form-label--phone > i.fa{   
+    font-size: 2.2rem; 
+} 
+
+.wrapper-placeholder .booking-form button[type="submit"]{
+    color: black;
+    transition: 0.6s;
+}
+.wrapper-placeholder .booking-form button[type="submit"]:hover{
+    background-color: black;
+    color: yellow;
+    border-color: yellow;
+}
+
+
+/* =============================FLOATING PLACEHOLDER======================*/
+.wrapper-placeholder { margin: 20px; }
+.wrapper-placeholder .form-group {
+  position: relative; margin-bottom: 1.25rem;
+}
+.wrapper-placeholder .form-control {
+  padding: 14px 12px 10px; /* top, sides, bottom */
+  height: auto;
+  box-sizing: border-box;
+}
+.wrapper-placeholder .form-control::placeholder {
+  color: transparent;
+  opacity: 0;
+}
+.wrapper-placeholder .form-control + .form-label {
+  pointer-events: none;
+  position: absolute;
+  left: 25px;
+  top: 14px; /* initial position = inside the input */
+  margin: 0;
+  font-size: 1rem;
+  color: #6c757d; /* muted like bootstrap */
+  transition: all 0.5s ease;
+  transform-origin: left top;
+  white-space: nowrap;
+}
+.wrapper-placeholder .form-control:focus + .form-label,
+.wrapper-placeholder .form-control:not(:placeholder-shown) + .form-label {
+  top: -25px;  /* float above the input */
+  left: 10px;
+  font-size: 0.78rem;
+  color: #212529; /* active/darker color */
+}
+.wrapper-placeholder textarea.form-control {
+  padding-top: 18px;
+  min-height: 120px;
+}
+.wrapper-placeholder textarea.form-control + .form-label { top: 18px; }
+
+@media (max-width: 576px) {
+  .wrapper-placeholder .form-control + .form-label { left: 10px; }
+  .wrapper-placeholder .form-control { padding-left: 10px; padding-right: 10px; }
+}
+/* ===================================END==================================*/
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .switch input {display:none;}
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #ffc107;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #ffc107; 
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }

@@ -1,17 +1,86 @@
+.cardetails--page { color:black; }
+.cardetails--page h1,
+.cardetails--page h2,
+.cardetails--page h3,
+.cardetails--page h4,
+.cardetails--page h5,
+.cardetails--page h6{ font-family:'Bruno Ace', sans-serif; color:black; text-transform:capitalize; } 
+.cardetails--page h1{ font-size: 3.2rem; }
+
+.cardetails--page .cardetails--page-titles > p{
+  font-family: 'Bruno Ace', sans-serif;
+    color: black;
+    padding: 0 6px;
+    font-size: 1.1rem; 
+}
+
+
 .car-images {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-  }
-  
-  .car-image {
-    max-width: 250px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  }
+}
+.car-image {
+  max-width: 250px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  width: 100%;
+}
+.car-images .carousel-item img {
+  max-height: 400px;
+  object-fit: cover;
+}
 
-  .car-images .carousel-item img {
-    max-height: 400px;
-    object-fit: cover;
-  }
+.cardetails--page aside.cardetails--description .container-lg > h3{ font-size:1.7rem; }
+.cardetails--page aside.cardetails--description .rack{ text-transform:capitalize; color: black; margin-bottom:15px; } /*darkslateblue|dimgray*/
+.cardetails--page aside.cardetails--description .rack i.fa,
+.cardetails--page aside.cardetails--description .rack i.fa-solid{ color: #ffc107; font-size: 2.1rem; }
+.cardetails--page aside.cardetails--description .rack i.fa.fa-car + span{text-transform:uppercase;}
+.cardetails--page aside.cardetails--description .rack > span{ position:relative; top:-5px; font-size:1.3rem; font-family:'Barlow Condensed', sans-serif;} 
+.cardetails--page aside.cardetails--description .rack i.fa-solid.fa-coins + i{ font-size: 1.5rem; }
+
+.cardetails--page aside.cardetails--description .rack.rack-price > img{
+  position:relative; top:-3px; left:-5px;
+}
+.cardetails--page aside.cardetails--description .rack.rack-price span{ font-family:'Bruno Ace', sans-serif; font-size: 1.5rem; position:relative; top:2px;} 
+
+.cardetails--page aside.cardetails--description .grid-container{
+  display: grid; grid-template-columns: repeat(12, 1fr);
+}
+.cardetails--page aside.cardetails--description .grid-container > p{ grid-column: 12 span; }
+.cardetails--page aside.cardetails--description .rack > i.fa-tint{ font-size: 2.3rem; } 
+
+.cardetails--page aside.contact-form--carbooking > h3{ color:#ebb618; }
+
+/* .cardetails--page aside.cardetails--description .bage > img{width:100%;}  */ 
+.cardetails--page aside.cardetails--description .bage img {
+  max-width: 100px; 
+  max-height: 100px;
+  width: 100%; 
+  height: auto;
+  object-fit: contain; 
+} 
+ 
+
+
+/***********************************************************************
+                               #MEDIA QUERIES:
+***********************************************************************/
+
+@media screen and (max-width: 1199px) {
+  .cardetails--page aside.cardetails--description > .container-lg h3{font-size: 1.6rem;} 
+}
+@media screen and (max-width: 991px) {
+  .cardetails--page aside.cardetails--description .grid-container > p{ grid-column: 4 span; } 
+}
+@media screen and (max-width: 767px) {
+  .cardetails--page aside.cardetails--description .grid-container > p{ grid-column: 6 span; } 
+} 
+@media screen and (max-width: 575px) {
+  .cardetails--page aside.cardetails--description .rack.rack-price{ grid-column:12 span; /*text-align:center;*/ } 
+  #single_car_slidercarousel{ display:none; }
+
+  .cardetails--page .cardetails--slider .slider--images .car-images-block .row > div:not(:first-of-type){ display:none; }
+  .cardetails--page .cardetails--slider .slider--images .car-images-block .row > div:first-of-type{ width:100%; text-align:center; }
+} 

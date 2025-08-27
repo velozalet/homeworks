@@ -8,7 +8,6 @@ import SliderCarouselTestimonialsContent from '../../components/SliderCarouselTe
 
 //Images:
 import mainHomeBanner from '../../assets/main-home-banner.png';
-
 import Buicklogo from '../../assets/car_make/Buick__logo.png';
 import Chevylogo from '../../assets/car_make/Chevy__logo.png';
 import GMClogo from '../../assets/car_make/GMC__logo.png';

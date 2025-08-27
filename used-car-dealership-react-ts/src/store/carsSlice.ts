@@ -15,6 +15,7 @@ interface CarsState {
   selectedMileage: {min:number; max?:number} | null; //current selected `Mileage-filter`
   selectedPrice: { min:number; max?:number } | null; //current selected `Price-filter`
   loading: boolean; // for loading indicator when we're expecting car's data from Firebase DB
+  sortOrder: 'asc' | 'desc' | null; //sort Order by `Price`: Low --> High | High --> Low
 }
 //II) Initial default State
 const initialState: CarsState = {
@@ -28,6 +29,7 @@ const initialState: CarsState = {
   selectedMileage: null,
   selectedPrice: null,
   loading: true, //start as TRUE until Firebase fetch finishes
+  sortOrder: null,
 };
 
 //III) Centralized Filtering. Store all active filters values in here. Each reducer`selectMake`,`selectModel`,`selectYear` etc. would just update its value and call applyFilters().
@@ -50,9 +52,16 @@ function applyFilters(state: CarsState) {
             if( car.price < min ) { return false; }
             if (max !== undefined && car.price > max) { return false; }
         }
-
         return true;
     }); //--> Now every time you call`selectMake`,`selectModel`,`selectYear`, etc.. they don’t need to “know” about each other — `applyFilters()` always enforces all active filters at once
+
+        //👇Sort AFTER filtering
+        if (state.sortOrder) {
+            state.filteredCars.sort((a, b) => {
+                if (state.sortOrder === 'asc') return a.price - b.price;
+                else return b.price - a.price;
+            });
+        }
 }
 
 //IV) `createSlice` — generates reducers + actions for us
@@ -131,6 +140,7 @@ const carsSlice = createSlice({  //Creates a slice(piece of state) of your`Redux
         state.selectedPrice = action.payload;
         applyFilters(state);
     },
+    //III.9) Reset All Filters --> to default Filters condition 
     resetFilters(state) {
         state.selectedMake = null;
         state.selectedModel = null;
@@ -139,9 +149,14 @@ const carsSlice = createSlice({  //Creates a slice(piece of state) of your`Redux
         state.selectedFuelType = null;
         state.selectedMileage = null;
         state.selectedPrice = null;
-        applyFilters(state); // reapply with no filters = show all
+        applyFilters(state); //reapply without filters = show all
     },
-    //III.9) `loading process` until Firebase fetch finishes to show `loading indicator`
+    //III.10) Sort Order by `Price`: Low --> High | High --> Low
+    setSortOrder(state, action: PayloadAction<'asc' | 'desc' | null>) {
+        state.sortOrder = action.payload;
+        applyFilters(state);
+    },
+    //III.11) `loading process` until Firebase fetch finishes to show `loading indicator`
     setLoading(state, action: PayloadAction<boolean>) {
         state.loading = action.payload;
     }
@@ -165,6 +180,7 @@ export const {
     selectMileage,
     selectPrice,
     resetFilters,
+    setSortOrder,
     setLoading
 } = carsSlice.actions;
 export default carsSlice.reducer; 
@@ -195,4 +211,8 @@ If we did:  dispatch( setCars([{ make: "BMW", model: "X5" }]) ); when inside red
 ✅ So:
 `PayloadAction<Car[]>` means “this message always carries a list of cars and it's an array.”
 `action.payload` is simply “the list of cars inside that message.”
+
+AND
+You are storing all filters in Redux state (selectedMake, selectedModel, etc.).
+✅ And whenever one of them changes, applyFilters recomputes filteredCars.
 */

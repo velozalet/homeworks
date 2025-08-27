@@ -1,69 +1,29 @@
 # React + TypeScript + Vite
-
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
 Currently, two official plugins are available:
-
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+ # ========================FINAL REACT PROJECT REQUIREMENTS:===============
+1. Build with react
+2.Perform: create, read, update and delete operations (CRUD) You will use Firebase here.
+3.Navigation using react router
+# ___________________________________Some ideas:
+1. Online market place
+2. Course Management Platform
+3. Travel planner
+4. Community Hub
+5. Inventory Management system
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Q: Are we required to use any APIs? If so, where should we get them?
+A: I only expect you guys to use React, React router and Firebase. (Those will be the ones we use in the course and you can get them via NPM install). However, you are free to choose to use as many APIs/libraries as you like on top of the ones previously mentioned. I would even encourage, if you have experience with backend, to create your own API :nerd_face:  (but this is not required, but would be very neat)
+Q: What is the deadline for the final project?
+A: I don't have the dates for the project presentation, but I assume it would be on the week of September 8. So, I would recommend to use September 8 as deadline.
+Q: Will we be doing a presentation, or is there another form of submission?
+A: You will be presenting your project to @Pablo. A demo of all features you implemented and so on...
+Q: Do I need to use TypeScript ?
+A: No, however I would suggest to use it, just because is a highly desirable skill to have in the JS development world.
+=============================================================================
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+ # 🚀 "Used Car Dealership Service" - GMC/Chevrolet/Buick  ==>  “Used Car Dealership” 
+........ ⏳ ⏳ ⏳
