@@ -1,0 +1,37 @@
+.page-banner{
+    width: 100%;
+    background-position: 50% 50%;
+    position: relative;
+    /*min-height: 490px;*/
+    background-repeat: no-repeat;
+    z-index: 0;
+} 
+.page-banner .row{ min-height: 490px; }
+
+.page-banner .row h1{
+    font-family: 'Bruno Ace', sans-serif; 
+    font-size: 3.8rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+
+
+/***********************************************************************
+                               #MEDIA QUERIES:
+***********************************************************************/
+
+@media screen and (max-width: 1199px) {
+}
+@media screen and (max-width: 991px) {
+    .page-banner .row{ min-height: 350px; }
+    .page-banner .row h1{ font-size: 3.4rem; }
+}
+@media screen and (max-width: 767px) {
+    .page-banner .row{ min-height: 280px; }
+    .page-banner .row h1{ font-size: 2.7rem; } 
+} 
+@media screen and (max-width: 575px) {
+    .page-banner .row{ min-height: 170px; }
+    .page-banner .row h1{ font-size: 1.8rem; }
+} 

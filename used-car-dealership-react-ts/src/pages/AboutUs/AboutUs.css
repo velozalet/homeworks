@@ -1,0 +1,17 @@
+.aboutus--page .page-banner .row h1 { color: #fff; } 
+/* .aboutus--page { height: 750px; } */
+
+/***********************************************************************
+                               #MEDIA QUERIES:
+***********************************************************************/
+
+@media screen and (max-width: 1199px) { 
+}
+@media screen and (max-width: 991px) {
+}
+@media screen and (max-width: 767px) {
+
+} 
+@media screen and (max-width: 575px) {
+
+} 

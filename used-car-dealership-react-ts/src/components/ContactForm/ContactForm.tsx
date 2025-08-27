@@ -141,7 +141,7 @@ const ContactForm = ( {mode,carId,make,model,year,mileage,price}: ContactFormPro
         </div>
         )}
         {/*Message*/}
-        <div className="col-12 form-group">
+        <div className="col-12 form-group mt-xl-3 mt-lg-3 mt-md-3 mt-sm-5 mt-5">
             <textarea
                 id="message"
                 className="form-control"
@@ -150,16 +150,16 @@ const ContactForm = ( {mode,carId,make,model,year,mileage,price}: ContactFormPro
                 {...register("message", 
                 (mode === "contact") ? { 
                     required:"Message is required",
-                    maxLength:{ value: 250, message: "Message cannot exceed 250 characters" }
+                    maxLength:{ value: 350, message: "Message cannot exceed 350 characters" }
                 } : {
-                    maxLength:{ value: 250, message: "Message cannot exceed 250 characters" }
+                    maxLength:{ value: 350, message: "Message cannot exceed 350 characters" }
                 })}
             ></textarea>
              <label htmlFor="message" className="form-label">Message {mode === "contact" && "(required)"}</label>
             {errors.message && <small className="text-danger">{errors.message.message}</small>}
         </div>
         {/*Submit*/}
-        <div className="col-12 text-center">
+        <div className="col-12 text-center mt-xl-3 mt-lg-3 mt-sm-1 mt-0">
             <button type="submit" className="btn btn-warning btn-lg" disabled={isSubmitting}> 
                 {isSubmitting ? "Submitting..." : mode === "booking" ? "Book Now" : "Send Message"}
             </button>

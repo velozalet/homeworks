@@ -1,0 +1,28 @@
+.contactus--page .contact-form.contact-form--contactus h3{ font-size:2rem; color:#ebb618; } 
+.contactus--page .contact-form.contact-form--contactus h3 + p{ font-family:'Barlow Condensed', sans-serif; color:black; font-size:1.3rem; }
+
+
+.contactus--page .contact-form--contactus div.form-group:not(div.form-group:nth-of-type(4)){
+    flex:0 0 auto; width:33.333%; max-width:33.333%; box-sizing:border-box; 
+}
+
+
+
+/***********************************************************************
+                               #MEDIA QUERIES:
+***********************************************************************/
+
+@media screen and (max-width: 1199px) {
+}
+@media screen and (max-width: 991px) {
+}
+@media screen and (max-width: 767px) {
+    .contactus--page .contact-form--contactus div.form-group:nth-of-type(4){ margin-top: 20px !important; }
+    .contactus--page .contact-form--contactus div.form-group:not(div.form-group:nth-of-type(4)){
+        flex-shrink:0; width:100%; max-width:100%;
+    }
+} 
+@media screen and (max-width: 575px) {
+    .contactus--page .contact-form.contact-form--contactus h3{ font-size:1.6rem;} 
+    .contactus--page .contact-form.contact-form--contactus h3 + p{ font-size:1.1rem; }
+} 

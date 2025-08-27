@@ -43,7 +43,7 @@ const CarDetails = (): JSX.Element => {
         showClass: "fancybox-fadeIn",
         hideClass: "fancybox-fadeOut",
         Carousel: {
-          transition: "slide", //'fade' | 'slide' | 'circular' | 'classic'
+          transition: "slide", //'fade'|'slide'|'circular'|'classic'
         },
     } as any);
     return () => { Fancybox.destroy(); };
@@ -89,7 +89,7 @@ const CarDetails = (): JSX.Element => {
             <h2 className="text-center mb-sm-0 mb-4 ">{car.make} {car.model}, {car.year}</h2>
         </div>{/*.container*/}
 
-        <div className="container-lg py-lg-4 py-md-4 py-sm-2">
+        <div className="container-lg py-lg-4 py-md-4 py-sm-2 mb-xl-0 mb-lg-0 mb-sm-0 mb-4">
             <div className="row">
                 <aside className="cardetails--slider col-lg-9 order-lg-1 order-md-2 order-sm-2 order-2">
                     <div className="slider--images">
@@ -178,14 +178,13 @@ const CarDetails = (): JSX.Element => {
                     </div>
                 </aside> 
 
-                <aside className="contact-form contact-form--carbooking col-lg-12 order-lg-3 order-md-3 order-sm-3 order-3 mt-5">
+                <aside className="contact-form cardetails--tabs-description col-lg-12 order-lg-3 order-md-3 order-sm-3 order-3 mt-5">
                     <Tabs
                         tabs={[
                         {
-                            label: "Description",
+                            label: "Description", 
                             content: (
-                            <section className="tab-item--content">
-                                {/* { (car && car.description) ? car.description : "no content..." }  */}
+                            <section className="tab-item--content car--description">
                                 <h5 className="car-description-header-h">{car.make} {car.model}, {car.year}</h5>  
                                 <HtmlContent htmlString={car.description} />
                             </section>
@@ -194,12 +193,12 @@ const CarDetails = (): JSX.Element => {
                         {
                             label: "Options",
                             content: (
-                            <section className="tab-item--content">
+                            <section className="tab-item--content car--option">
                                 <ul className="list-group">
-                                    {(car && car.description)
+                                    {(car && car.options)
                                     ? car.options.map( (option,index,array) => ( 
-                                        <li key={index} className="list-group-item" style={{backgroundColor:'#f0f0f0'}}>  
-                                            <i className="fa fa-check-square-o pe-2" style={{fontSize:'22px'}}></i>{option}
+                                        <li key={index} className="list-group-item">  
+                                            <i className="fa fa-check-square-o pe-2"></i>{option}
                                         </li>
                                         ))
                                     : "no content..." }
@@ -210,12 +209,12 @@ const CarDetails = (): JSX.Element => {
                         {
                             label: "Safety",
                             content: (
-                            <section className="tab-item--content"> 
+                            <section className="tab-item--content car--safety"> 
                                 <ul className="list-group">
-                                    {(car && car.description)
+                                    {(car && car.safety)
                                     ? car.safety.map( (saf,index,array) => ( 
-                                        <li key={index} className="list-group-item" style={{backgroundColor:'#f0f0f0'}}>  
-                                            <i className="fa fa-check-square-o pe-2" style={{fontSize:'22px'}}></i>{saf}
+                                        <li key={index} className="list-group-item">  
+                                            <i className="fa fa-check-square-o pe-2"></i>{saf} 
                                         </li>
                                         ))
                                     : "no content..." }
@@ -228,7 +227,7 @@ const CarDetails = (): JSX.Element => {
                 </aside>
 
                 <aside className="contact-form contact-form--carbooking col-lg-12 order-lg-4 order-md-4 order-sm-4 order-4 mt-5">
-                    <h3 className="text-center mb-5">Book this car</h3>
+                    <h3 className="text-center mb-xl-5 mb-lg-5 mb-md-4 mb-sm-4 mb-4">Book this car</h3> 
                     <div className="wrapper wrapper-placeholder">
                         <ContactForm 
                             mode="booking" 

@@ -80,8 +80,9 @@
 .wrapper-placeholder .form.booking-form .form-group .form-check{ padding-left: 0; } 
 
 @media (max-width: 576px) {
-  .wrapper-placeholder .form-control + .form-label { left: 10px; }
+  /* .wrapper-placeholder .form-control + .form-label { left: 10px; } */
   .wrapper-placeholder .form-control { padding-left: 10px; padding-right: 10px; }
+  .wrapper.wrapper-placeholder{ margin: 5px; }
 }
 /* ===================================END==================================*/
 
