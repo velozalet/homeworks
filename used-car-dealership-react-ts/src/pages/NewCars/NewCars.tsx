@@ -22,7 +22,6 @@ function NewCars(){
             </div>{/*.row*/} 
         </div>{/*.container*/} 
     </div> {/*.newcars--page*/} 
-
     </>
     ); 
 }

@@ -16,6 +16,52 @@
 }
 
 
+/*Text appearing effect*/
+.loading-container {  
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    margin: 0 32px;
+}
+.loading-container::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background-color: #fff;
+    bottom: 0;
+    left: 0;
+    border-radius: 10px;
+    animation: movingLine 1.2s ease-out forwards;
+}
+@keyframes movingLine {
+    0% { width: 0; opacity: 1; }
+    100% { width: 100%; opacity: 1; }
+}
+.loading-text {
+    font-size: 5vw;
+    line-height: 64px;
+    letter-spacing: 10px;
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.loading-text span {
+    animation: moveLetters 1.2s ease-out forwards; /* faster */
+    position: relative;
+    display: inline-block; 
+    opacity: 0;
+    text-shadow: 0px 2px 10px rgba(46, 74, 81, 0.3); 
+}
+@keyframes moveLetters {  
+    0% { transform: translateX(-15vw); opacity: 0; }
+    60% { transform: translateX(2vw); opacity: 1; }
+    100% { transform: translateX(0);  opacity: 1; }
+}
+/*__/Text appearing effect*/
+  
+
 
 /***********************************************************************
                                #MEDIA QUERIES:

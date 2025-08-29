@@ -103,11 +103,6 @@
 .usedcar--page.color-scheme--light .sidebar .filters-section .filters-section-caption,
 .usedcar--page.color-scheme--light .total-cars--info{ color: #000; }
 .usedcar--page.color-scheme--dark .no-cars-found { color: black; }
-
-.usedcar--page.color-scheme--light .pagination-controls button[disabled]{ background-color: #6c757d; border-color: black; color:black; }   
-.usedcar--page.color-scheme--light .pagination-controls button{ border-color: #ffc107; background-color:#ffc107; color:#000; }  
-.usedcar--page.color-scheme--light .pagination-controls button:hover{ color: #ffc107; background-color:#000; border-color: #000; } 
-.usedcar--page.color-scheme--light .pagination-controls span{color:black;   }
 /*__/color scheme ==> light*/ 
 
 /*color scheme ==> dark*/
@@ -126,10 +121,6 @@
 
 .usedcar--page.color-scheme--dark .cars-sorting{ background-color: #212529; color:white; position:relative; }
 .usedcar--page.color-scheme--dark .no-cars-found { color:white; } 
-
-.usedcar--page.color-scheme--dark .pagination-controls button[disabled]{ background-color:#6c757d; border-color: #000; }  
-.usedcar--page.color-scheme--dark .pagination-controls button{ border-color: #ffc107; background-color:#ffc107; color:#000; }  
-.usedcar--page.color-scheme--dark .pagination-controls button:hover{ color: #ffc107; background-color:#000;; border-color: #ffc107 }
 /*__/color scheme ==> dark*/ 
 
 
@@ -175,8 +166,6 @@
 .usedcar--page .btn-reset-all-filters{ transition: .7s; } 
 
 .usedcar--page .btn-reset-all-filters:hover{ background-color: red; color:white; }
-
-
 
 
 /***********************************************************************

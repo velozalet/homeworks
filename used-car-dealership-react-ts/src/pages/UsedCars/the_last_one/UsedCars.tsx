@@ -32,9 +32,6 @@ function UsedCars(){
         return (localStorage.getItem("colorScheme") as "light" | "dark") || "light";
     });
 
-    //Pagination state
-    const [currentPage, setCurrentPage] = useState(1);  const carsPerPage = 4;
-
     const dispatch = useDispatch<AppDispatch>(); //Redux'actions. Now we can use`dispatch(...)` to call fns: setCars(),selectMake(),selectModel(), etc..
     const allCars = useSelector((state: RootState) => state.cars.allCars); //Get all Cars array from `Redux Store`
     const filteredCars = useSelector((state: RootState) => state.cars.filteredCars); //Get filtered Cars from `Redux Store`
@@ -111,14 +108,6 @@ function UsedCars(){
         setLocalSortOrder(newOrder);
         dispatch(setSortOrder(newOrder));
     };
-
-    //Calculate pagination
-    const indexOfLastCar = currentPage * carsPerPage;
-    const indexOfFirstCar = indexOfLastCar - carsPerPage;
-    const currentCars = filteredCars.slice(indexOfFirstCar, indexOfLastCar); 
-    const totalPages = Math.ceil(filteredCars.length / carsPerPage);
-    const handleNext = () => { if (currentPage < totalPages) setCurrentPage(prev => prev + 1); }; 
-    const handlePrev = () => { if (currentPage > 1) setCurrentPage(prev => prev - 1); };
       
     //console.log("Currently applied filters:",{selectedMake,selectedModel,selectedYear,selectedBodyStyle,selectedFuelType,selectedMileage,selectedPrice}); //console.log(sortOrder);
 
@@ -264,22 +253,14 @@ function UsedCars(){
                             { favorites.length > 0 && (<sub>{favorites.length}</sub>) }  
                         </div>
                     </section>
-                    <section className="cars-section"> 
-                        <CarList cars={currentCars} /> {/* Before==> <CarList /> Before-before==> <CarList cars={filteredCars} /> */}
+                    <section className="cars-section">
+                        <CarList /> {/*<CarList cars={filteredCars} /> */}
                     </section> {/*.cars-section*/}
                 </aside>
                 {/*__/Car's list*/}
             </div> {/*.row*/}
         </div> {/*.container*/}
             
-        {/*Pagination Сontrol*/} 
-        { (filteredCars.length >= carsPerPage) ? 
-            <div className="pagination-controls text-center pt-2 pb-5">
-                <button className="btn btn-sm me-2" onClick={handlePrev} disabled={currentPage === 1}>Previous</button>
-                <span>Page <strong className="fs-5 text">{currentPage}</strong>  / {totalPages}</span> 
-                <button className="btn btn-sm ms-2" onClick={handleNext} disabled={currentPage === totalPages}>Next</button>
-            </div> : " " }
-        {/*__/Pagination Сontrol*/}
     </div> //.usedcar--page
     ); 
 }

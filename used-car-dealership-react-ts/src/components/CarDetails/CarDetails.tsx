@@ -138,7 +138,7 @@ const CarDetails = (): JSX.Element => {
                     </div>
                 </aside>
 
-                <aside className="cardetails--description col-lg-3 order-lg-2 order-md-1 order-sm-1 order-1"> 
+                <aside className="cardetails--description col-lg-3 order-lg-2 order-md-1 order-sm-1 order-1">
                     <div className="container-lg text-lg-start text-md-start text-sm-start text-start ps-3">  
                         <h3 className="d-lg-block d-md-none d-sm-none d-none mb-4">{car.make} {car.model}</h3>
                         <p className="rack d-sm-none d-block">
@@ -149,7 +149,9 @@ const CarDetails = (): JSX.Element => {
                             <p className="rack"><i className="fa fa-tint chromatic-aberration-effect pe-3"></i><span>{car.fuelType}</span></p>
                             <p className="rack"><i className="fa fa-cogs chromatic-aberration-effect pe-2"></i><span>{car.transmission}</span></p> 
                             <p className="rack"><i className="fa fa-road chromatic-aberration-effect pe-2"></i><span>{car.mileage} km</span></p> 
-                            <p className="rack"><i className="fa fa-eye chromatic-aberration-effect pe-2"></i><span>{car.color}</span></p>
+                            <p className="rack rack-color"><i className="fa fa-eye chromatic-aberration-effect pe-3"></i> {/*</i><span>{car.color}11</span>*/}
+                                <span style={{ backgroundColor:car.color }}></span>
+                            </p>
                             <p className="rack"><i className="fa fa-car chromatic-aberration-effect pe-2"></i><span>{car.bodyStyle}</span></p>  
                             <p className="rack d-sm-block d-none"><i className="fa fa-barcode chromatic-aberration-effect pe-2"></i><span>{car.vin}</span></p>
                             <p className="rack rack-price"><img src={fa_coins_icon} alt="fa_coins_icon" /><span className="text-primary fs-special">{car.price.toLocaleString()}</span></p> 

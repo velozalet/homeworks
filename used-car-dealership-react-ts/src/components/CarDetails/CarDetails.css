@@ -50,6 +50,9 @@
 }
 .cardetails--page aside.cardetails--description .grid-container > p{ grid-column: 12 span; }
 .cardetails--page aside.cardetails--description .rack > i.fa-tint{ font-size: 2.3rem; } 
+.cardetails--page aside.cardetails--description .rack.rack-color > span{
+  width:30px; height:30px; display:inline-block; position:relative; top:3px; outline:1px solid black;
+}
 
 .cardetails--page aside.contact-form--carbooking > h3{ color:#ebb618; }
 
@@ -64,7 +67,9 @@
 .cardetails--page aside.cardetails--tabs-description .tab-item--content.car--safety li,
 .cardetails--page aside.cardetails--tabs-description .tab-item--content.car--option li{ background-color: #f0f0f0; } 
 .cardetails--page aside.cardetails--tabs-description .tab-item--content.car--safety li > i.fa,
-.cardetails--page aside.cardetails--tabs-description .tab-item--content.car--option li > i.fa{ font-size: 22px; }  
+.cardetails--page aside.cardetails--tabs-description .tab-item--content.car--option li > i.fa{ font-size: 22px; color: #ebb618; }  
+
+.cardetails--page aside.cardetails--tabs-description .tab-item--content.car--description h5{color: #ebb618;}
 
 /***********************************************************************
                                #MEDIA QUERIES:
@@ -84,6 +89,8 @@
 
   .cardetails--page aside.cardetails--tabs-description .tab-item--content.car--description p{ font-size: .8rem; }
   .cardetails--page aside.cardetails--tabs-description .tab-item--content.car--description h5 { font-size: .9rem; }
+
+  .cardetails--page h1{ font-size: 2.5rem; }
 } 
 @media screen and (max-width: 575px) {
   .cardetails--page aside.cardetails--description .rack.rack-price{ grid-column:12 span; /*text-align:center;*/ } 
@@ -100,5 +107,6 @@
   .cardetails--page aside.cardetails--tabs-description .tab-item--content.car--safety li{ 
     font-size: .8rem;
     padding-left: 0; padding-right: 0;
-   } 
+  } 
+  .cardetails--page h1{ font-size: 2rem; }
 } 

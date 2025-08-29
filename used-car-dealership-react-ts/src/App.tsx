@@ -1,14 +1,3 @@
-/*src/
-├── routes/
-│   └── AdminProtectedRoute.tsx
-├── pages/
-│   └── __AdminPanel/
-│   ├── Home
-│   ├── AboutUs
-│   ├── ContactUs
-│   ├── NewCars
-│   ├── UsedCars
----------------------------------------------------------------------------------------------------*/
 //import { useState } from 'react';
 import { BrowserRouter,Routes,Route,Link } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
@@ -86,7 +75,7 @@ const App = ():JSX.Element => {
         </nav> */} {/*1.Moved this to`const FrontSiteNavigation` to use`useLocation()` in order not to display `Front-End site Menu` when we're in the`Admin Panel`*/}
         {/* <FrontSiteNavigation /> */} {/*--> 2.Moved this Navigation to`Header` component. And `Header`,`Footer` components inside `FrontLayout`*/}
         <Routes>
-             {/*Front-End site routes:*/}
+            {/*Front-End site routes:*/}
             <Route element={<FrontLayout />} >
                 <Route path="/" element={<Home />} />
                 <Route path="/new-cars" element={<NewCars />} />
@@ -98,7 +87,7 @@ const App = ():JSX.Element => {
                 {/*Fallback for invalid URLs*/}
                 <Route path="*" element={<PageNotFound />} />
             </Route>
-
+            {/*__/Front-End site routes:*/}
             {/*`Admin Panel` protected routes:*/}
             <Route path="/admin/*" element={<AdminProtectedRoute />}> 
                 <Route index element={<AdminDashboard />} />
@@ -106,6 +95,7 @@ const App = ():JSX.Element => {
                 <Route path="edit" element={<EditCar />} />
                 <Route path="delete" element={<DeleteCar />} />
             </Route>
+            {/*__/`Admin Panel` protected routes:*/}
         </Routes>
     </BrowserRouter>
     </>

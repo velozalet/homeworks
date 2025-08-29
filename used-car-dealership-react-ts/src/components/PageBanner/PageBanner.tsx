@@ -12,9 +12,9 @@ const PageBanner: React.FC<PageBannerProps> = ({ url, title }) => {
     return (
     <div className="page-banner" style={{ backgroundImage:`url(${url})`, backgroundSize:"cover" }}>
         <div className="container-lg">
-            <div className="row align-items-center">
-                <div className="text-center">
-                    <h1>{title}</h1> 
+            <div className="row align-items-center loading-container">
+                <div className="text-center loading-text">
+                    <span><h1>{title}</h1> </span>
                 </div> 
             </div>
         </div>
