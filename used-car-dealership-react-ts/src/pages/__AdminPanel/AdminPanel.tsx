@@ -1,19 +1,10 @@
-/*src/
-├── routes/
-│   └── AdminProtectedRoute.tsx
-├── pages/
-│   └──__AdminPanel/
-│          ├── AdminPanel.tsx & AdminPanel.css
-│          ├── subpages/
-|             ├── AdminDashboard.tsx
-|             ├── CreateCar.tsx 
-|             ├── EditCar.tsx
-|             └── DeleteCar.tsx
----------------------------------------------------------------------------------------------------*/
 import { BrowserRouter,Routes,Route,Link,Outlet, useNavigate } from 'react-router-dom';
 
 import { signOut } from 'firebase/auth';
 import { auth } from "../../firebase/firebase"; //`firebase.ts` config
+
+//Styles:
+import './AdminPanel.css';
 
 function AdminPanel(){
     const navigate = useNavigate();
@@ -28,8 +19,8 @@ function AdminPanel(){
       };
 
     return(
-    <div className="adminpanel--page">
-        <h1 style={{textAlign:'center',color:'green'}}>Welcome to the `Admin Panel` Page</h1>
+    <div className="adminpanel--page"> 
+        <h1>Welcome to the `Admin Panel` Page</h1> 
 
             <a className="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
             Admin Menu

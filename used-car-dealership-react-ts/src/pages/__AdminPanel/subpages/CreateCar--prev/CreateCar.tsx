@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import { createCar,uploadCarImage } from "../../../services/carService";
+import { createCar } from "../../../services/carService";
 import type { Car } from "../../../types/car";
 
 import { carMakesAndModels } from "../../../constants/carMakesAndModels"; //Array of Objs with car's Makes & Models
@@ -10,10 +10,11 @@ import { fuelType } from "../../../constants/fuelType"; //Array of strings with 
 import { transmission } from "../../../constants/transmission"; //Array of strings with car's Transmission
 import { color } from "../../../constants/color"; //Array of strings with car's Color
 
-import { capitalize } from "../../../utils/helpers.ts"; 
+import { capitalize } from "../../../utils/helpers.ts"; //
 
 
 function CreateCar() { 
+
     // Local state for form fields (start with a few, you can expand)
     const [formData, setFormData] = useState<Omit<Car,"id">>({  
     make: "",
@@ -92,12 +93,6 @@ function CreateCar() {
         e.preventDefault();
         setLoading(true);
         try {
-            //Check if `model` is empty before saving
-            if( !formData.model || formData.model.trim() === "" ){
-                //alert("Model is EMPTY!."); setLoading(false); return; //stop the submit
-                if( formData.make ){ formData.model = carMakesAndModels[formData.make][0] } else{ formData.model = "" }
-            }else{ formData.model }
-
             const newCarId = await createCar(formData);
             setSuccessMsg(`✅ Car created successfully! ID: ${newCarId}`);
             setFormData({
@@ -194,7 +189,7 @@ function CreateCar() {
             onChange={handleChange}
             required
             >
-            <option value="">--- Chose Make ---</option>
+            <option value="">Chose Make</option>
             {car_makes.map( (make, index, array) => (
                 <option key={make} value={make}>{ (make === "gmc") ? make.toUpperCase() : capitalize(make) }</option>
             ))}
@@ -211,7 +206,7 @@ function CreateCar() {
             onChange={handleChange} 
             required
             >
-            { (!formData.make) ? <option value="">--- Chose Make first---</option> : "" }
+            { (!formData.make) ? <option value="">First the Make!</option> : "" }
             {car_models.map( (model, index, array) => (
                 <option key={model} value={model}>{ capitalize(model) }</option>
             ))}
@@ -452,47 +447,30 @@ function CreateCar() {
         {/*SAFETY*/}
         {/*IMAGES*/}
         <div className="col-12">
-            <div className="d-flex align-items-center">
+            <div className="d-flex">
                 <input
-                type="file"
-                accept="image/*"
+                type="text"
                 className="form-control"
-                onChange={async (e) => {
-                    if (!e.target.files?.length) return;
-                    const file = e.target.files[0];
-                    try {
-                    //If no carId yet, generate a temporary one --> const tempCarId = formData.id || "temp"; 
-                    const tempCarId = "temp";
-                    const url = await uploadCarImage(tempCarId, file); 
-
-                    setFormData((prev) => ({
-                        ...prev,
-                        images: [...prev.images, url],
-                    }));
-                    } catch (err) {
-                    alert("❌ Failed to upload image. Check console.");
-                    console.error(err);
-                    }
-                }}
+                placeholder="Add Images"
+                value={imageInput}
+                onChange={(e) => setImageInput(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addImage())}
                 />
+                <button
+                type="button"
+                className="btn btn-secondary btn-sm ms-2"
+                onClick={addImage}
+                ><i className="fa fa-plus"></i></button> 
             </div>
-
-            {/*Render uploaded images*/}
+            {/*Render each next image as block*/}
             <div className="mt-2 d-flex flex-wrap gap-2">
                 {formData.images.map((item, index) => (
                 <span
                     key={index}
                     className="badge bg-secondary p-2"
                     style={{ cursor: "pointer" }}
-                    onClick={() =>
-                    setFormData((prev) => ({
-                        ...prev,
-                        images: prev.images.filter((_, i) => i !== index),
-                    }))
-                    }
-                >
-                    {item} ✕
-                </span>
+                    onClick={() => removeImage(index)}
+                >{item} ✕  </span>
                 ))}
             </div>
         </div>

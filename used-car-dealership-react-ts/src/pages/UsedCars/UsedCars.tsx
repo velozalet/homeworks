@@ -29,11 +29,11 @@ function UsedCars(){
         return (localStorage.getItem("sortOrder") as "none" | "asc" | "desc") || "none";
     });
     const [colorScheme, setColorScheme] = useState<"light" | "dark">(() => { //Read initial `colorScheme` from localStorage
-        return (localStorage.getItem("colorScheme") as "light" | "dark") || "light";
+        return (localStorage.getItem("colorScheme") as "light" | "dark") || "light"; 
     });
 
     //Pagination state
-    const [currentPage, setCurrentPage] = useState(1);  const carsPerPage = 4;
+    const [currentPage, setCurrentPage] = useState(1);  const carsPerPage = 10;
 
     const dispatch = useDispatch<AppDispatch>(); //Redux'actions. Now we can use`dispatch(...)` to call fns: setCars(),selectMake(),selectModel(), etc..
     const allCars = useSelector((state: RootState) => state.cars.allCars); //Get all Cars array from `Redux Store`

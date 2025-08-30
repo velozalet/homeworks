@@ -1,0 +1,1 @@
+export const transmission: string[] = ["auto", "manual"];

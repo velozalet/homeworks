@@ -7,22 +7,9 @@ import type {Car} from '../../types/car';
 
 //Components:
 import Button from '../../components/Button/Button'; 
+//Images:
+import no_car_image_pattern from '../../assets/no-car-image-sm.png';
 
-/* (!) We moved this to separate file --> `src/types/car.ts`
-interface Car {
-  id: string;
-  make:  'GMC'|'Chevrolet'|'Buick'|string;
-  model: string;
-  year: number;
-  bodyStyle: 'Hatch'|'SUV'|'Sedan'|string;
-  color: string;
-  mileage: number;
-  transmission: 'Auto'|'Manual'|string;
-  fuelType: 'Gas'|'Diesel'|string;
-  price: number; 
-  images: string[]; //array of image URLs for multiple images
-}
-*/
 const CarCard = ({ car }: {car:Car}) => {
     const dispatch = useDispatch();
     const favorites = useSelector((state: RootState) => state.favorites.favorites);
@@ -41,10 +28,14 @@ const CarCard = ({ car }: {car:Car}) => {
   <div id={car.id} className="col-sm-10 col-md-6 mb-4 mx-auto mx-md-0">
         <div className="card card--car">
             <Link to={`/used-cars/${car.id}`} className="">
-                <img src={car.images[0]} className="card-img-top img-fluid" alt={`${car.make} ${car.model}`} />
+                { ( !car.images[0] )
+                    ? <img src={no_car_image_pattern} className="card-img-top img-fluid" alt={`${car.make} ${car.model}`} />
+                    : <img src={car.images[0]} className="card-img-top img-fluid" alt={`${car.make} ${car.model}`} />
+                }
             </Link>
-            <div className="card-body"> {/*bg-dark*/} 
-                <h5 className="card-title">{car.make} {car.model}</h5> {/*text-white|text-black|text-warning*/}
+            <div className="card-body"> {/*bg-dark*/}
+                <h5 className="card-title">{( car.make === 'gmc' ) ? car.make.toUpperCase() : car.make } {car.model}
+                    </h5> {/*text-white|text-black|text-warning*/}
                 <h5 className="card-title card-title--price">
                     <p className="car-price text-primary fs-special fs-5 fw-bold"> {/*text-white|text-primary|text-black|text-warning|text-danger*/}
                         <i className="fa fa-dollar pe-1"></i>{car.price.toLocaleString()}

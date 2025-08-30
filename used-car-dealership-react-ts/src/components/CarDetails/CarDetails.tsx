@@ -21,6 +21,7 @@ import fa_coins_icon from '../../assets/icons/fa-coins_icon.png';
 import car_fax_bage from '../../assets/icons/car_fax_bage.svg';
 import one_owner_bage from '../../assets/icons/one-owner@1x.svg';
 import accident_free_bage from '../../assets/icons/accident-free@1x.svg';
+import no_car_image_pattern from '../../assets/no-car-image-sm.png';
 
 
 const CarDetails = (): JSX.Element => {
@@ -118,7 +119,7 @@ const CarDetails = (): JSX.Element => {
                             ))}
                             </div>*/}
                         </SliderCarousel>
-                        ) : ( <p>No images available</p> )}
+                        ) : ( <img src={no_car_image_pattern} className="card-img-top img-fluid" alt={`${car.make} ${car.model}`} /> )}
                         {/*__/Sinle Car's SliderCarousel*/}
 
                         <div className="car-images-block mt-4 mb-3">
@@ -157,10 +158,6 @@ const CarDetails = (): JSX.Element => {
                             <p className="rack rack-price"><img src={fa_coins_icon} alt="fa_coins_icon" /><span className="text-primary fs-special">{car.price.toLocaleString()}</span></p> 
                         </div> 
                         <div className="row justify-content-center">
-                            {/* <p className="rack"><i className="fa fa-file-text-o pe-2"></i><span>CarFax Clear</span></p> 
-                            <p className="rack"><i className="fa fa-check-circle pe-2"></i><span>No Accident</span></p> 
-                            <p className="rack"><i className="fa fa-user pe-2"></i><span>1 Owner</span></p> */}
-
                             { (car.oneOwner) ? 
                                 <div className="bage col-xl-12 col-lg-12 col-md-2 col-sm-3 col-7 mb-2 text-sm-start text-center">
                                     <img className="img-fluid" src={one_owner_bage} alt="one_owner_bage" /> 

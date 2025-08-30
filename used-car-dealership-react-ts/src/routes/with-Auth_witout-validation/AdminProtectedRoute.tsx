@@ -4,7 +4,7 @@ import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 //import type { User } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase"; //firebase.ts config
-import { useForm } from "react-hook-form"; //--> Valid
+            import { useForm } from "react-hook-form"; //--> Valid
 //import { Navigate } from "react-router-dom";
 
 //import { Outlet } from "react-router-dom";
@@ -13,13 +13,10 @@ import Preloader from '../components/Preloader/Preloader';
 
 
 const AdminProtectedRoute = ({ children }: Props) => {
-    //const{ register, handleSubmit, reset, formState:{errors} } = useForm();
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(true);  //true = checking auth
     const [isAdmin, setIsAdmin] = useState(false);
-    const [isErrorLogin, setIsErrorLogin] = useState(false);
 
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, async (user) => {
@@ -31,22 +28,18 @@ const AdminProtectedRoute = ({ children }: Props) => {
             }else{ setIsAdmin(false); }
             setLoading(false);  //finished checking
         });
-        return () => unsub(); 
+        return () => unsub();
     }, []);
 
     const handleLogin = async () => {
         setLoading(true); //start spinner while trying login
-        try{ //`onAuthStateChanged` will handle success → setLoading(false) there
-            await signInWithEmailAndPassword(auth, email, password); 
-            setPassword(""); setEmail("");
-            setIsErrorLogin(false); 
-        }  
+        try{ await signInWithEmailAndPassword(auth, email, password); }  //`onAuthStateChanged` will handle success → setLoading(false) there
         catch(err) { 
-            setIsErrorLogin(true);
-            //alert("Invalid credentials"); 
+            alert("Invalid credentials"); 
             setLoading(false); //stop spinner if login fails
         }
     };
+
 
     if (loading) {
         return(
@@ -85,12 +78,7 @@ const AdminProtectedRoute = ({ children }: Props) => {
                         </div>
                         <div className="col-12 text-center mt-xl-2 mt-lg-2 mt-sm-2 mt-2">  
                             <button className="btn btn-warning btn-lg" onClick={handleLogin}>Login</button> 
-                        </div> 
-                        { (isErrorLogin) && 
-                            <small className="text-center fs-5 pt-3" style={{fontSize:'48px',color:'red'}}>  
-                                <i className="fa fa-exclamation-triangle" style={{fontSize:'38px',color:'red'}}></i> Invalid credentials
-                            </small>
-                        }  
+                        </div>
                     </div> {/*.row*/}
                 </div> {/*.container*/}
             </div> //.admin-login-form

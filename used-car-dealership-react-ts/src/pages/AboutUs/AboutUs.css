@@ -8,10 +8,13 @@
 @media screen and (max-width: 1199px) { 
 }
 @media screen and (max-width: 991px) {
+    .aboutus--page .c-block--text .inner-content{ padding-left:15px !important; padding-right:15px !important; }
+    .aboutus--page .c-block--text .inner-content h2{ margin-top:15px; } 
+    .aboutus--page .c-block--text .inner-content h2{ margin-top:25px; font-size:1.6rem; text-align:center; }
 }
 @media screen and (max-width: 767px) {
 
 } 
-@media screen and (max-width: 575px) {
-
+@media screen and (max-width: 575px) { 
+    .aboutus--page .c-block--text .inner-content h2{ margin-top:25px; font-size:1.4rem; text-align:center; }
 } 

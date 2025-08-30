@@ -1,10 +1,8 @@
 import { collection,doc,getDocs,addDoc,setDoc } from "firebase/firestore";
-import { ref,uploadBytes,getDownloadURL } from "firebase/storage";
 import { db } from "../firebase/firebase";
-import { storage } from "../firebase/firebase"; 
 import type { Car } from "../types/car";
 
-//1.Func.to fetch all cars from Firestore
+//Func.to fetch all cars from Firestore
 export async function fetchCars(): Promise<Car[]> {
     const carsCol = collection(db, "cars"); //`cars` is your FiresStore collection name
     const carsSnapshot = await getDocs(carsCol);
@@ -17,7 +15,7 @@ export async function fetchCars(): Promise<Car[]> {
     return carsList; 
 }
 
-//2.Create a new car and also store the id field
+//Create a new car and also store the id field
 //Func.to create(save) a new car in Firestore. use Omit<Car,"id"> because ID will comes from Firestore, not from the form.
 export async function createCar(car: Omit<Car,"id">): Promise<string> { 
     try {
@@ -29,17 +27,5 @@ export async function createCar(car: Omit<Car,"id">): Promise<string> {
     } catch (error){
         console.error("Error adding car:", error);
         throw error;
-    }
-}
-//2.1Upload single image to Firebase Storage
-export async function uploadCarImage(carId: string, file: File): Promise<string> {
-    try {
-      const storageRef = ref(storage, `cars/${carId}/${file.name}`);
-      await uploadBytes(storageRef, file);
-      const url = await getDownloadURL(storageRef);
-      return url;
-    }catch(error) {
-      console.error("Error uploading image:", error);
-      throw error;
     }
 }

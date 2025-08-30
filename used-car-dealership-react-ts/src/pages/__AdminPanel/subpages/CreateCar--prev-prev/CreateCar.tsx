@@ -1,5 +1,5 @@
-import { useState,useEffect } from "react";
-import { createCar,uploadCarImage } from "../../../services/carService";
+import { useState } from "react";
+import { createCar } from "../../../services/carService";
 import type { Car } from "../../../types/car";
 
 import { carMakesAndModels } from "../../../constants/carMakesAndModels"; //Array of Objs with car's Makes & Models
@@ -10,12 +10,10 @@ import { fuelType } from "../../../constants/fuelType"; //Array of strings with 
 import { transmission } from "../../../constants/transmission"; //Array of strings with car's Transmission
 import { color } from "../../../constants/color"; //Array of strings with car's Color
 
-import { capitalize } from "../../../utils/helpers.ts"; 
 
-
-function CreateCar() { 
+function CreateCar() {
     // Local state for form fields (start with a few, you can expand)
-    const [formData, setFormData] = useState<Omit<Car,"id">>({  
+    const [formData, setFormData] = useState<Omit<Car, "id">>({
     make: "",
     model: "",
     year: new Date().getFullYear(),
@@ -37,12 +35,6 @@ function CreateCar() {
 
     const [loading, setLoading] = useState(false);
     const [successMsg, setSuccessMsg] = useState("");
-    //State for `Options`:
-    const [optionInput, setOptionInput] = useState(""); //const [options, setOptions] = useState<string[]>([]);
-    //State for `Safety`:
-    const [safetyInput, setSafetyInput] = useState("");
-    //State for `Images`:
-    const [imageInput, setImageInput] = useState(""); 
 
     //-->Get list of Makes
     const car_makes =  Object.keys(carMakesAndModels); //-->['gmc', 'chevrolet', 'buick'] 
@@ -63,18 +55,12 @@ function CreateCar() {
    const car_fueltypes = fuelType; //-->['gas', 'diesel']
    //-->Get list of Mileage Ranges ==> no need!
 
-   useEffect(() => {
-        if( !successMsg ) return;
-        const timer = setTimeout( //After 4 sec. the notification`Car created successfully!`will br desappeard
-            ()=>{ return setSuccessMsg("") }, 4000 
-        );
-
-        return () => { clearTimeout(timer) }; //--> UNMOUNTS: cleans the timer 
-    }, [successMsg]); 
 
 
     //Generic input handler 
-    const handleChange = ( e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement> ) => {
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    ) => {
         const { name, value, type, checked } = e.target;
         setFormData((prev) => {
             //Ensure numbers are stored as numbers
@@ -88,16 +74,17 @@ function CreateCar() {
             });
     };
 
+    const handleArrayChange = (name: "images" | "options" | "safety", value: string) => {
+        setFormData( (prev) => ({
+            ...prev,
+            [name]: value.split(",").map((item) => item.trim()),
+        }));
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         try {
-            //Check if `model` is empty before saving
-            if( !formData.model || formData.model.trim() === "" ){
-                //alert("Model is EMPTY!."); setLoading(false); return; //stop the submit
-                if( formData.make ){ formData.model = carMakesAndModels[formData.make][0] } else{ formData.model = "" }
-            }else{ formData.model }
-
             const newCarId = await createCar(formData);
             setSuccessMsg(`✅ Car created successfully! ID: ${newCarId}`);
             setFormData({
@@ -120,70 +107,19 @@ function CreateCar() {
                 safety: [],
             });
         } catch(err){
-            alert("❌ Failed to create car. Check console."); 
+            alert("❌ Failed to create car. Check console.");
             console.error(err);
         }
         setLoading(false);
     };
 
-    {/*OPTIONS*/}
-    const addOption = () => {
-        if (optionInput.trim() !== "") {
-            setFormData((prev) => ({ 
-                ...prev,
-                options: [...prev.options, optionInput.trim()],
-              }));
-          setOptionInput(""); //clear input
-        }
-    };
-    const removeOption = (index: number) => {
-        setFormData((prev) => ({
-            ...prev,
-            options: prev.options.filter((_, i) => i !== index),
-          }));
-    };
-    {/*OPTIONS*/}
-    {/*SAFETY*/}
-    const addSafety = () => {
-        if (safetyInput.trim() !== "") {
-            setFormData((prev) => ({ 
-                ...prev,
-                safety: [...prev.safety, safetyInput.trim()],
-                }));
-            setSafetyInput(""); //clear input
-        }
-    };
-    const removeSafety = (index: number) => {
-        setFormData((prev) => ({
-            ...prev,
-            safety: prev.safety.filter((_, i) => i !== index),
-            }));
-    };
-    {/*SAFETY*/}
-    {/*IMAGES*/}
-    const addImage = () => {
-        if (imageInput.trim() !== "") {
-            setFormData((prev) => ({ 
-                ...prev,
-                images: [...prev.images, imageInput.trim()],
-                }));
-            setImageInput(""); //clear input
-        }
-    };
-    const removeImage = (index: number) => {
-        setFormData((prev) => ({
-            ...prev,
-            images: prev.images.filter((_, i) => i !== index),
-            }));
-    };
-    {/*IMAGES*/}
-
+  function capitalize(str:string){ if (!str) return ""; return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase(); }
 
   return (
     <div className="createcar--page container mt-4">
-      <h1 className="text-center">Create New Car</h1>
+      <h1 className="text-center text-success">Create New Car</h1>
 
-      <form onSubmit={handleSubmit} className="create-new-car--form row g-3">
+      <form onSubmit={handleSubmit} className="row g-3">
         {/*Make*/}
         <div className="col-md-6">
           <label className="form-label text-black">Make</label>
@@ -194,7 +130,7 @@ function CreateCar() {
             onChange={handleChange}
             required
             >
-            <option value="">--- Chose Make ---</option>
+            <option value="">Chose Make</option>
             {car_makes.map( (make, index, array) => (
                 <option key={make} value={make}>{ (make === "gmc") ? make.toUpperCase() : capitalize(make) }</option>
             ))}
@@ -211,7 +147,7 @@ function CreateCar() {
             onChange={handleChange} 
             required
             >
-            { (!formData.make) ? <option value="">--- Chose Make first---</option> : "" }
+            { (!formData.make) ? <option value="">First the Make!</option> : "" }
             {car_models.map( (model, index, array) => (
                 <option key={model} value={model}>{ capitalize(model) }</option>
             ))}
@@ -245,7 +181,7 @@ function CreateCar() {
             required
             >
             {car_bodystyles.map( (bodystyle, index, array) => (
-                <option key={bodystyle} value={bodystyle}>{ (bodystyle === "suv") ? bodystyle.toUpperCase() : capitalize(bodystyle) }</option>
+                <option key={bodystyle} value={bodystyle}>{ capitalize(bodystyle) }</option>
             ))}
             </select>
         </div>
@@ -378,6 +314,7 @@ function CreateCar() {
         {/*Carfax Clear/ No Accident/ One Owner*/}
         {/*Description*/}
         <div className="col-12">
+          <label className="form-label text-black">Description</label>
           <textarea
             className="form-control"
             rows={3}
@@ -385,120 +322,45 @@ function CreateCar() {
             value={formData.description}
             onChange={handleChange}
             placeholder="Description"
-            required
           ></textarea>
         </div>
         {/*Description*/}
 
         {/*OPTIONS*/}
         <div className="col-12">
-            <div className="d-flex">
-                <input
-                type="text"
-                className="form-control"
-                placeholder="Add Option"
-                value={optionInput}
-                onChange={(e) => setOptionInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addOption())}
-                />
-                <button
-                type="button"
-                className="btn btn-secondary btn-sm ms-2"
-                onClick={addOption}
-                ><i className="fa fa-plus"></i></button> 
-            </div>
-            {/*Render each next option as block*/} 
-            <div className="mt-2 d-flex flex-wrap gap-2">
-                {formData.options.map((item, index) => (
-                <span
-                    key={index}
-                    className="badge bg-secondary p-2"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => removeOption(index)} 
-                >{item} ✕ </span> 
-                ))} 
-            </div>
+            {/* <label className="form-label text-black">Options</label> */}
+            <input 
+            type="text" 
+            className="form-control" 
+            placeholder="Options (comma separated)" 
+            onChange={(e) => handleArrayChange("options", e.target.value)}
+            />
         </div>
-        {/*OPTIONS*/}
+         {/*OPTIONS*/}
         {/*SAFETY*/}
         <div className="col-12">
-            <div className="d-flex">
-                <input
-                type="text"
-                className="form-control"
-                placeholder="Add Safety"
-                value={safetyInput}
-                onChange={(e) => setSafetyInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addSafety())}
-                />
-                <button
-                type="button"
-                className="btn btn-secondary btn-sm ms-2"
-                onClick={addSafety}
-                ><i className="fa fa-plus"></i></button>
-            </div>
-            {/*Render each next safety as block*/}
-            <div className="mt-2 d-flex flex-wrap gap-2">
-                {formData.safety.map((item, index) => (
-                <span
-                    key={index}
-                    className="badge bg-secondary p-2"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => removeSafety(index)}
-                >{item} ✕ </span>
-                ))}
-            </div>
+            {/* <label className="form-label text-black">Safety</label>  */}
+            <input 
+            type="text" 
+            className="form-control" 
+            placeholder="Safety Features (comma separated)" 
+            onChange={(e) => handleArrayChange("safety", e.target.value)} 
+            />
         </div>
         {/*SAFETY*/}
         {/*IMAGES*/}
-        <div className="col-12">
-            <div className="d-flex align-items-center">
-                <input
-                type="file"
-                accept="image/*"
-                className="form-control"
-                onChange={async (e) => {
-                    if (!e.target.files?.length) return;
-                    const file = e.target.files[0];
-                    try {
-                    //If no carId yet, generate a temporary one --> const tempCarId = formData.id || "temp"; 
-                    const tempCarId = "temp";
-                    const url = await uploadCarImage(tempCarId, file); 
-
-                    setFormData((prev) => ({
-                        ...prev,
-                        images: [...prev.images, url],
-                    }));
-                    } catch (err) {
-                    alert("❌ Failed to upload image. Check console.");
-                    console.error(err);
-                    }
-                }}
-                />
-            </div>
-
-            {/*Render uploaded images*/}
-            <div className="mt-2 d-flex flex-wrap gap-2">
-                {formData.images.map((item, index) => (
-                <span
-                    key={index}
-                    className="badge bg-secondary p-2"
-                    style={{ cursor: "pointer" }}
-                    onClick={() =>
-                    setFormData((prev) => ({
-                        ...prev,
-                        images: prev.images.filter((_, i) => i !== index),
-                    }))
-                    }
-                >
-                    {item} ✕
-                </span>
-                ))}
-            </div>
+         <div className="col-12">
+            {/* <label className="form-label text-black">imases</label>  */}
+            <input 
+            type="text" 
+            className="form-control" 
+            placeholder="Images (comma separated URLs)" 
+            onChange={(e) => handleArrayChange("images", e.target.value)} 
+            />
         </div>
         {/*IMAGES*/}
 
-        <div className="col-12 text-center pb-5">
+        <div className="col-12 text-center">
           <button type="submit" className="btn btn-success" disabled={loading}>
             {loading ? "Saving..." : "Save Car"}
           </button>

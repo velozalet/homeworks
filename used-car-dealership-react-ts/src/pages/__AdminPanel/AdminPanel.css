@@ -1,0 +1,16 @@
+.adminpanel--page{
+    background-color:aliceblue;
+}
+.adminpanel--page h1{ text-align:center; color:green; } 
+.adminpanel--page .alert.alert-success{ position:absolute; top:50%; left: calc(50% - 220px); }
+
+.adminpanel--page .createcar--page .create-new-car--form label.form-label{
+    padding-bottom:0; margin-bottom:3px; margin-left: 4px; 
+}
+.adminpanel--page .createcar--page .create-new-car--form .form-select:focus,
+.adminpanel--page .createcar--page .create-new-car--form .form-select:active,
+.adminpanel--page .createcar--page .create-new-car--form .form-select:focus-visible{
+    border: none;
+    box-shadow: none;
+    outline: 1px solid #ffc107;
+}
