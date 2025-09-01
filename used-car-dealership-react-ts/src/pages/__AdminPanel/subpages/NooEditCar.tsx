@@ -1,4 +1,4 @@
-function EditCar(){
+function NoEditCar(){
 
     return(
     <div className="editcar--page">
@@ -7,4 +7,4 @@ function EditCar(){
     </div>
     ); 
 }
-export default EditCar;
+export default NoEditCar;

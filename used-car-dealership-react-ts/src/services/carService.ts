@@ -1,4 +1,4 @@
-import { collection,doc,getDocs,addDoc,setDoc } from "firebase/firestore";
+import { collection,doc,getDocs,addDoc,setDoc,updateDoc } from "firebase/firestore";
 import { ref,uploadBytes,getDownloadURL } from "firebase/storage";
 import { db } from "../firebase/firebase";
 import { storage } from "../firebase/firebase"; 
@@ -31,7 +31,7 @@ export async function createCar(car: Omit<Car,"id">): Promise<string> {
         throw error;
     }
 }
-//2.1Upload single image to Firebase Storage
+//2.1 Upload single image to Firebase Storage
 export async function uploadCarImage(carId: string, file: File): Promise<string> {
     try {
       const storageRef = ref(storage, `cars/${carId}/${file.name}`);
@@ -43,3 +43,15 @@ export async function uploadCarImage(carId: string, file: File): Promise<string>
       throw error;
     }
 }
+
+//3. Update an existing car in Firestore. Partial<Car> → means no need to send all fields,only the ones being updated.
+export async function updateCar(carId: string, updatedCar: Partial<Car>): Promise<void> {
+    try {
+        const carRef = doc(db, "cars", carId);
+        await updateDoc(carRef, updatedCar);
+        console.log(`Car ${carId} updated successfully`);
+    }catch(error){
+        console.error("Error updating car:", error);
+        throw error;
+    }
+} 

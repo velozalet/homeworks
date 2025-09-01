@@ -1,7 +1,25 @@
 .adminpanel--page{
-    background-color:aliceblue;
+    background-color:aliceblue;  
 }
-.adminpanel--page h1{ text-align:center; color:green; } 
+.adminpanel--page .admin-a-info{ position:absolute; right:15px; top:80px; color:#0d6efd; font-family:'Bruno Ace', sans-serif; letter-spacing:1px; }  
+.adminpanel--page .admin-a-info > i{ font-size:1.7rem; } 
+.adminpanel--page .admin-a-info > p { font-size:.9rem; font-style:italic; color:#0d6efd; font-family:Ubuntu, sans-serif; letter-spacing:0; } 
+.adminpanel--page .offcanvas{  background-color:lavender; }
+.adminpanel--page .offcanvas .offcanvas-header .offcanvas-title{ font-size:1.7rem; color:green; } 
+.adminpanel--page .offcanvas .offcanvas-header button.btn-close{ font-size:1.3rem; opacity:0.4; }
+.adminpanel--page .offcanvas .offcanvas-header button.btn-close:hover{ opacity:1; color:red !important; } 
+
+.adminpanel--page .offcanvas .offcanvas-body nav > p {text-align:left;}
+.adminpanel--page .offcanvas .offcanvas-body nav > p > a{ text-decoration:none; font-size:1.3rem; color:black; opacity:.8; } 
+.adminpanel--page .offcanvas .offcanvas-body nav > p > a:hover{ color:green; opacity:1; }
+
+.adminpanel--page .offcanvas .btn-logout{ border:1px solid gray; } /*style={{position:'absolute',right:'15px',top:'80px'}} */
+.adminpanel--page .offcanvas .btn-logout > i{ font-size:1.4rem; color:#0d6efd; position:relative; top:2px; padding-right:2px; transition:.9s; } 
+.adminpanel--page .offcanvas .btn-logout:hover{ background-color: black; border:1px solid #ffc107; color:#ffc107 !important; }
+.adminpanel--page .offcanvas .btn-logout:hover > i { color:#ffc107; }
+
+
+.adminpanel--page h1{ text-align:center; color:green; }
 .adminpanel--page .alert.alert-success{ position:absolute; top:50%; left: calc(50% - 220px); }
 
 .adminpanel--page .createcar--page .create-new-car--form label.form-label{
@@ -14,3 +32,56 @@
     box-shadow: none;
     outline: 1px solid #ffc107;
 }
+
+
+
+.admindashboard--page .tabs--dispaly-cars .tab--content{ 
+    background-color: white;
+    border: 1px solid gray; border-radius: 8px; 
+}
+.admindashboard--page .tabs--dispaly-cars .tab--content{ display:none !important; }
+.admindashboard--page .tabs--dispaly-cars .tab--content.active{ display:block !important; }
+.admindashboard--page .tabs--dispaly-cars .tab--content ol > li{ text-align:left; color:black; }
+.admindashboard--page .tabs--dispaly-cars .tab--content ol > li::marker{ font-size:1.3rem; } 
+.admindashboard--page .tabs--dispaly-cars .tab--button > button { 
+    text-transform:uppercase; border-radius: 7px; transition: 1s;  
+}  
+.admindashboard--page .tabs--dispaly-cars .tab--button > button.active { 
+   background-color: #ffc107 !important; 
+} 
+.admindashboard--page .tabs--dispaly-cars .tab--button > button > strong{  
+    padding:1px 3px; background-color: gray; margin-left:4px; border: 1px solid transparent; border-radius:4px;
+
+}
+.admindashboard--page .tabs--dispaly-cars .tab--button > button:hover{ 
+    background-color: #ffc107 !important; color:black !important; 
+} 
+
+.admindashboard--page .tabs--dispaly-cars .tab--content ol .btn-car--rack {width:75%;} 
+.admindashboard--page .tabs--dispaly-cars .tab--content ol .btn-car--rack img{ width:auto; height:150px; } 
+.admindashboard--page .tabs--dispaly-cars .tab--content ol .btn-car--rack .col-btn--info{ color:black; }
+.admindashboard--page .tabs--dispaly-cars .tab--content ol .btn-car--rack .col-btn--info h5{ text-transform:uppercase; padding-top:10px; } 
+.admindashboard--page .tabs--dispaly-cars .tab--content ol .btn-car--rack .col-btn--info h5 > i{ font-size:.9rem; } 
+.admindashboard--page .tabs--dispaly-cars .tab--content ol .btn-car--rack .col-btn--bg{  
+
+}
+
+/* .popover .popover-header{ padding-bottom:20px; } */
+.popover .popover-body{ padding:7px 3px 3px 3px;}
+.popover .popover-header{ padding:3px 3px 6px 3px; background-color: white; }
+.popover .popover-body a{ font-family:'Barlow Condensed', sans-serif; font-size:1.2rem;} 
+.popover .popover-header,.popover .popover-body{ text-align:center; } 
+.popover .popover-header a, .popover .popover-body a{ font-family:'Barlow Condensed', sans-serif; font-size:1.2rem; }
+.popover { 
+    border: 1px solid black;
+    background-color: white !important; 
+} 
+.popover-arrow{ transform: translate(0px, 43px); }
+.popover .popover-arrow::before{ 
+    border-right-color: black !important;
+}
+.popover .popover-arrow::after{
+    border-right-color: black;
+}
+.popover .popover-header > a:hover{ color:blue; }
+.popover .popover-body > a:hover{ color:red; }

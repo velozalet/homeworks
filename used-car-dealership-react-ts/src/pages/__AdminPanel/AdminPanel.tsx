@@ -20,42 +20,35 @@ function AdminPanel(){
 
     return(
     <div className="adminpanel--page"> 
-        <h1>Welcome to the `Admin Panel` Page</h1> 
+        <h1>Welcome to the `Admin Panel`</h1> 
 
             <a className="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-            Admin Menu
+            <i className="fa fa-retweet" style={{fontSize:'24px'}}></i>
             </a>
 
             <div className="offcanvas offcanvas-start"  id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                 <div className="offcanvas-header">
-                    <h5 className="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-                    <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <h5 className="offcanvas-title" id="offcanvasExampleLabel">Admin Menu</h5>
+                    <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body">
-                    <div>Some text as placeholder. In ..</div>
-                    <div className="dropdown mt-3">
-                        <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
-                            Dropdown button
-                        </button>
-                        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a className="dropdown-item" href="#">Action</a></li>
-                            <li><a className="dropdown-item" href="#">Another action</a></li>
-                            <li><a className="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </div>
                     <aside className="text-center w-1/4 p-4 border-r">
                         <nav className="space-y-3">
                             <p><Link to="/admin" className="block text-lg font-medium hover:underline">🏠 Dashboard</Link></p>
-                            <p><Link to="/admin/create" className="block hover:underline">➕ Create++</Link></p>
+                            <p><Link to="/admin/create" className="block hover:underline">➕ Create</Link></p>
                             <p><Link to="/admin/edit" className="block hover:underline">✏️ Edit</Link></p>
                             <p><Link to="/admin/delete" className="block hover:underline">🗑️ Delete</Link></p>
                         </nav>
                     </aside>
+                    <button 
+                    onClick={handleLogout}  
+                    className="btn btn-warning btn-logout mt-6 px-3 py-1 text-black">
+                        <i className="fa fa-arrow-circle-left"></i> Log Out 
+                    </button> {/*Logout button*/}
                 </div>
             </div> {/*offcanvas*/}
 
-
-            <aside className="text-center w-1/4 p-4 border-r">
+            <aside className="text-center w-1/4 p-4 border-r invisible">
                 <nav className="space-y-3">
                     <Link to="/admin" className="block text-lg font-medium hover:underline">🏠 Dashboard</Link>
                     <Link to="/admin/create" className="block hover:underline">➕ Create++</Link>
@@ -64,11 +57,10 @@ function AdminPanel(){
                 </nav>
             </aside>
 
-            <button 
-            onClick={handleLogout} 
-            className="mt-6 px-3 py-1 text-black"
-            style={{position:'absolute',right:'15px',top:'80px'}} 
-            >🔄 Log Out </button> {/*Logout button*/}
+            <div className="admin-a-info text-black"> 
+                <i className="fa fa-user pe-1"></i>Admin 
+                <p>admin_cardealer@ca.com</p> 
+            </div>  
 
         <div className="flex">
             <main className="flex-1 p-6">

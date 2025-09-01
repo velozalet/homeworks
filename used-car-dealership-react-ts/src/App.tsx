@@ -20,11 +20,12 @@ import AdminProtectedRoute from './routes/AdminProtectedRoute';
 //Pages(of `Admin Panel`):
 import AdminDashboard from './pages/__AdminPanel/subpages/AdminDashboard';
 import CreateCar from './pages/__AdminPanel/subpages/CreateCar';
-import EditCar from './pages/__AdminPanel/subpages/EditCar';
-import DeleteCar from './pages/__AdminPanel/subpages/DeleteCar';
+//import EditCar from './pages/__AdminPanel/subpages/EditCar';
+//import DeleteCar from './pages/__AdminPanel/subpages/DeleteCar';
 
 //Components:
 import CarDetails from './components/CarDetails/CarDetails';
+import EditCar from './components/EditCar/EditCar';
 
 //Styles:
 import './App.css';
@@ -61,19 +62,9 @@ const FrontSiteNavigation = ()=> { //check the URL. If we're in `Admin Panel` --
 
 
 const App = ():JSX.Element => { 
-
     return(
     <>
     <BrowserRouter>
-        {/* <nav style={{display:'flex',gap:'1rem'}}>
-            <Link to="/">Home</Link>
-            <Link to="/new-cars">New Cars</Link>
-            <Link to="/used-cars">Used Cars</Link>
-            <Link to="/about">About</Link>
-            <Link to="/contact">Contact</Link>
-            <Link to="/admin">Admin</Link>
-        </nav> */} {/*1.Moved this to`const FrontSiteNavigation` to use`useLocation()` in order not to display `Front-End site Menu` when we're in the`Admin Panel`*/}
-        {/* <FrontSiteNavigation /> */} {/*--> 2.Moved this Navigation to`Header` component. And `Header`,`Footer` components inside `FrontLayout`*/}
         <Routes>
             {/*Front-End site routes:*/}
             <Route element={<FrontLayout />} >
@@ -92,8 +83,9 @@ const App = ():JSX.Element => {
             <Route path="/admin/*" element={<AdminProtectedRoute />}> 
                 <Route index element={<AdminDashboard />} />
                 <Route path="create" element={<CreateCar />} />
-                <Route path="edit" element={<EditCar />} />
-                <Route path="delete" element={<DeleteCar />} />
+                <Route path=":carId" element={<EditCar />} />{/*just added for Edit Car routing*/}
+                {/* <Route path="edit" element={<EditCar />} /> */}
+                {/* <Route path="delete" element={<DeleteCar />} /> */}
             </Route>
             {/*__/`Admin Panel` protected routes:*/}
         </Routes>
