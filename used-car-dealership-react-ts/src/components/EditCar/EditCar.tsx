@@ -9,15 +9,27 @@ import type { Car } from "../../types/car";
 import { setCars,setLoading } from "../../store/carsSlice";
 import { fetchCars,updateCar } from "../../services/carService";
 
-import { carMakesAndModels } from "../../constants/carMakesAndModels"; //Array of Objs with car's Makes & Models
-import { bodyStyles } from "../../constants/bodyStyles"; //Array of strings with car's Body Styles
-import { carYears } from "../../constants/carYears"; //Array of numbers with car's Years
-import { fuelType } from "../../constants/fuelType"; //Array of strings with car's fuel Type
-//import { mileageRanges } from "../../constants/mileageRanges"; Array of Objs with car's Mileage Ranges
-import { transmission } from "../../constants/transmission"; //Array of strings with car's Transmission
-import { color } from "../../constants/color"; //Array of strings with car's Color
 
-import { capitalize } from "../../utils/helpers.ts"; 
+import __Make from "./__Make";
+import __Model from "./__Model";
+import __Year from "./__Year";
+import __BodyStyle from "./__BodyStyle";
+import __Color from "./__Color";
+import __Mileage from "./__Mileage";
+import __Transmission from "./__Transmission";
+import __FuelType from "./__FuelType";
+import __Price from "./__Price";
+import __Vin from "./__Vin";
+import __CarfaxClear from "./__CarfaxClear";
+import __NoAccident from "./__NoAccident";
+import __OneOwner from "./__OneOwner";
+import __Description from "./__Description";
+import __Options from "./__Options";
+import __Safety from "./__Safety";
+import __Images from "./__Images";
+import __SaveButton from "./__SaveButton";
+
+//import { capitalize } from "../../utils/helpers.ts"; 
 
 //Components:
 //Styles:
@@ -43,28 +55,6 @@ const EditCar = (): JSX.Element => {
     const [safetyInput, setSafetyInput] = useState("");
     //State for `Images`:
     const [imageInput, setImageInput] = useState(""); 
-
-
-    //-->Get list of Makes
-    const car_makes =  Object.keys(carMakesAndModels); //-->['gmc', 'chevrolet', 'buick'] 
-    //-->Get list of Models according to before selected Makes
-    let car_models: string[];
-    if(formData){
-        if( !formData.make ){ car_models = []; }  //case-1: no `Make` chosen
-        else if( !carMakesAndModels[formData.make] ){ car_models = []; } //case-2: `Make` chosen but not in our dictionary
-        else{  car_models = carMakesAndModels[formData.make]; } //case-3: make chosen and exists in dictionary
-    }
-    //-->Get list of Years
-    const car_years = carYears; //-->[2025, 2024, 2023, 2022, 2021, 2020]
-    //-->Get list of Body Styles 
-    const car_bodystyles = bodyStyles; //-->['sedan', 'suv', 'hatch']
-    //-->Get list of Color 
-    const car_colors = color; //-->['black', 'white', 'blue', 'red', 'green', 'yellow']
-    //-->Get list of Transmission 
-    const car_transmissions = transmission; //-->['auto', 'manual']
-    //-->Get list of Fuel Type 
-    const car_fueltypes = fuelType; //-->['gas', 'diesel']
-    //-->Get list of Mileage Ranges ==> no need!
 
     //After 4 sec. the notification`Car created successfully!`will br desappeard
     useEffect(() => {
@@ -100,7 +90,7 @@ const EditCar = (): JSX.Element => {
     //3.1) If no `car` set it form `setFormData(car)`
     useEffect(() => { 
         if(car) { setFormData(car); }
-      },[car]);
+    },[car]);
 
     //4) Handle input changes
     const handleChange = ( e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement> ) => {
@@ -191,357 +181,86 @@ const EditCar = (): JSX.Element => {
     };
     {/*IMAGES*/}
 
-    if( !car ){
-        return( 
-            <>
-                <div className="container-lg text-center"> 
-                    <nav className="breadcrumbs pt-lg-3 pt-md-3 pt-sm-2 pt-2" aria-label="breadcrumb">
-                        <ol className="breadcrumb">
-                            <Link to="/admin" className="breadcrumb-item">Admin DashsBoard</Link> 
-                            <li className="breadcrumb-item active" aria-current="page">Car - {carId}</li>  
-                        </ol>
-                    </nav>
-                    <h1 className="text-black">N-------------------</h1>
-                    <p className="text-black">Car ID: {carId}</p> 
-                </div>
-            </>
-        );
-    }
+    if( !car ){ return( <><p className="text-black">Car ID: {carId}</p></> ); }
     if (!formData) {
-        return (
-          <div className="container-lg text-center">
-            <h2>Loading car data...</h2>
-          </div>
-        ); 
-      }
+        return ( <div className="container-lg text-center"><h2>Loading car data...</h2></div> ); 
+    }
 
-    return ( // (!!!) NEEDS value={formData.model || ""} OR is as OK?
+    return (
     <div id={carId} className="editcar--page container mt-4">
         <h1>Edit Car</h1>
 
         <form onSubmit={handleSubmit} className="edit-car--form row g-3">
             {/*Make*/}
-            <div className="col-md-6">
-                <label className="form-label text-black">Make</label>
-                <select
-                    className="form-select"
-                    name="make"
-                    value={formData.make || ""}
-                    onChange={handleChange}
-                >
-                {car_makes.map( (make, index, array) => (
-                    <option key={make} value={make}>{ (make === "gmc") ? make.toUpperCase() : capitalize(make) }</option>
-                ))}
-                </select> 
-            </div>
+            <__Make value={formData.make || ""} onChange={handleChange} />
             {/*Make*/}
-
             {/*Model*/}
-            <div className="col-md-6">
-                <label className="form-label text-black">Model</label>
-                <select
-                className="form-select"
-                name="model"
-                value={formData.model}
-                onChange={handleChange} 
-                required
-                >
-                { ( formData.make )  
-                    ? car_models.map( (model, index, array) => (
-                    <option key={model} value={model}>{ capitalize(model) }</option>
-                ))
-                : "" }
-                </select>
-            </div>
+            <__Model make={formData.make || ""} model={formData.model || ""} onChange={handleChange} />
             {/*Model*/}
-
             {/*Year*/}
-            <div className="col-md-4">
-                <label className="form-label text-black">Year</label>
-                <select
-                className="form-select"
-                name="year"
-                value={formData.year}
-                onChange={handleChange} 
-                required
-                >
-                {car_years.map( (year, index, array) => (
-                    <option key={year} value={year}>{ year }</option>
-                ))} 
-                </select>
-            </div>
+            <__Year value={formData.year || ""} onChange={handleChange} />
             {/*Year*/}
-
             {/*Body Style*/}
-            <div className="col-md-4">
-                <label className="form-label text-black">Body Style</label>
-                <select
-                className="form-select"
-                name="bodyStyle"
-                value={formData.bodyStyle}
-                onChange={handleChange} 
-                required
-                >
-                {car_bodystyles.map( (bodystyle, index, array) => (
-                    <option key={bodystyle} value={bodystyle}>{ (bodystyle === "suv") ? bodystyle.toUpperCase() : capitalize(bodystyle) }</option>
-                ))}
-                </select>
-            </div>
+            <__BodyStyle value={formData.bodyStyle || ""} onChange={handleChange} />
             {/*Body Style*/}
-
             {/*Color*/}
-            <div className="col-md-4">
-                <label className="form-label text-black">Color</label>
-                <select
-                className="form-select"
-                name="color"
-                value={formData.color}
-                onChange={handleChange} 
-                required
-                >
-                {car_colors.map( (color, index, array) => (
-                    <option key={color} value={color}>{ capitalize(color) }</option>
-                ))}
-                </select>
-            </div>
+            <__Color value={formData.color || ""} onChange={handleChange} />
             {/*Color*/}
-
             {/*Mileage*/}
-            <div className="col-md-4">
-                <label className="form-label text-black">Mileage</label>
-                <input 
-                type="text" 
-                name="mileage" 
-                className="form-control" 
-                placeholder="Mileage" 
-                value={formData.mileage} 
-                onChange={handleChange} 
-                />
-            </div> 
+            <__Mileage value={formData.mileage || "" } onChange={handleChange} />
             {/*Mileage*/} 
-
             {/*Transmission*/}
-            <div className="col-md-4">
-                <label className="form-label text-black">Transmission</label>
-                <select
-                className="form-select"
-                name="transmission"
-                value={formData.transmission}
-                onChange={handleChange} 
-                required
-                >
-                {car_transmissions.map( (transmission, index, array) => (
-                    <option key={transmission} value={transmission}>{ capitalize(transmission) }</option>
-                ))}
-                </select>
-            </div> 
-            {/*Transmission*/}
-
-            {/*Fuel Type*/} 
-            <div className="col-md-4">
-                <label className="form-label text-black">Fuel Type</label>
-                <select
-                className="form-select"
-                name="fuelType"
-                value={formData.fuelType}
-                onChange={handleChange} 
-                required
-                >
-                {car_fueltypes.map( (fueltype, index, array) => (
-                    <option key={fueltype} value={fueltype}>{ capitalize(fueltype) }</option>
-                ))}
-                </select>
-            </div> 
+            <__Transmission value={formData.transmission || "" } onChange={handleChange} />
             {/*Fuel Type*/}
-
+            <__FuelType value={formData.fuelType || "" } onChange={handleChange} />
+            {/*Fuel Type*/}
             {/*Price*/}
-            <div className="col-md-4">
-                <label className="form-label text-black">Price($)</label>
-                <input
-                type="text"
-                className="form-control"
-                name="price"
-                placeholder="Price" 
-                value={formData.price}
-                onChange={handleChange}
-                required
-                />
-            </div>
+            <__Price value={formData.price || "" } onChange={handleChange} />
             {/*Price*/}
-
             {/*VIN*/}
-            <div className="col-md-4">
-                <label className="form-label text-black">VIN</label>
-                <input
-                type="text"
-                className="form-control"
-                name="vin" 
-                value={formData.vin}
-                onChange={handleChange}
-                required 
-                />
-            </div>
+            <__Vin value={formData.vin || "" } onChange={handleChange} />
             {/*VIN*/}
-
             {/*Carfax Clear/ No Accident/ One Owner*/}
             <div className="col-md-4">
-                <div className="form-check">
-                    <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id="carfaxClear"
-                        name="carfaxClear"
-                        checked={formData.carfaxClear}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="carfaxClear" className="form-check-label text-black">Carfax Clear</label>
-                </div>
-                <div className="form-check">
-                    <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id="noAccident"
-                        name="noAccident"
-                        checked={formData.noAccident}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="carfaxClear" className="form-check-label text-black">No Accident</label>
-                </div>
-                <div className="form-check">
-                    <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id="oneOwner"
-                        name="oneOwner"
-                        checked={formData.oneOwner}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="carfaxClear" className="form-check-label text-black">One Owner</label>
-                </div>
+                <__CarfaxClear value={formData.carfaxClear || "" } onChange={handleChange} />
+                <__NoAccident value={formData.noAccident || "" } onChange={handleChange} />
+                <__OneOwner value={formData.oneOwner || "" } onChange={handleChange} />
             </div> 
             {/*Carfax Clear/ No Accident/ One Owner*/}
-
             {/*Description*/}
-            <div className="col-12">
-                <textarea
-                    className="form-control"
-                    rows={3}
-                    name="description"
-                    value={formData.description}
-                    onChange={handleChange}
-                    placeholder="Description"
-                    required
-                ></textarea>
-            </div>
+            <__Description value={formData.description || "" } onChange={handleChange} />
             {/*Description*/}
 
-
-        {/*OPTIONS*/}
-        <div className="col-12">
-          <label className="form-label">Options</label>
-          <div className="d-flex">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Add Option"
-              value={optionInput}
-              onChange={(e) => setOptionInput(e.target.value)}
-              onKeyDown={(e) =>
-                e.key === "Enter" && (e.preventDefault(), addOption())
-              }
+            {/*OPTIONS*/}
+            <__Options
+                options={formData.options}
+                optionInput={optionInput}
+                setOptionInput={setOptionInput}
+                addOption={addOption}
+                removeOption={removeOption}
             />
-            <button
-              type="button"
-              className="btn btn-secondary btn-sm ms-2"
-              onClick={addOption}
-            >
-              +
-            </button>
-          </div>
-          <div className="mt-2 d-flex flex-wrap gap-2">
-            {formData.options.map((item, index) => (
-              <span
-                key={index}
-                className="badge bg-secondary p-2"
-                style={{ cursor: "pointer" }}
-                onClick={() => removeOption(index)}
-              >
-                {item} ✕
-              </span>
-            ))}
-          </div>
-        </div>
-        {/*OPTIONS*/}
-
-         {/*SAFETY*/}
-         <div className="col-12">
-          <label className="form-label">Safety</label>
-          <div className="d-flex">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Add Safety"
-              value={safetyInput}
-              onChange={(e) => setSafetyInput(e.target.value)}
-              onKeyDown={(e) =>
-                e.key === "Enter" && (e.preventDefault(), addSafety())
-              }
+            {/*OPTIONS*/}
+            {/*SAFETY*/}
+            <__Safety
+                safety={formData.safety}
+                safetyInput={safetyInput}
+                setSafetyInput={setSafetyInput}
+                addSafety={addSafety}
+                removeSafety={removeSafety}
             />
-            <button
-              type="button"
-              className="btn btn-secondary btn-sm ms-2"
-              onClick={addSafety}
-            >
-              +
-            </button>  
-          </div>
-          <div className="mt-2 d-flex flex-wrap gap-2">
-            {formData.safety.map((item, index) => (
-              <span
-                key={index}
-                className="badge bg-secondary p-2"
-                style={{ cursor: "pointer" }}
-                onClick={() => removeSafety(index)}
-              >
-                {item} ✕
-              </span>
-            ))}
-          </div>
-        </div> 
-        {/*SAFETY*/}
+            {/*SAFETY*/}
 
-        {/*IMAGES*/}
-        <div className="col-12">
-          <label className="form-label">Images</label>
-          <input
-            type="file"
-            accept="image/*"
-            className="form-control"
-            onChange={(e) => {
-              if (!e.target.files?.length) return;
-              addImage(e.target.files[0]);
-            }}
-          />
-          <div className="mt-2 d-flex flex-wrap gap-2">
-            {formData.images.map((item, index) => ( 
-              <span
-                key={index}
-                className="badge bg-secondary p-2"
-                style={{ cursor: "pointer" }}
-                onClick={() => removeImage(index)}
-              >
-                {item} ✕
-              </span>
-            ))}
-          </div> 
-        </div>  
-        {/*IMAGES*/}
+            {/*IMAGES*/}
+            <__Images
+                images={formData.images}
+                addImage={addImage}
+                removeImage={removeImage}
+            /> 
+            {/*IMAGES*/}
 
-        
-        <div className="col-12 text-center pb-5">
-            {/* <button type="submit" className="btn btn-primary mt-3">Save Changes</button> */} 
-            <button type="submit" className="btn btn-success" disabled={loadingFlag}>{loadingFlag ? "Saving..." : "Save Car"}</button>
-        </div>
+        {/*SAVE BTN*/}
+        <__SaveButton loading={loadingFlag} />
+         {/*SAVE BTN*/}
       </form>
 
       {successMsg && <div className="alert alert-success mt-3">{successMsg}</div>}
