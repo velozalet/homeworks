@@ -22,8 +22,9 @@ import FilterPrice from "../../components/Filters/FilterPrice";
 import './UsedCars.css';
 
 function UsedCars(){
-    //const [sortOrder, setLocalSortOrder] = useState<"none" | "asc" | "desc">("none"); //`none`→ initial neutral state | `asc`→ Low → High | `desc` → High → Low
-    //const [colorScheme, setColorScheme] = useState<"light" | "dark">("light"); //check the `Color Scheme` state current: `light`|`dark`
+    // const allSettings = useSelector((state: RootState) => state.settings.allSettings);
+    // const settings = allSettings && allSettings.length > 0 ? allSettings[0] : null;  
+ 
       
     const [sortOrder, setLocalSortOrder] = useState<"none" | "asc" | "desc">(() => { //Read initial `sortOrder` from localStorage
         return (localStorage.getItem("sortOrder") as "none" | "asc" | "desc") || "none";
@@ -33,7 +34,8 @@ function UsedCars(){
     });
 
     //Pagination state
-    const [currentPage, setCurrentPage] = useState(1);  const carsPerPage = 10;
+    const [currentPage, setCurrentPage] = useState(1); 
+    const carsPerPage = 10; 
 
     const dispatch = useDispatch<AppDispatch>(); //Redux'actions. Now we can use`dispatch(...)` to call fns: setCars(),selectMake(),selectModel(), etc..
     const allCars = useSelector((state: RootState) => state.cars.allCars); //Get all Cars array from `Redux Store`

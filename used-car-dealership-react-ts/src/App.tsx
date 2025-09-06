@@ -1,4 +1,11 @@
 //import { useState } from 'react';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchSettings } from "./services/settingsService";
+import { setSettings, setLoading } from "./store/settingsSlice";
+import type { AppDispatch,RootState } from "./store/store";
+//import { useSelector } from "react-redux";
+
 import { BrowserRouter,Routes,Route,Link } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
 
@@ -20,8 +27,10 @@ import AdminProtectedRoute from './routes/AdminProtectedRoute';
 //Pages(of `Admin Panel`):
 import AdminDashboard from './pages/__AdminPanel/subpages/AdminDashboard';
 import CreateCar from './pages/__AdminPanel/subpages/CreateCar';
-//import EditCar from './pages/__AdminPanel/subpages/EditCar';
-//import DeleteCar from './pages/__AdminPanel/subpages/DeleteCar';
+import BookingCar from './pages/__AdminPanel/subpages/BookingCar';
+import MailBox from './pages/__AdminPanel/subpages/MailBox';
+import Settings from './pages/__AdminPanel/subpages/Settings';
+
 
 //Components:
 import CarDetails from './components/CarDetails/CarDetails';
@@ -36,7 +45,7 @@ const FrontSiteNavigation = ()=> { //check the URL. If we're in `Admin Panel` --
     if( isAdmin ){ return null; }
 
     return(
-    <nav className="navbar navbar-expand-lg sticky-top navbar-dark bg-dark py-3">
+    <nav className="navbar navbar-expand-lg sticky-top navbar-dark bg-dark py-3"> 
         <div className="container">
             <Link className="navbar-brand" to="/">
                 <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Brand" />
@@ -62,6 +71,25 @@ const FrontSiteNavigation = ()=> { //check the URL. If we're in `Admin Panel` --
 
 
 const App = ():JSX.Element => { 
+    const dispatch = useDispatch<AppDispatch>();
+
+    //Get All settings of project in global
+    useEffect(() => {
+        async function loadSettings() {
+          try {
+            dispatch(setLoading(true));
+            const settings = await fetchSettings();
+            dispatch(setSettings(settings));
+          } catch (err) {
+            console.error("Error loading settings:", err);
+          } finally {
+            dispatch(setLoading(false));
+          }
+        }
+        loadSettings();
+      }, [dispatch]);
+    //   const settings = useSelector((state: RootState) => state.settings.allSettings); console.log(settings);
+
     return(
     <>
     <BrowserRouter>
@@ -70,7 +98,7 @@ const App = ():JSX.Element => {
             <Route element={<FrontLayout />} >
                 <Route path="/" element={<Home />} />
                 <Route path="/new-cars" element={<NewCars />} />
-                <Route path="/used-cars" element={<UsedCars />} />
+                <Route path="/used-cars" element={<UsedCars />} /> 
                 <Route path="/used-cars/:carId" element={<CarDetails />} />
                 <Route path="/about" element={<AboutUs />} />
                 <Route path="/contact" element={<ContactUs />} />
@@ -84,12 +112,13 @@ const App = ():JSX.Element => {
                 <Route index element={<AdminDashboard />} />
                 <Route path="create" element={<CreateCar />} />
                 <Route path=":carId" element={<EditCar />} />{/*just added for Edit Car routing*/}
-                {/* <Route path="edit" element={<EditCar />} /> */}
-                {/* <Route path="delete" element={<DeleteCar />} /> */}
+                <Route path="booking-car" element={<BookingCar />} /> 
+                <Route path="mail-box" element={<MailBox />} />
+                <Route path="settings" element={<Settings />} />
             </Route>
             {/*__/`Admin Panel` protected routes:*/}
         </Routes>
-    </BrowserRouter>
+    </BrowserRouter> 
     </>
     );
 }

@@ -1,75 +1,103 @@
+import React, { useState } from "react";
+
 //Components:
 import PageBanner from "../../components/PageBanner/PageBanner"; 
 import SliderCarousel from '../../components/SliderCarousel/SliderCarousel'; 
 import SliderCarouselTestimonialsContent from '../../components/SliderCarouselTestimonialsContent/SliderCarouselTestimonialsContent';
+import SliderCarouselNewCarsContent from '../../components/SliderCarouselNewCarsContent/SliderCarouselNewCarsContent';
 //import HtmlContent from "../../components/HtmlContent/HtmlContent";
 
 //Styles:
 import './NewCars.css';
 
+import { gmcNewCars } from "../../constants/gmcNewCars"; //Array of GMC new cars
+import { chevroletNewCars } from "../../constants/chevroletNewCars"; //Array of Chevrolet new cars
+import { buickNewCars } from "../../constants/buickNewCars"; //Array of Buick new cars
+
+
 //Images:
 import newcars_page_bg from '../../assets/page-bg/page-bg-1.jpg';
+import gmc_logo_mini from '../../assets/gmc-logo-mini.png';
+import chevrolet_logo_mini from '../../assets/chevrolet-logo-mini.png';
+import buick_logo_mini from '../../assets/buick-logo-mini.png';
+import GMClogo from '../../assets/car_make/GMC__logo.png';
 
 function NewCars(){
-
-    return(
+    const [activeTab, setActiveTab] = useState<"gmc" | "chevrolet" | "buick">("gmc");
+    
+    return( 
     <>
     <div className="newcars--page">  
 
         <PageBanner url={newcars_page_bg} title="New Cars" />   
 
-        <div className="container-lg py-lg-4 py-md-4 py-sm-2 mb-xl-0 mb-lg-0 mb-sm-0 mb-4"> 
+        <div className="container-lg py-lg-4 py-md-4 py-sm-2 mb-xl-0 mb-lg-0 mb-sm-0 mt-4 mb-4"> 
             <div className="row">
-                <p className="text-black">content ..... </p> <a href="https://www.murraymaplecreek.ca/" target="_blank">content from here...</a>
-                <br /><br /><hr />
-                        {/* Testimonials Section - Slider*/} 
-        <section className="pb-0 pt-lg-5 pt-md-5 pt-sm-5 pt-4 bg-dark">
-            <div className="container-lg">
-                <h2 className="text-center text-warning mb-0">What Our Clients Say</h2>
-                <div className="row g-4">
-                    <SliderCarousel id={"slider_testimonials"} interval={6000}  autoloop={true} effect_name="simply-carousel">
-                        <SliderCarouselTestimonialsContent />
-                    </SliderCarousel> 
-                </div> {/*.row*/} 
-            </div> {/*.container*/} 
-        </section>
-        {/*__/Testimonials Section - Slider*/}
-                <img src="https://static.foxdealer.com/assets/A/N/compressed/300x300_ANLk9.png" style={{width:'300px',height:'quto'}} alt="" />
-                SHEVROLET:
-                https://static.foxdealer.com/assets/Q/W/compressed/300x300_QWBwZ.png -- Cruze
-                https://static.foxdealer.com/assets/N/L/compressed/300x300_NLjpp.png -- Blazer
-                https://static.foxdealer.com/assets/k/8/compressed/300x300_k8w65.png -- Camaro
-                https://static.foxdealer.com/assets/1/W/compressed/300x300_1WolZ.png -- Colorado
-                https://static.foxdealer.com/assets/A/N/compressed/300x300_ANLk9.png -- Equinox
-                https://static.foxdealer.com/assets/P/7/compressed/300x300_P7lrW.png -- Blazer
-                https://static.foxdealer.com/assets/n/x/compressed/300x300_nx9WR.png -- Traverse
-                https://static.foxdealer.com/assets/D/R/compressed/300x300_DRYMA.png -- Impala
-                https://static.foxdealer.com/assets/w/V/compressed/300x300_wVxZw.png -- Malibu
-                https://static.foxdealer.com/assets/0/Y/compressed/300x300_0YrM5.png -- Silverado 1500
-                https://static.foxdealer.com/assets/N/k/compressed/300x300_NkPg2.png -- Silverado 1500 LD
-                https://static.foxdealer.com/assets/v/l/compressed/300x300_vlpz0.png -- Silverado 2500 HD
-                https://static.foxdealer.com/assets/Y/W/compressed/300x300_YWMqO.png -- Silverado 3500 HD
-                https://static.foxdealer.com/assets/Z/Y/compressed/300x300_ZYx42.png -- Tahoe 
-                https://static.foxdealer.com/assets/Y/W/compressed/300x300_YW9DK.png -- Trax
-                https://static.foxdealer.com/assets/o/Q/compressed/300x300_oQK6A.png -- Spark
-                https://static.foxdealer.com/assets/j/Z/compressed/300x300_jZJjz.png -- Trailblazer
-                https://static.foxdealer.com/assets/Y/W/compressed/300x300_YWJx0.png -- Blazer EV
 
-                BUICK:
-                https://static.foxdealer.com/assets/D/1/compressed/300x300_D1llA.png -- Enclave
-                https://static.foxdealer.com/assets/j/q/compressed/300x300_jqD6v.png -- Encore
-                https://static.foxdealer.com/assets/x/n/compressed/300x300_xnrGr.png -- Envision
-                https://static.foxdealer.com/assets/X/D/compressed/300x300_XDRyA.png -- Regal Sportback
+                <div className="new-cars-tabs text-center">
+                    <button 
+                    className="btn btn-primary gmc_logo_mini"
+                    onClick={ () => setActiveTab("gmc") }
+                    ><img src={gmc_logo_mini} alt="" /></button>
+                    <button 
+                    className="btn btn-primary buick_logo_mini mx-3"
+                    onClick={ () => setActiveTab("buick")}
+                    ><img src={buick_logo_mini} alt="" /></button>
+                    <button className="btn btn-primary chevrolet_logo_mini"
+                    onClick={ () => setActiveTab("chevrolet") }
+                    ><img src={chevrolet_logo_mini} alt="" /></button> 
+                </div>
 
-                GMC:
-                https://static.foxdealer.com/assets/Z/Y/compressed/300x300_ZYE2v.png -- Acadia
-                https://static.foxdealer.com/assets/7/1/compressed/300x300_71xQr.png -- Canyon
-                https://static.foxdealer.com/assets/y/o/compressed/300x300_yo40W.png -- Sierra 1500
-                https://static.foxdealer.com/assets/1/W/compressed/300x300_1Wk50.png -- Sierra 2500 HD 
-                https://static.foxdealer.com/assets/O/M/compressed/300x300_OMvYE.png -- Terrain
-                https://static.foxdealer.com/assets/G/v/compressed/300x300_Gv7JQ.png -- Yukon
-                https://static.foxdealer.com/assets/N/L/compressed/300x300_NLg88.png --  Yukon XL
-                https://static.foxdealer.com/assets/M/Q/compressed/300x300_MQrEA.png -- Sierra 3500 hd
+ 
+                { (activeTab) === "gmc" &&
+                <section className="gmc-newcars--section pb-0 pt-lg-5 pt-md-5 pt-sm-5 pt-4">
+                    <div className="container-lg">
+                        <h2 className="text-center text-warning mb-4">GMC</h2>
+                        <div className="row g-4 newcars--page--newcars-slider">
+                            <SliderCarousel id={"slider_gmc_new_cars"} interval={90000}  autoloop={true} effect_name="simply-carousel">
+                                <SliderCarouselNewCarsContent cars={gmcNewCars} /> 
+                            </SliderCarousel> 
+                        </div> {/*.row*/} 
+                    </div> {/*.container*/}
+                </section>
+                }
+                { (activeTab) === "chevrolet" &&
+                <section className="chevrolet-newcars--section pb-0 pt-lg-5 pt-md-5 pt-sm-5 pt-4">
+                    <div className="container-lg">
+                        <h2 className="text-center text-warning mb-4">Chevrolet</h2>
+                        <div className="row g-4 newcars--page--newcars-slider">
+                            <SliderCarousel id={"slider_buick_new_cars"} interval={90000}  autoloop={true} effect_name="simply-carousel">
+                                <SliderCarouselNewCarsContent cars={chevroletNewCars} /> 
+                            </SliderCarousel>
+                        </div> {/*.row*/}
+                    </div> {/*.container*/} 
+                </section>
+                }
+                { (activeTab) === "buick" &&
+                <section className="buick-newcars--section pb-0 pt-lg-5 pt-md-5 pt-sm-5 pt-4">
+                    <div className="container-lg">
+                        <h2 className="text-center text-warning mb-4">Buick</h2>
+                        <div className="row g-4 newcars--page--newcars-slider">
+                            <SliderCarousel id={"slider_chevrolet_new_cars"} interval={90000}  autoloop={true} effect_name="simply-carousel">
+                                <SliderCarouselNewCarsContent cars={buickNewCars} /> 
+                            </SliderCarousel>
+                        </div> {/*.row*/}
+                    </div> {/*.container*/} 
+                </section>
+                }
+
+                {/* Testimonials Section - Slider*/} 
+                <section className="mt-5 testimonials--section">
+                    <div className="container-lg">
+                        <h2 className="text-center text-warning mb-0">What Our Clients Say</h2>
+                        <div className="row g-4 newcars--page--testemonials-slider">
+                            <SliderCarousel id={"slider_testimonials"} interval={60000}  autoloop={true} effect_name="simply-carousel">
+                                <SliderCarouselTestimonialsContent />
+                            </SliderCarousel> 
+                        </div> {/*.row*/} 
+                    </div> {/*.container*/} 
+                </section>
+                {/*__/Testimonials Section - Slider*/}
 
             </div>{/*.row*/} 
         </div>{/*.container*/} 

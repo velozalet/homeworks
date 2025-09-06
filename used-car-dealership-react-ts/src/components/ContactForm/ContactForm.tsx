@@ -20,6 +20,7 @@ interface ContactFormProps {
     model?: string;
     year?: number;
     mileage?: number;
+    vin?: string;
     price?: number;
 }
 interface ContactFormData { 
@@ -31,7 +32,7 @@ interface ContactFormData {
     message?: string; //optional field
 }
 
-const ContactForm = ( {mode,carId,make,model,year,mileage,price}: ContactFormProps ) => {
+const ContactForm = ( {mode,carId,make,model,year,mileage,vin,price}: ContactFormProps ) => {
   const { register,handleSubmit,reset, formState:{errors,isSubmitting} } = useForm<ContactFormData>();
 
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -46,10 +47,10 @@ const ContactForm = ( {mode,carId,make,model,year,mileage,price}: ContactFormPro
     try {
         //await addDoc(collection(db, "bookings"), { ...data,carId,make,model,year,mileage,price,createdAt:serverTimestamp(),status:"pending" });
         const docData = (mode === "booking")
-            ? { ...data,carId,make,model,year,mileage,price,createdAt:serverTimestamp(),status:"pending" }
+            ? { ...data,carId,make,model,year,mileage,vin,price,createdAt:serverTimestamp(),status:"pending" }
             : { ...data,createdAt:serverTimestamp(),status:"new-message" };
         await addDoc(collection(db, mode === "booking" ? "bookings" : "contacts"), docData);
-        triggerSnackbar("✅ Form submitted successfully!"); reset(); // alert("✅ Form submitted successfully!");
+        triggerSnackbar("✅ Form submitted successfully!"); reset(); //alert("✅ Form submitted successfully!");
         }catch(err){
             triggerSnackbar("❌ Something went wrong. Try again later."); //alert("❌ Something went wrong. Try again later.");
             console.error("Error saving form data:", err);

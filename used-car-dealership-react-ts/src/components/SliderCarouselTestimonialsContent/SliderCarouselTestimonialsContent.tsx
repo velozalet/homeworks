@@ -46,13 +46,6 @@ const SliderCarouselMainContent = ()=>{
         ) ) }
       </div>
       {/*__/Indicators/dots */}
-
-    {/* <div className="col-md-4">
-        <div className="testimonial-card">
-            <p>"Great service and amazing selection! I found my dream car here."</p>
-            <h6 className="mt-3 text-warning">– Sarah J.</h6>
-        </div>
-    </div> */}
       {/*Slides*/}
       <div className="carousel-inner">
         { SlidesArray.map( (item,index,array) => (

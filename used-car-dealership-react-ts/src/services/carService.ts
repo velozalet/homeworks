@@ -1,4 +1,4 @@
-import { collection,doc,getDocs,addDoc,setDoc,updateDoc } from "firebase/firestore";
+import { collection,doc,getDocs,addDoc,setDoc,updateDoc,deleteDoc } from "firebase/firestore";
 import { ref,uploadBytes,getDownloadURL } from "firebase/storage";
 import { db } from "../firebase/firebase";
 import { storage } from "../firebase/firebase"; 
@@ -54,4 +54,16 @@ export async function updateCar(carId: string, updatedCar: Partial<Car>): Promis
         console.error("Error updating car:", error);
         throw error;
     }
-} 
+}
+
+//4. Delete car by ID
+export async function deleteCar(carId: string): Promise<void> {
+    try {
+      const carRef = doc(db, "cars", carId);
+      await deleteDoc(carRef);
+      console.log(`Car ${carId} deleted successfully`);
+    } catch (error) {
+      console.error("Error deleting car:", error);
+      throw error;
+    }
+  }

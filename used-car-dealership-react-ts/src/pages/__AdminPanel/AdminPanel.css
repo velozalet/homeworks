@@ -1,6 +1,6 @@
-.adminpanel--page{
-    background-color:aliceblue;  
-}
+.adminpanel--page{ background-color:aliceblue; }
+.adminpanel--page .title-of-adminpanel{ font-size:3.8rem; color: #0d6efd; }  
+
 .adminpanel--page .admin-a-info{ position:absolute; right:15px; top:80px; color:#0d6efd; font-family:'Bruno Ace', sans-serif; letter-spacing:1px; }  
 .adminpanel--page .admin-a-info > i{ font-size:1.7rem; } 
 .adminpanel--page .admin-a-info > p { font-size:.9rem; font-style:italic; color:#0d6efd; font-family:Ubuntu, sans-serif; letter-spacing:0; } 
@@ -32,12 +32,11 @@
     box-shadow: none;
     outline: 1px solid #ffc107;
 }
-
-
+.admindashboard--page .total-cars--info{ font-family:'Bruno Ace', sans-serif; }
+.admindashboard--page .total-cars--info > strong{ color:#ffc107; font-size:1.4rem; } 
 
 .admindashboard--page .tabs--dispaly-cars .tab--content{ 
-    background-color: white;
-    border: 1px solid gray; border-radius: 8px; 
+    /*background-color: white; border: 1px solid gray; border-radius: 8px;*/ 
 }
 .admindashboard--page .tabs--dispaly-cars .tab--content{ display:none !important; }
 .admindashboard--page .tabs--dispaly-cars .tab--content.active{ display:block !important; }
@@ -75,6 +74,7 @@
 .popover { 
     border: 1px solid black;
     background-color: white !important; 
+    z-index:0;
 } 
 .popover-arrow{ transform: translate(0px, 43px); }
 .popover .popover-arrow::before{ 
@@ -85,3 +85,69 @@
 }
 .popover .popover-header > a:hover{ color:blue; }
 .popover .popover-body > a:hover{ color:red; }
+
+
+.booking-car--page{ height: 100vh; }
+.booking-car--page .accordion.booking-car--accordion h2{
+    font-family: Ubuntu, sans-serif;
+}
+
+.booking-car--page .accordion.booking-car--accordion button.accordion-button{
+    box-shadow: none !important; background-color: #dee2e6; color:gray;
+    border:1px solid gray;
+}
+.booking-car--page .accordion.booking-car--accordion button.accordion-button > strong{ color:black; font-size: .9rem; } 
+.booking-car--page .accordion.booking-car--accordion button.accordion-button:first-of-type{
+    border-bottom: none !important;
+}
+.booking-car--page .accordion.booking-car--accordion .accordion-body{
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+}
+.booking-car--page .accordion.booking-car--accordion .accordion-body:last-of-type{
+    border-bottom: 1px solid gray; 
+}
+
+.booking-car--page .accordion.booking-car--accordion .accordion-button:not(.collapsed){
+    color:#0d6efd;
+}
+.booking-car--page .accordion.booking-car--accordion .accordion-body ul > li:first-of-type{ color:green; text-align: right; border-bottom:none; } 
+.booking-car--page .accordion.booking-car--accordion .accordion-body ul > li:nth-of-type(2){ font-style:italic; }
+.booking-car--page .accordion.booking-car--accordion .accordion-body ul > li:nth-of-type(2) > strong{ font-style:normal; }  
+.booking-car--page .accordion.booking-car--accordion .accordion-body ul > li > strong{ font-size: .9rem; padding-right:3px; } 
+.booking-car--page .accordion.booking-car--accordion .accordion-body ul > li:first-of-type > strong { font-size:1.1rem; padding-right:0; }
+.booking-car--page .accordion.booking-car--accordion .accordion-body ul > li.list-group-item.car { text-transform: capitalize; }
+
+
+/***********************************************************************
+                               #MEDIA QUERIES:
+***********************************************************************/
+@media screen and (max-width: 1199px) {}
+@media screen and (max-width: 991px) {
+    .admindashboard--page .tabs--dispaly-cars .tab--content ol .btn-car--rack .col-btn--info h5 { font-size:1rem; }
+    .admindashboard--page .tabs--dispaly-cars .tab--content ol .btn-car--rack .col-btn--info > p{ font-size:1rem; } 
+    .admindashboard--page .tabs--dispaly-cars .tab--content ol .btn-car--rack .col-btn--bg { padding-left:0; padding-right:0; } 
+    .adminpanel--page .title-of-adminpanel{ font-size:3.5rem; } 
+}
+@media screen and (max-width: 767px) {
+    .admindashboard--page .tabs--dispaly-cars .tab--content ol .btn-car--rack { width:100%; }
+    .adminpanel--page .title-of-adminpanel{ font-size:3.1rem; } 
+    .popover .popover-arrow::before { border-right-color:transparent !important; }
+    .popover .popover-arrow::after { border-right-color: transparent !important; }
+}
+
+@media screen and (max-width: 575px) { 
+    .admindashboard--page .tabs--dispaly-cars .tab--content ol .btn-car--rack img { width:auto !important; height:auto !important; } 
+    .admindashboard--page .tabs--dispaly-cars .tab--content { padding-left:0 !important; padding-right:0 !important; }
+    .adminpanel--page .title-of-adminpanel{ font-size:2rem; }  
+    .admindashboard--page .tabs--dispaly-cars .tab--content ol > li::marker { font-size: 1rem; }  
+
+    .booking-car--page .accordion.booking-car--accordion .accordion-body{ padding-left:0; padding-right:0; }
+    .booking-car--page .accordion.booking-car--accordion .accordion-body ul > li:first-of-type > strong { font-size:1rem; }
+} 
+@media screen and (max-width: 399px){
+    .booking-car--page .accordion.booking-car--accordion button.accordion-button > span{ position:absolute; top:3px; right:3px; }
+    .booking-car--page .accordion.booking-car--accordion button.accordion-button:first-of-type { height: 85px; }
+    .booking-car--page .accordion.booking-car--accordion .accordion-body ul > li.list-group-item.car > strong{ font-size:1.2rem !important; }
+    .booking-car--page .accordion.booking-car--accordion .accordion-body ul > li.list-group-item.mess { font-size:.9rem; }
+}

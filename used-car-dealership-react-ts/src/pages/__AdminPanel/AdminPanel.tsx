@@ -20,7 +20,7 @@ function AdminPanel(){
 
     return(
     <div className="adminpanel--page"> 
-        <h1>Welcome to the `Admin Panel`</h1> 
+        <h1 className="title-of-adminpanel">The Admin Panel</h1> 
 
             <a className="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
             <i className="fa fa-retweet" style={{fontSize:'24px'}}></i>
@@ -34,10 +34,11 @@ function AdminPanel(){
                 <div className="offcanvas-body">
                     <aside className="text-center w-1/4 p-4 border-r">
                         <nav className="space-y-3">
-                            <p><Link to="/admin" className="block text-lg font-medium hover:underline">🏠 Dashboard</Link></p>
-                            <p><Link to="/admin/create" className="block hover:underline">➕ Create</Link></p>
-                            <p><Link to="/admin/edit" className="block hover:underline">✏️ Edit</Link></p>
-                            <p><Link to="/admin/delete" className="block hover:underline">🗑️ Delete</Link></p>
+                            <p><Link to="/admin" className="block text-lg font-medium hover:underline"><b>🏠</b> Dashboard</Link></p>
+                            <p><Link to="/admin/create" className="block hover:underline"><b>➕</b> Create</Link></p>
+                            <p><Link to="/admin/booking-car" className="block hover:underline"><b>🚙</b> Car Booking</Link></p> {/*🚘 */}
+                            <p><Link to="/admin/mail-box" className="block hover:underline"><b>📭</b> Mail Box</Link></p> {/*📭  📥  📧*/}
+                            <p><Link to="/admin/settings" className="block hover:underline"><b>⚙️</b> Site Settings</Link></p>
                         </nav>
                     </aside>
                     <button 
@@ -48,14 +49,15 @@ function AdminPanel(){
                 </div>
             </div> {/*offcanvas*/}
 
-            <aside className="text-center w-1/4 p-4 border-r invisible">
-                <nav className="space-y-3">
+            <aside className="text-center w-1/4 pt-2 pb-4 border-r invisible d-none"> 
+                <nav className="">
                     <Link to="/admin" className="block text-lg font-medium hover:underline">🏠 Dashboard</Link>
                     <Link to="/admin/create" className="block hover:underline">➕ Create++</Link>
                     <Link to="/admin/edit" className="block hover:underline">✏️ Edit</Link>
                     <Link to="/admin/delete" className="block hover:underline">🗑️ Delete</Link>
                 </nav>
-            </aside>
+            </aside> 
+            <div className="text-center pt-4"><img alt="Brand" src="/src/assets/site_logo.png" /></div>
 
             <div className="admin-a-info text-black"> 
                 <i className="fa fa-user pe-1"></i>Admin 

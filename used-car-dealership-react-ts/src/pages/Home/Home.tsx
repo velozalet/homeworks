@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store/store"; 
 //Components:
 import { Link } from 'react-router-dom';
 //import Button from '../../components/Button/Button';
@@ -15,8 +17,10 @@ import GMClogo from '../../assets/car_make/GMC__logo.png';
 //Styles:
 import './Home.css';
 
-
 function Home(){ 
+    const allSettings = useSelector((state: RootState) => state.settings.allSettings);
+    const settings = allSettings && allSettings.length > 0 ? allSettings[0] : null; // console.log(settings);
+    
     return(
     <>
     <div className="home--page">
@@ -27,7 +31,7 @@ function Home(){
         <section className="hero d-md-block d-flex align-items-center" style={{backgroundImage:`url(${mainHomeBanner})`}}>  
             <div className="container">
                 <div className="a"> 
-                    <h1 className="chromatic-aberration-effect">USED CAR DEALERSHIP <span>SERVICE</span></h1>
+                    <h1 className="chromatic-aberration-effect">{ settings && settings.mainTitle } <span>SERVICE</span></h1>
                     <p className="lead">Only Recent Year Cars!</p>
                     {/* <Button as="a" className="btn-yellow mt-3 px-4 py-2" href="/used-cars" text="View Details"></Button> */}
                     <Link to="/used-cars" className="btn btn-yellow mt-3 px-4 py-2">View Details</Link>
@@ -38,7 +42,7 @@ function Home(){
 
         <hr style={{color:'black',margin:'7px',opacity:.35}} />  
         {/*Main SliderCarousel*/}
-        <SliderCarousel id={"slider_carousel"} interval={4000} autoloop={true} effect_name="flash-fade">
+        <SliderCarousel id={"slider_carousel"} interval={400000} autoloop={true} effect_name="flash-fade">
             <SliderCarouselMainContent />
         </SliderCarousel>
         {/*__/Main SliderCarousel*/}

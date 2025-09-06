@@ -218,7 +218,7 @@ const CarDetails = (): JSX.Element => {
                                         ))
                                     : "no content..." }
                                 </ul>
-                            </section>
+                            </section> 
                             ),
                         },
                         ]}
@@ -234,7 +234,8 @@ const CarDetails = (): JSX.Element => {
                             make={car.make} 
                             model={car.model} 
                             year={car.year} 
-                            mileage={car.mileage} 
+                            mileage={car.mileage}
+                            vin={car.vin} 
                             price={car.price}
                         />
                     </div>

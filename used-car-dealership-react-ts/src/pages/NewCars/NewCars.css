@@ -1,8 +1,28 @@
 .newcars--page .page-banner .row h1 { color: #ebb618; }
 /* .newcars--page { height: 750px; }  */
 
+/* .newcars--page button.buick_logo_mini > img{  } */
 
-  
+
+.newcars--page .newcars--page--newcars-slider .carousel-control-prev-icon,
+.newcars--page .newcars--page--newcars-slider .carousel-control-next-icon { filter:invert(1) grayscale(100); position:relative; z-index:10; position:absolute; bottom:-15px; }  
+
+.newcars--page .newcars--page--newcars-slider .carousel-control-prev-icon { right:-100%; }
+.newcars--page .newcars--page--newcars-slider .carousel-control-next-icon { left:-100%; }
+
+.newcars--page .newcars--page--newcars-slider #slider_gmc_new_cars,
+.newcars--page .newcars--page--newcars-slider #slider_chevrolet_new_cars,
+.newcars--page .newcars--page--newcars-slider #slider_buick_new_cars{ height:190px; position: relative; }
+
+
+
+.newcars--page .testimonials--section .newcars--page--testemonials-slider .carousel-inner .carousel-item .carousel-caption{ background-color:white !important; color:black; }
+.newcars--page .testimonials--section .newcars--page--testemonials-slider .carousel-control-prev-icon,
+.newcars--page .testimonials--section .newcars--page--testemonials-slider .carousel-control-next-icon { filter: invert(1) grayscale(100); }  
+
+.newcars--page .newcars--page--newcars-slider .carousel .carousel-inner .carousel-item a > img{ transition: transform 0.3s ease-in-out; }
+.newcars--page .newcars--page--newcars-slider .carousel .carousel-inner .carousel-item a:hover > img{ transform: scale(1.05); }
+
 
 /***********************************************************************
                                #MEDIA QUERIES:
@@ -13,8 +33,20 @@
 @media screen and (max-width: 991px) {
 }
 @media screen and (max-width: 767px) {
-
+    .newcars--page .newcars--page--newcars-slider #slider_gmc_new_cars,
+    .newcars--page .newcars--page--newcars-slider #slider_chevrolet_new_cars,
+    .newcars--page .newcars--page--newcars-slider #slider_buick_new_cars{ height:150px; }
 } 
 @media screen and (max-width: 575px) {
+    .newcars--page .newcars--page--newcars-slider #slider_gmc_new_cars,
+    .newcars--page .newcars--page--newcars-slider #slider_chevrolet_new_cars,
+    .newcars--page .newcars--page--newcars-slider #slider_buick_new_cars{ height:130px; }
+    .newcars--page .newcars--page--testemonials-slider .carousel{ height:200px !important; }  
+} 
 
+@media screen and (max-width: 445px) {
+    .newcars--page .newcars--page--testemonials-slider .carousel{ height:255px !important; }  
+    .newcars--page .newcars--page--newcars-slider #slider_gmc_new_cars,
+    .newcars--page .newcars--page--newcars-slider #slider_chevrolet_new_cars,
+    .newcars--page .newcars--page--newcars-slider #slider_buick_new_cars{ height:100px; }
 } 
