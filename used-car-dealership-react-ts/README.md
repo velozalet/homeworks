@@ -53,28 +53,32 @@ Currently, two official plugins are available:
 ---
 
 ## 📘 API & Libraries
-- **@fancyapps/ui** → Modern lightbox/gallery (modals, image/video popups)  
-- **@reduxjs/toolkit** → Official Redux state management with less boilerplate  
-- **firebase** → Backend services: database, auth, hosting, storage  
-- **nouislider** → Lightweight range slider (double price slider)  
-- **react-hook-form** → Form management & validation  
-- **react-input-mask** → Input masking (e.g., phone numbers, dates)  
-- **react-redux** → React bindings for Redux  
-- **react-router-dom** → Navigation without page reloads  
+- **react-router-dom** → Routing for React (page navigation, links  without reloads)  
+- **react-redux** → Store and State Management   
+- **@reduxjs/toolkit** → Additional, not required BUT Official, recommended way to write Redux state logic with less code and more clear and readable  
+- **react-hook-form** → A library to manage Forms in React with controlled inputs and  validation.
+- **react-input-mask** → Provides input masking (like phone numbers, dates, et cetera...).
+- **@fancyapps/ui** → Lightbox library for  gallery, modal windows, image/video popups).
+- **nouislider** → Lightbox for adjustable slider like a range slider- I’ve used it as range-slider for my Price-Filter
+- **firebase** → Google’s backend services - database, auth, hosting, storage.
 
 ---
 
 ## 🎯 Project Goal
 Develop a **Used Car Dealership Web Application** that allows users to:
-- Browse, filter, and sort cars  
-- Book test drives  
-- Manage favorites (wishlist)  
-- Access data in real time from Firebase BD and Storage 
-For Administrator: 
-- See all cars in the Admin Panel 
-- Be able to edit each car's details and delete it if i sold or no longer needs to be displayed
-- See all letters/messages booking  about test drive or car purchase and change their status- PANDING → ANSWERED
-- See all letters contact(feedback form) from customers and change their status- NEW → ANSWERED
+- Browse, filter, and sort vehicles you need
+- Browse/view single car(details) with all info and Descriptions
+- Book car to test drives and buy it
+- Send messages/letters to DealerShip team(questions, complaints, wishes )
+- Manage favorites cars (wishlist) - this’s a wish-list the client has added the cars he likes.
+- Access data in real time from Firebase BD and Storage
+For Administrator Project Goals are: 
+- See all cars in the Admin Panel as a total list
+- Be able to edit each car’s  details and delete it  if a vehicle has been sold for example or no longer needs to be displayed
+- See all booking letters/messages  about a test drive or car purchase and be able to change their status- `PANDING` → `ANSWERED` like in Mail box. 
+	And Delete letters/messages if there's no need for more.
+- See all contact letters (feedback from ContactUs page) and be able to change their status  `NEW` → `ANSWERED`. 
+	And Delete contacts letters if there's no need for more.
 
 Focus: **recent cars (≤7 years old) - cars in good condition ** with a **modern, responsive UI**.
 
