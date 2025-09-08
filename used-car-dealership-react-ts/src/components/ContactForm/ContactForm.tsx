@@ -14,7 +14,7 @@ import './ContactForm.css';
 //Images:
 
 interface ContactFormProps {
-    mode: "booking" | "contact"; //reusable: `booking`(for booking car) or `contact`(simple form for Contact Form)
+    mode: "booking" | "contact"; 
     carId?: string;
     make?: string;
     model?: string;
@@ -45,14 +45,13 @@ const ContactForm = ( {mode,carId,make,model,year,mileage,vin,price}: ContactFor
 
   const onSubmit = async (data: ContactFormData) => {
     try {
-        //await addDoc(collection(db, "bookings"), { ...data,carId,make,model,year,mileage,price,createdAt:serverTimestamp(),status:"pending" });
         const docData = (mode === "booking")
             ? { ...data,carId,make,model,year,mileage,vin,price,createdAt:serverTimestamp(),status:"pending" }
             : { ...data,createdAt:serverTimestamp(),status:"new-message" };
         await addDoc(collection(db, mode === "booking" ? "bookings" : "contacts"), docData);
-        triggerSnackbar("✅ Form submitted successfully!"); reset(); //alert("✅ Form submitted successfully!");
+        triggerSnackbar("✅ Form submitted successfully!"); reset(); 
         }catch(err){
-            triggerSnackbar("❌ Something went wrong. Try again later."); //alert("❌ Something went wrong. Try again later.");
+            triggerSnackbar("❌ Something went wrong. Try again later."); 
             console.error("Error saving form data:", err);
         }
   };
@@ -173,10 +172,3 @@ const ContactForm = ( {mode,carId,make,model,year,mileage,vin,price}: ContactFor
   );
 };
 export default ContactForm; 
-/* Use it:
-    <ContactForm
-        mode="booking" carId={car.id} make={car.make} model={car.model} year={car.year} mileage={car.mileage} price={car.price}
-    />
-    and
-    <ContactForm mode="contact" />
-*/

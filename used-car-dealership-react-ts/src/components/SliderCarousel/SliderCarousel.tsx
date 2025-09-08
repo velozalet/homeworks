@@ -86,16 +86,3 @@ const SliderCarousel = ( {id, interval=5000, autoloop=true, effect_name="simply-
   );
 };
 export default SliderCarousel;
-/* Use of this:
-  <SliderCarousel interval={3000} effect_name="simply-carousel" /> -->regular carousel
-  <SliderCarousel interval={5000} effect_name="flash-fade" />      -->carousel flash fade
-  <SliderCarousel interval={4000} effect_name="smooth-fade" />     -->smooth fade
-
-    <SliderCarousel interval={4000} effect_name="flash-fade">
-        <SliderCarouselMainContent />
-    </SliderCarousel>
-
-    <SliderCarousel interval={5000} effect_name="smooth-fade">
-        <SliderCarouselTestimonialsContent />
-    </SliderCarousel>
-*/

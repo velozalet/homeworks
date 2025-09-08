@@ -44,18 +44,3 @@ const Button: React<ButtonProps> = ({
     } //End switch
 };
 export default Button;
-
-/* Example Usage:
-<Button as="button" text="Submit Form" type="submit" />
-<Button as="button" text="Reset Form" type="reset" />
-
- <Button 
-    as="button" 
-    className="btn btn-yellow px-4 py-2 rounded" 
-    text="View Details" 
-    type="submit"
-    onClick={(e) => {e.preventDefault();}}
- ></Button>
-
- <Button as="a" href="/cars" text="Cars Link" />
-*/

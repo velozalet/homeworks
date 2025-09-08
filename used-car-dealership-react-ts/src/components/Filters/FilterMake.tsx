@@ -7,12 +7,11 @@ import { carMakesAndModels } from "../../constants/carMakesAndModels"; //Array o
 const makes =  Object.keys(carMakesAndModels); //-->['gmc', 'chevrolet', 'buick']
   
 function FilterMake(){ 
-    const dispatch = useDispatch<AppDispatch>(); //Redux'actions. Now we can use`dispatch(...)` to call fns: setCars(),selectMake(),selectModel(), etc..
+    const dispatch = useDispatch<AppDispatch>();
     const selectedMake = useSelector((state: RootState) => state.cars.selectedMake); //-->contains: gmc|chevrolet|buick
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) =>{
         dispatch( selectMake(e.target.value || null) );  //null if empty
-        //dispatch( selectModel("") ); //reset `Model` when `Make` changes
     };
 
     return(

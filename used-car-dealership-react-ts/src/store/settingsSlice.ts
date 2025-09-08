@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { Settings } from "../types/settings";
 
-interface SettingsState {  //contactsReducer
+interface SettingsState {
     allSettings: Settings | null;
     loading: boolean;
 }

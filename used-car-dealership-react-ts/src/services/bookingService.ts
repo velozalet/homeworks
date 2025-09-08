@@ -10,7 +10,6 @@ export async function fetchBookings(): Promise<Booking[]> {
 
     //Convert docs to array of Car objects
     const bookingsList: Booking[] = bookingsSnapshot.docs.map((docSnap) => ({ 
-        //const data = docSnap.data();
         id: docSnap.id,
         ...docSnap.data(),
         createdAt: docSnap.data().createdAt?.toDate

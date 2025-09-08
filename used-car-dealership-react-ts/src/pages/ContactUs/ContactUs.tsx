@@ -1,7 +1,6 @@
 //Components:
 import ContactForm from "../../components/ContactForm/ContactForm";
 import PageBanner from "../../components/PageBanner/PageBanner"; 
-//import HtmlContent from "../../components/HtmlContent/HtmlContent";
 
 //Styles:
 import './ContactUs.css';

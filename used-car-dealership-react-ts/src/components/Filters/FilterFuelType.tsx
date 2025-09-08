@@ -7,7 +7,7 @@ import { fuelType } from "../../constants/fuelType"; //Array of strings with car
 const fueltypes = fuelType; //-->['gas', 'diesel']
  
 function FilterFuelType(){ 
-    const dispatch = useDispatch<AppDispatch>(); //Redux'actions. Now we can use`dispatch(...)` to call fns: setCars(),selectMake(),selectModel(), etc..
+    const dispatch = useDispatch<AppDispatch>(); 
     const selectedFuelType = useSelector((state: RootState) => state.cars.selectedFuelType); //-->contains: gas|diesel
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) =>{

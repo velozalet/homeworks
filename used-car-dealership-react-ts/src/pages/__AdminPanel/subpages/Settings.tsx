@@ -11,9 +11,7 @@ function Settings() {
     (state: RootState) => state.settings.allSettings
     );
     const loading = useSelector((state: RootState) => state.settings.loading);
-
     const [formData, setFormData] = useState<Settings | null>(null);
-    //const [loading, setLoading] = useState(false);
     const [successMsg, setSuccessMsg] = useState("");
 
     // Load Settings from Firebase
@@ -37,11 +35,11 @@ function Settings() {
     useEffect(() => {
         if( !successMsg ) return;
         const timer = setTimeout(
-        ()=>{ return setSuccessMsg("") }, 4000 
-    );
+          ()=>{ return setSuccessMsg("") }, 4000 
+        );
 
-return () => { clearTimeout(timer) }; //--> UNMOUNTS: cleans the timer 
-}, [successMsg]); 
+        return () => { clearTimeout(timer) }; //--> UNMOUNTS: cleans the timer 
+    }, [successMsg]); 
 
     //Handle form field changes
     const handleChange = ( e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> ) => {
@@ -67,7 +65,7 @@ return () => { clearTimeout(timer) }; //--> UNMOUNTS: cleans the timer
                 paginationOfPages: Number(formData.paginationOfPages),
                 socialMediaLinks: formData.socialMediaLinks,
             });
-            setSuccessMsg("Settings updated successfully!"); //alert("Settings updated successfully!");
+            setSuccessMsg("Settings updated successfully!");
         }catch(err){
             console.error("Failed to update settings:", err);
             alert("Failed to update settings — check console.");

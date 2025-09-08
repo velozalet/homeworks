@@ -1,4 +1,3 @@
-//import React from 'react';
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -31,7 +30,7 @@ const CarDetails = (): JSX.Element => {
     //Find the car by ID
     const car = allCars.find(
         (item_car) => { return item_car.id === carId }
-    ); //console.log(car);
+    );
 
     //Bind Fancybox on mount
     useEffect(() => {
@@ -104,20 +103,7 @@ const CarDetails = (): JSX.Element => {
                                 </div>
                             ))}
                             </div>
-                            {/*Carousel indicators
-                            <div className="carousel-indicators">
-                            {car.images.map((_, idx) => (
-                                <button
-                                key={idx}
-                                type="button"
-                                data-bs-target="#slider_carousel"
-                                data-bs-slide-to={idx}
-                                className={idx === 0 ? "active" : ""}
-                                aria-current={idx === 0 ? "true" : undefined}
-                                aria-label={`Slide ${idx + 1}`}
-                                />
-                            ))}
-                            </div>*/}
+
                         </SliderCarousel>
                         ) : ( <img src={no_car_image_pattern} className="card-img-top img-fluid" alt={`${car.make} ${car.model}`} /> )}
                         {/*__/Sinle Car's SliderCarousel*/}
@@ -223,7 +209,7 @@ const CarDetails = (): JSX.Element => {
                         },
                         ]}
                     />
-                </aside>
+                </aside> 
 
                 <aside className="contact-form contact-form--carbooking col-lg-12 order-lg-4 order-md-4 order-sm-4 order-4 mt-5">
                     <h3 className="text-center mb-xl-5 mb-lg-5 mb-md-4 mb-sm-4 mb-4">Book this car</h3> 

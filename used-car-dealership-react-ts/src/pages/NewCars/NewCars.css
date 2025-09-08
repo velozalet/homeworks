@@ -24,6 +24,45 @@
 .newcars--page .newcars--page--newcars-slider .carousel .carousel-inner .carousel-item a:hover > img{ transform: scale(1.05); }
 
 
+/*For .gallery-full*/
+.gallery-full {
+    --n: 3; /*number of rows*/
+    --m: 3; /*number of columns */
+    --h: calc((100vh - (var(--n) - 1)*var(--g))/var(--n));  /*OR: --h: calc(100vh / var(--n)); */
+    --w: calc((100vw - (var(--m) - 1)*var(--g))/var(--m));  /*OR: --w: calc(100vw / var(--m)); */
+    --g: 10px; /*control the gap*/
+    --f: 1.5; /*control the scale factor*/
+            /*(!) We can also simplify the --h and --w by removing the gap - like this:
+                --h: calc(100vh / var(--n)); --> Viewport height divided by number of rows 
+                --w: calc(100vw / var(--m)); --> Viewport width divided by number of columns
+                (!!!) It’s important to note this optimization applies only to the full-screen example
+            */
+    
+    display: grid;
+    gap: var(--g);
+    width:100%; /*width: 100vw;*/
+    height: 100vh;
+    grid-template-columns: repeat(var(--m),auto);
+  }
+  .gallery-full > img {
+    width: 0;
+    height: 0;
+    min-height: 100%;
+    min-width: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    filter: grayscale(100%);
+    transition: .35s linear;
+  }
+  .gallery-full img:hover{
+    filter: grayscale(0);
+    width:  calc(var(--w)*var(--f));
+    height: calc(var(--h)*var(--f));
+  }
+  /*__/For .gallery-full*/
+
+
+
 /***********************************************************************
                                #MEDIA QUERIES:
 ***********************************************************************/

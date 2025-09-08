@@ -1,4 +1,4 @@
-import { BrowserRouter,Routes,Route,Link,Outlet, useNavigate } from 'react-router-dom';
+import { Link,Outlet, useNavigate } from 'react-router-dom';
 
 import { signOut } from 'firebase/auth';
 import { auth } from "../../firebase/firebase"; //`firebase.ts` config
@@ -12,7 +12,7 @@ function AdminPanel(){
     const handleLogout = async () => {
         try {
           await signOut(auth);
-          navigate('/admin'); // back to your login form
+          navigate('/admin'); //back to login form
         } catch (error) {
           console.error('Logout error:', error);
         }
@@ -66,7 +66,7 @@ function AdminPanel(){
 
         <div className="flex">
             <main className="flex-1 p-6">
-                <Outlet /> {/* <-- Here your sub-pages will render */}
+                <Outlet /> {/* sub-pages will render*/}
             </main>
         </div>
     </div> //.adminpanel--page

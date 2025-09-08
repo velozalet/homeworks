@@ -1,5 +1,4 @@
 import React, { useState,useEffect,useRef,useCallback } from "react";
-import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 
 import type {  RootState, AppDispatch } from "../../../store/store"; 
@@ -7,7 +6,7 @@ import { setCars,setLoading } from "../../../store/carsSlice";
 import { fetchCars } from "../../../services/carService";
 import { deleteCar } from "../../../services/carService";
 
-import { carMakesAndModels } from "../../../constants/carMakesAndModels"; //Array of Objs with car's Makes & Models
+import { carMakesAndModels } from "../../../constants/carMakesAndModels";
 
 //Components:
 
@@ -20,27 +19,11 @@ function AdminDashboard(){
     const [activeTab, setActiveTab] = useState(0);
     const [carToDelete, setCarToDelete] = useState<string | null>(null);
 
-    const dispatch = useDispatch<AppDispatch>(); //Redux'actions. Now we can use`dispatch(...)` to call fns: setCars(),selectMake(),selectModel(), etc..
+    const dispatch = useDispatch<AppDispatch>(); 
     const allCars = useSelector((state: RootState) => state.cars.allCars); //Get all Cars array from `Redux Store` -->  console.log(allCars);
     const gmcCars = allCars.filter( (item,index,array) => { if( item.make === 'gmc') { return item; } } ); //Get GMC Cars only
     const chevroletCars = allCars.filter( (item,index,array) => { if( item.make === 'chevrolet') { return item; } } ); //Get Chevrolet Cars only
     const buickCars = allCars.filter( (item,index,array) => { if( item.make === 'buick') { return item; } } ); //Get Buick Cars only
-
-    //Delete Car by ID
-    // const handleDelete = useCallback(async (carId: string) => {
-    //     const confirmed = window.confirm("Are you sure you want to delete this car?");
-    //     if (!confirmed) return;
-        
-    //     try {
-    //         await deleteCar(carId);
-    //         //update redux store so UI refreshes
-    //         const updated = allCars.filter(c => c.id !== carId);
-    //         dispatch(setCars(updated));
-    //     } catch (err) {
-    //         console.error("Failed to delete car:", err);
-    //         alert("Could not delete car — check console.");
-    //     }
-    // }, [allCars, dispatch]);
 
     //Delete Car by ID: 1.Confirm deleting via Modal Window
     const handleDelete = useCallback((carId: string) => {
@@ -253,7 +236,6 @@ function AdminDashboard(){
                 </section> {/*.cars-section*/}
 
                 {/*Modal*/}
-                {/* <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Modal Window</button> */}
                 <div className="modal fade" id="deleteCarModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="deleteCarModalLabel" aria-hidden="true"> 
                     <div className="modal-dialog">
                         <div className="modal-content">

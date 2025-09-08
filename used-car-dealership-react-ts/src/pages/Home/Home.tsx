@@ -2,8 +2,6 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../../store/store"; 
 //Components:
 import { Link } from 'react-router-dom';
-//import Button from '../../components/Button/Button';
-//import ModalWindow from '../../components/ModalWindow/ModalWindow';
 import SliderCarousel from '../../components/SliderCarousel/SliderCarousel'; 
 import SliderCarouselMainContent from '../../components/SliderCarouselMainContent/SliderCarouselMainContent';
 import SliderCarouselTestimonialsContent from '../../components/SliderCarouselTestimonialsContent/SliderCarouselTestimonialsContent';

@@ -22,9 +22,3 @@ const PageBanner: React.FC<PageBannerProps> = ({ url, title }) => {
     );
 };
 export default PageBanner; 
-/*Usage:
-  <PageBanner 
-    url="/images/banner-cars.jpg" 
-    title="Used Cars for Sale" 
-  />
-*/

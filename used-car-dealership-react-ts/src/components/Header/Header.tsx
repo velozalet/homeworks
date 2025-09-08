@@ -31,14 +31,12 @@ const Header = ()=> {
 
         <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ms-auto me-auto d-flex justify-content-center">
-            {/* <li className="nav-item pe-2"><Link className="nav-link px-3 py-1 text-center" to="/">Home</Link></li> */}
             <li className="nav-item px-0 py-1 pe-md-3"><Link className="nav-link px-3 py-1 text-center fw-light" to="/used-cars">Used Cars</Link></li>
             <li className="nav-item px-0 py-1 pe-md-3"><Link className="nav-link px-3 py-1 text-center fw-light" to="/new-cars">New Cars</Link></li>
             <li className="nav-item px-0 py-1 pe-md-3"><Link className="nav-link px-3 py-1 text-center fw-light" to="/about">About Us</Link></li>
             <li className="nav-item px-0 py-1 pe-md-3"><Link className="nav-link px-3 py-1 text-center fw-light" to="/contact">Contact Us</Link></li>
-            {/* <li className="nav-item pe-2"><Link className="nav-link px-3 py-1 text-center fw-light disabled" to="/admin" aria-disabled="true">Admin</Link></li> */}
         </ul>
-        </div> {/*.navbar-collapse*/}
+        </div> {/*.navbar-collapse*/} 
     </div> {/*.container*/}
     </nav>
     );

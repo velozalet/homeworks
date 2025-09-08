@@ -1,20 +1,13 @@
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-//import type { ReactNode } from "react";
-//import type { User } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import { auth, db } from "../firebase/firebase"; //firebase.ts config
-import { useForm } from "react-hook-form"; //--> Valid
-//import { Navigate } from "react-router-dom";
+import { auth, db } from "../firebase/firebase"; 
 
-//import { Outlet } from "react-router-dom";
 import AdminPanel from "../pages/__AdminPanel/AdminPanel";
 import Preloader from '../components/Preloader/Preloader'; 
 
 
 const AdminProtectedRoute = ({ children }: Props) => {
-    //const{ register, handleSubmit, reset, formState:{errors} } = useForm();
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(true);  //true = checking auth
@@ -43,7 +36,6 @@ const AdminProtectedRoute = ({ children }: Props) => {
         }  
         catch(err) { 
             setIsErrorLogin(true);
-            //alert("Invalid credentials"); 
             setLoading(false); //stop spinner if login fails
         }
     };
@@ -100,20 +92,3 @@ const AdminProtectedRoute = ({ children }: Props) => {
   return <AdminPanel />;
 };
 export default AdminProtectedRoute;
-
-/* At first - in Firebase Console:
-1.Go to Firestore Database → Create database (Start in test mode for now) - It should be done already!
-2.Create a collection (Start Collection) -> enter `admins`
-3.Add a document with ID = your Firebase user’s uid (not email)
-  - If you already have created a Firebase Authentication user for your admin, copy their UID from `Firebase Authentication → Users`
-  - Paste that UID into the Document ID field.
-  - Do not use "Auto ID" for this case — the document ID must match the admin's UID so we can look it up directly.
-4. Add a field:
-FIELD:    TYPE:    VALUE:
-isAdmin   Boolean  true
-
-5.Save the document.
-
-Document path will look like:
-admins > nbS8nvkCpgdyspBOckfsMtddI9F2 >  isAdmin: true  ==> where nbS8nvkCp... is your UID from `Firebase Authentication → Users`
-*/

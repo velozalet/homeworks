@@ -8,7 +8,6 @@ import { fetchCars } from "../../services/carService";
 
 //Components:
 import Button from '../../components/Button/Button';
-//import FilterSidebar from "../../components/Filters/FilterSidebar";
 import FilterMake from "../../components/Filters/FilterMake";
 import FilterModel from "../../components/Filters/FilterModel";
 import FilterYear from "../../components/Filters/FilterYear";
@@ -22,10 +21,6 @@ import FilterPrice from "../../components/Filters/FilterPrice";
 import './UsedCars.css';
 
 function UsedCars(){
-    // const allSettings = useSelector((state: RootState) => state.settings.allSettings);
-    // const settings = allSettings && allSettings.length > 0 ? allSettings[0] : null;  
- 
-      
     const [sortOrder, setLocalSortOrder] = useState<"none" | "asc" | "desc">(() => { //Read initial `sortOrder` from localStorage
         return (localStorage.getItem("sortOrder") as "none" | "asc" | "desc") || "none";
     });
@@ -37,13 +32,13 @@ function UsedCars(){
     const [currentPage, setCurrentPage] = useState(1); 
     const carsPerPage = 10; 
 
-    const dispatch = useDispatch<AppDispatch>(); //Redux'actions. Now we can use`dispatch(...)` to call fns: setCars(),selectMake(),selectModel(), etc..
+    const dispatch = useDispatch<AppDispatch>(); 
     const allCars = useSelector((state: RootState) => state.cars.allCars); //Get all Cars array from `Redux Store`
     const filteredCars = useSelector((state: RootState) => state.cars.filteredCars); //Get filtered Cars from `Redux Store`
     const favorites = useSelector((state: RootState) => state.favorites.favorites); //Get `favorites` array from `Redux Store`
-    const {selectedMake,selectedModel,selectedYear,selectedBodyStyle,selectedFuelType,selectedMileage,selectedPrice} = useSelector((state: RootState) => state.cars); //Get each filter from `Redux Store`
+    const {selectedYear,selectedBodyStyle,selectedFuelType,selectedMileage} = useSelector((state: RootState) => state.cars); //Get each filter from `Redux Store`
    
-    const pageColorSchemeRef = useRef<HTMLDivElement>(null); //`Ref`to <div className="usedcar--page"> --> color-scheme--dark|color-scheme--ligh
+    const pageColorSchemeRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => { //1) Load cars from Firebase DB
         async function loadCars() {
@@ -93,17 +88,13 @@ function UsedCars(){
             pageColorSchemeRef.current.classList.toggle("color-scheme--light");
             pageColorSchemeRef.current.classList.toggle("color-scheme--dark");
         }
-        if( pageColorSchemeRef.current ){ //--> OLD functionality before using `localStorage`
-            //if( pageColorSchemeRef.current.classList.contains("color-scheme--light") ){
-            //setColorScheme("light");
-            //}else{ setColorScheme("dark"); }
-        }
+
         if( pageColorSchemeRef.current ){ //update State & localStorage
             const newScheme = pageColorSchemeRef.current.classList.contains("color-scheme--light") ? "light" : "dark";
             setColorScheme(newScheme);
             localStorage.setItem("colorScheme", newScheme);
         }
-    }; //console.log(colorScheme);
+    }; 
     
     //Sort Order by `Price`: Low --> High | High --> Low
     const handleSortClick = () => {
@@ -121,8 +112,6 @@ function UsedCars(){
     const totalPages = Math.ceil(filteredCars.length / carsPerPage);
     const handleNext = () => { if (currentPage < totalPages) setCurrentPage(prev => prev + 1); }; 
     const handlePrev = () => { if (currentPage > 1) setCurrentPage(prev => prev - 1); };
-      
-    //console.log("Currently applied filters:",{selectedMake,selectedModel,selectedYear,selectedBodyStyle,selectedFuelType,selectedMileage,selectedPrice}); //console.log(sortOrder);
 
     return(
     <div ref={pageColorSchemeRef} className="usedcar--page color-scheme--light pt-lg-4 pt-md-4 pt-sm-4 pt-3"> {/*color-scheme--dark | color-scheme--light*/} 
@@ -257,8 +246,6 @@ function UsedCars(){
                           : (sortOrder === "asc") ? <span>Low<i className="fa fa-caret-right mx-1"></i>High</span>
                           : <span>High<i className="fa fa-caret-right mx-1"></i>Low</span> } 
 
-                        {/*<Button as="button" className="sort year-sort" text=""><i className="fa fa-sort-alpha-desc"></i></Button> */}
-
                         <div className="favorites-btn-container add-to-favorite" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Favorite Cars"> 
                             { favorites.length > 0 && ( 
                                 <Link to="/used-cars/favorite" className="favorites-btn add-to-favorite fa fa-heart"></Link>
@@ -267,7 +254,7 @@ function UsedCars(){
                         </div>
                     </section>
                     <section className="cars-section"> 
-                        <CarList cars={currentCars} /> {/* Before==> <CarList /> Before-before==> <CarList cars={filteredCars} /> */}
+                        <CarList cars={currentCars} /> 
                     </section> {/*.cars-section*/}
                 </aside>
                 {/*__/Car's list*/}

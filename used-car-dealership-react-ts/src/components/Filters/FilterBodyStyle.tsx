@@ -7,7 +7,7 @@ import { bodyStyles } from "../../constants/bodyStyles"; //Array of strings with
 const bodystyles = bodyStyles; //-->['sedan', 'suv', 'hatch']
  
 function FilterBodyStyle(){ 
-    const dispatch = useDispatch<AppDispatch>(); //Redux'actions. Now we can use`dispatch(...)` to call fns: setCars(),selectMake(),selectModel(), etc..
+    const dispatch = useDispatch<AppDispatch>(); 
     const selectedBodyStyle = useSelector((state: RootState) => state.cars.selectedBodyStyle); //-->contains: sedan|suv|hatch
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) =>{

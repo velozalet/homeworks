@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { Contact } from "../types/contact";
 
-interface ContactState {  //contactsReducer
+interface ContactState {
     allContacts: Contact[];
     loading: boolean;
 }

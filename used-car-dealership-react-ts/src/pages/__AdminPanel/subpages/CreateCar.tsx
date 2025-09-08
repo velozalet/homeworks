@@ -2,19 +2,17 @@ import { useState,useEffect } from "react";
 import { createCar,uploadCarImage } from "../../../services/carService";
 import type { Car } from "../../../types/car";
 
-import { carMakesAndModels } from "../../../constants/carMakesAndModels"; //Array of Objs with car's Makes & Models
-import { bodyStyles } from "../../../constants/bodyStyles"; //Array of strings with car's Body Styles
-import { carYears } from "../../../constants/carYears"; //Array of numbers with car's Years
-import { fuelType } from "../../../constants/fuelType"; //Array of strings with car's fuel Type
-//import { mileageRanges } from "../../../constants/mileageRanges"; Array of Objs with car's Mileage Ranges
-import { transmission } from "../../../constants/transmission"; //Array of strings with car's Transmission
-import { color } from "../../../constants/color"; //Array of strings with car's Color
+import { carMakesAndModels } from "../../../constants/carMakesAndModels";
+import { bodyStyles } from "../../../constants/bodyStyles";
+import { carYears } from "../../../constants/carYears";
+import { fuelType } from "../../../constants/fuelType";
+import { transmission } from "../../../constants/transmission";
+import { color } from "../../../constants/color";
 
 import { capitalize } from "../../../utils/helpers.ts";  
 
 
 function CreateCar() { 
-    // Local state for form fields (start with a few, you can expand)
     const [formData, setFormData] = useState<Omit<Car,"id">>({  
     make: "",
     model: "",
@@ -38,7 +36,7 @@ function CreateCar() {
     const [loading, setLoading] = useState(false);
     const [successMsg, setSuccessMsg] = useState("");
     //State for `Options`:
-    const [optionInput, setOptionInput] = useState(""); //const [options, setOptions] = useState<string[]>([]);
+    const [optionInput, setOptionInput] = useState(""); 
     //State for `Safety`:
     const [safetyInput, setSafetyInput] = useState("");
     //State for `Images`:
@@ -52,16 +50,15 @@ function CreateCar() {
     else if( !carMakesAndModels[formData.make] ){ car_models = []; } //case-2: `Make` chosen but not in our dictionary
     else{  car_models = carMakesAndModels[formData.make]; } //case-3: make chosen and exists in dictionary
     //-->Get list of Years
-    const car_years = carYears; //-->[2025, 2024, 2023, 2022, 2021, 2020]
+    const car_years = carYears;
     //-->Get list of Body Styles 
-    const car_bodystyles = bodyStyles; //-->['sedan', 'suv', 'hatch']
+    const car_bodystyles = bodyStyles;
     //-->Get list of Color 
-    const car_colors = color; //-->['black', 'white', 'blue', 'red', 'green', 'yellow']
+    const car_colors = color;
     //-->Get list of Transmission 
-    const car_transmissions = transmission; //-->['auto', 'manual']
+    const car_transmissions = transmission;
    //-->Get list of Fuel Type 
-   const car_fueltypes = fuelType; //-->['gas', 'diesel']
-   //-->Get list of Mileage Ranges ==> no need!
+   const car_fueltypes = fuelType;
 
    //After 4 sec. the notification`Car created successfully!`will br desappeard
    useEffect(() => {
@@ -70,7 +67,7 @@ function CreateCar() {
             ()=>{ return setSuccessMsg("") }, 4000 
         );
 
-        return () => { clearTimeout(timer) }; //--> UNMOUNTS: cleans the timer 
+        return () => { clearTimeout(timer) }; 
     }, [successMsg]); 
 
 

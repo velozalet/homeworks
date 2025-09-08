@@ -29,8 +29,6 @@ import __Safety from "./__Safety";
 import __Images from "./__Images";
 import __SaveButton from "./__SaveButton";
 
-//import { capitalize } from "../../utils/helpers.ts"; 
-
 //Components:
 //Styles:
 import './EditCar.css';
@@ -39,18 +37,18 @@ import './EditCar.css';
 
 const EditCar = (): JSX.Element => {
   // Local state for editing
-  const [formData, setFormData] = useState<Car | null>(null);//const [formData, setFormData] = useState<Partial<Car>>({}); //
+  const [formData, setFormData] = useState<Car | null>(null);
 
     const {carId} = useParams<{ carId:string }>(); 
-    const dispatch = useDispatch<AppDispatch>(); //Redux'actions. Now we can use`dispatch(...)` to call fns: setCars(),selectMake(),selectModel(), etc..
+    const dispatch = useDispatch<AppDispatch>(); 
     const navigate = useNavigate();
     //2) Get all cars from Redux
-    const allCars = useSelector((state: RootState) => state.cars.allCars); //Get all Cars array from `Redux Store` -->  console.log(allCars);
+    const allCars = useSelector((state: RootState) => state.cars.allCars); 
 
     const [loadingFlag, setloadingFlag] = useState(false);
     const [successMsg, setSuccessMsg] = useState("");
     //State for `Options`:
-    const [optionInput, setOptionInput] = useState(""); //const [options, setOptions] = useState<string[]>([]);
+    const [optionInput, setOptionInput] = useState(""); 
     //State for `Safety`:
     const [safetyInput, setSafetyInput] = useState("");
     //State for `Images`:
@@ -80,8 +78,8 @@ const EditCar = (): JSX.Element => {
             dispatch(setLoading(false)); //stop loading... 
           } 
         }
-        loadCars(); //if (allCars.length === 0) {  loadCars();   }
-    }, [dispatch]); //[dispatch, allCars.length]);
+        loadCars(); 
+    }, [dispatch]); 
 
     //3) Find the car by ID
     const car = allCars.find(
@@ -117,7 +115,6 @@ const EditCar = (): JSX.Element => {
     try {
       if (formData) {
         await updateCar(formData.id, formData);
-        //alert("Car updated successfully!");
         setSuccessMsg(`✅ Car updated successfully!`);
       }
     } catch (err) { 

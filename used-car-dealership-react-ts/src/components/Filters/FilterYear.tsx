@@ -7,7 +7,7 @@ import { carYears } from "../../constants/carYears"; //Array of numbers with car
 const years = carYears; //-->[2025, 2024, 2023, 2022, 2021, 2020]
  
 function FilterYear(){ 
-    const dispatch = useDispatch<AppDispatch>(); //Redux'actions. Now we can use`dispatch(...)` to call fns: setCars(),selectMake(),selectModel(), etc..
+    const dispatch = useDispatch<AppDispatch>(); 
     const selectedYear = useSelector((state: RootState) => state.cars.selectedYear); //-->contains: 2025|2024|2023| etc..
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) =>{

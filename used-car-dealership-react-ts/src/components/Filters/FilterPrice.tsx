@@ -1,4 +1,3 @@
-//=> This will render the `noUiSlider` and dispatch selected min/max values to Redux.
 import React, { useEffect, useRef } from "react";
 
 import nouislider from "nouislider";
@@ -10,11 +9,11 @@ import { selectPrice } from "../../store/carsSlice";
 
 
 function FilterPrice(){ 
-    const dispatch = useDispatch<AppDispatch>(); //Redux'actions. Now we can use`dispatch(...)` to call fns: setCars(),selectMake(),selectModel(), etc..
+    const dispatch = useDispatch<AppDispatch>();
     const sliderRef = useRef<HTMLDivElement>(null);
     const sliderInstance = useRef<nouislider.API>(null);
 
-    const selectedPrice = useSelector((state: RootState) => state.cars.selectedPrice); //-->contains: ????????????
+    const selectedPrice = useSelector((state: RootState) => state.cars.selectedPrice); 
 
     useEffect(() => {
         if (!sliderRef.current) return;
@@ -47,7 +46,7 @@ function FilterPrice(){
         };
     }, [dispatch]);
 
-    //🔄 reset UI when Redux clears selectedPrice
+    //reset UI when Redux clears selectedPrice
     useEffect(() => {
         if (selectedPrice === null && sliderInstance.current) {
             sliderInstance.current.set([15000, 70000]);
@@ -63,10 +62,3 @@ function FilterPrice(){
     );
 }
 export default FilterPrice; 
-/*Mileage is a range filter.  
-
-*/
-
-
-
-  

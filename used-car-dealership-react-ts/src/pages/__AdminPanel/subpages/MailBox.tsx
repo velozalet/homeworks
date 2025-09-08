@@ -27,7 +27,7 @@ function MailBox(){
           }
         }
         loadContacts();
-    }, [dispatch]); //console.log(allContacts); 
+    }, [dispatch]);
 
 
     //2.Update status (`pending` → `answered`)

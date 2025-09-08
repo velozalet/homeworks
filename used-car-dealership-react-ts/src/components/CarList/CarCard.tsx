@@ -82,7 +82,7 @@ const CarCard = ({ car }: {car:Car}) => {
                     </div>
                 </div>
             </div>
-            {/*<Button className="add-to-favorite fa fa-heart-o" text=""></Button>*/}
+
             <Button 
                 className={`add-to-favorite fa ${isFavorite ? "fa-heart" : "fa-heart-o"}`}
                 text=""
@@ -91,6 +91,6 @@ const CarCard = ({ car }: {car:Car}) => {
             ></Button>
         </div>
   </div> 
-  );
+  );  
 };
 export default CarCard;

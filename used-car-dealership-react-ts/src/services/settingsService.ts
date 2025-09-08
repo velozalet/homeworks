@@ -11,7 +11,7 @@ export async function fetchSettings(): Promise<Settings[]> {
     //Convert docs → array of Settings
     const settingsList: Settings[] = settingsSnapshot.docs.map((docSnap) => ({
         id: docSnap.id, //include document ID
-        ...docSnap.data(), //spread all fields
+        ...docSnap.data(), 
     })) as Settings[];
     return settingsList;
 }
@@ -24,27 +24,3 @@ export async function updateSettings(
     const docRef = doc(db, "settings", id);
     await updateDoc(docRef, data);
   }
-/*
-    export async function fetchSettings(): Promise<Settings> {
-        const settingsCol = collection(db, "settings");
-        const snapshot = await getDocs(settingsCol);
-    
-        // merge all docs into one object (assuming "settings" collection has key-value docs)
-        const settings: Settings = {};
-        snapshot.forEach((doc) => {
-        settings[doc.id] = doc.data();
-        });
-    
-        return settings;
-    }
-*/
-/*
-    export async function fetchSettings(): Promise<Settings> {
-    
-        const settingsDocRef = doc(db, "settings", "main"); //replace "main" with your actual doc ID if different
-        const snapshot = await getDoc(settingsDocRef);
-
-        if (!snapshot.exists()) { throw new Error("Settings document not found"); }
-        return snapshot.data() as Settings;
-    }
-*/

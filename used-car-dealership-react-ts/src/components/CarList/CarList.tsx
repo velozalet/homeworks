@@ -1,5 +1,3 @@
-/*This will pull filteredCars from Redux and map them to CarCards*/
-//import React, {useEffect,useState} from "react";
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../store/store';
 import type { Car } from "../../types/car";
@@ -26,7 +24,6 @@ const CarList = ( {cars}: CarListProps ) => {
         );
     }
     if( !list.length ){ 
-        //return <p className="no-cars-found text-center mt-lg-5 mt-md-5 mt-sm-4 mt-3">No cars found...</p>;  
         return <div className="no-cars-found text-center"><img className="no-cars-found-img" src={no_cars_found} alt="no_cars_found" /> </div>
     }
   

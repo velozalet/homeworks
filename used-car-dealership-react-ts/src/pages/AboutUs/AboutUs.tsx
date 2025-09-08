@@ -1,6 +1,5 @@
 //Components:
 import PageBanner from "../../components/PageBanner/PageBanner"; 
-//import HtmlContent from "../../components/HtmlContent/HtmlContent";
 import { Link } from 'react-router-dom';
 
 //Styles:
@@ -89,8 +88,6 @@ function AboutUs(){
                 {/*__/4-block*/}
             </div>{/*.row*/} 
         </div>{/*.container*/} 
-
-
 
     </div> {/*.newcars--page*/} 
     </>

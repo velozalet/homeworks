@@ -5,8 +5,8 @@ import { selectModel } from "../../store/carsSlice";
 import { carMakesAndModels } from "../../constants/carMakesAndModels"; //Array of Objs with car's Makes & Models
 
 
-function FilterModel(){ //function FilterModel({ selectedModel, onChange }: Props) {..}
-    const dispatch = useDispatch<AppDispatch>(); //Redux'actions. Now we can use`dispatch(...)` to call fns: setCars(),selectMake(),selectModel(), etc..
+function FilterModel(){
+    const dispatch = useDispatch<AppDispatch>(); 
     const selectedMake = useSelector((state: RootState) => state.cars.selectedMake); //-->contains: gmc|chevrolet|buick
     const selectedModel = useSelector((state: RootState) => state.cars.selectedModel);  //-->contains: Model of car after filtering `Make-filter`
 
